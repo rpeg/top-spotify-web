@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import SpotifyLoginButton from './components/SpotifyLoginButton'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <SpotifyLoginButton />
     </div>
   );
 }
