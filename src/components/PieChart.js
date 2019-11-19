@@ -20,7 +20,18 @@ const PieChart = ({ genres, count }) => {
     .sort((a, b) => (b.freq > a.freq ? 1 : -1))
     .slice(0, count);
 
-  const colors = Palette("tol-rainbow", count).map(c => "#" + c);
+  const miscGenre = {
+    freq: getTotalFreq(arr) - getTotalFreq(sortedGenres),
+    name: "Misc."
+  };
+
+  const colors = Palette("tol-rainbow", count + 1).map(c => "#" + c);
+
+  const data = sortedGenres.concat(miscGenre).map((genre, i) => ({
+    color: colors[i],
+    title: genre.name,
+    value: genre.freq
+  }));
 
   return (
     <Container>
@@ -29,15 +40,11 @@ const PieChart = ({ genres, count }) => {
           <ReactMinimalPieChart
             className="minimal-pie"
             animate
-            animationDuration={750}
+            animationDuration={500}
             animationEasing="ease-out"
             cx={50}
             cy={50}
-            data={sortedGenres.map((genre, i) => ({
-              color: colors[i],
-              title: genre.name,
-              value: genre.freq
-            }))}
+            data={data}
             label={({ data, dataIndex }) => data[dataIndex].title}
             labelPosition={105}
             labelStyle={{
@@ -60,5 +67,7 @@ const PieChart = ({ genres, count }) => {
     </Container>
   );
 };
+
+const getTotalFreq = arr => arr.reduce((acc, curr) => acc + curr.freq, 0);
 
 export default PieChart;

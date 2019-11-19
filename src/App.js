@@ -78,7 +78,7 @@ const App = () => {
             ...artistsLongTerm.map(a => a.genres).flat(),
             ...artistsMedTerm.map(a => a.genres).flat()
           ]}
-          count={10}
+          count={20}
         />
       )}
       <div>
