@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
+import { isEmpty } from "lodash";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import ArtistGrid from "./components/ArtistGrid";
 import PieChart from "./components/PieChart";
+import Profile from "./components/Profile";
 
 const App = () => {
   const [artistsLongTerm, setArtistsLongTerm] = useState([]);
   const [artistsMedTerm, setArtistsMedTerm] = useState([]);
   const [artistsShortTerm, setArtistsShortTerm] = useState([]);
+  const [profile, setProfile] = useState({});
 
   const loginSpotify = e => {
     e.preventDefault();
@@ -26,6 +29,7 @@ const App = () => {
     getArtistsLongTerm();
     getArtistsMedTerm();
     getArtistsShortTerm();
+    getProfile();
   };
 
   const getArtistsLongTerm = () => {
@@ -64,6 +68,13 @@ const App = () => {
       .catch(err => console.log(err));
   };
 
+  const getProfile = () => {
+    axios
+      .get("http://localhost:3000/my-profile")
+      .then(res => setProfile(res.data))
+      .catch(err => console.log(err));
+  };
+
   return (
     <div className="App">
       <Button variant="outline-primary" onClick={loginSpotify}>
@@ -72,13 +83,19 @@ const App = () => {
       <Button variant="outline-primary" onClick={getData}>
         Get data
       </Button>
+      {!isEmpty(profile) && (
+        <Profile
+          userName={profile.id}
+          imageSrc={profile.images[0].url}
+        />
+      )}
       {artistsLongTerm.length > 0 && artistsMedTerm.length > 0 && (
         <PieChart
           genres={[
             ...artistsLongTerm.map(a => a.genres).flat(),
             ...artistsMedTerm.map(a => a.genres).flat()
           ]}
-          count={10}
+          count={15}
         />
       )}
       <div>
