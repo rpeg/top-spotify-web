@@ -74,7 +74,10 @@ const App = () => {
       </Button>
       {artistsLongTerm.length > 0 && artistsMedTerm.length > 0 && (
         <DonutChart
-          genres={artistsLongTerm.genres.concat(artistsMedTerm.genres)}
+          genres={[
+            ...artistsLongTerm.map(a => a.genres).flat(),
+            ...artistsMedTerm.map(a => a.genres).flat()
+          ]}
         />
       )}
       <div>
