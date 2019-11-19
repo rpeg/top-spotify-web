@@ -5,7 +5,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import ArtistGrid from "./components/ArtistGrid";
-import DonutChart from "./components/DonutChart";
+import PieChart from "./components/PieChart";
 
 const App = () => {
   const [artistsLongTerm, setArtistsLongTerm] = useState([]);
@@ -73,7 +73,7 @@ const App = () => {
         Get data
       </Button>
       {artistsLongTerm.length > 0 && artistsMedTerm.length > 0 && (
-        <DonutChart
+        <PieChart
           genres={[
             ...artistsLongTerm.map(a => a.genres).flat(),
             ...artistsMedTerm.map(a => a.genres).flat()
