@@ -54,7 +54,7 @@ const SectionTemplate = ({ title, timeRange }) => {
           </Row>
 
           {artists.length > 0 && (
-            <ArtistGrid artists={artists.slice(0, 8)} numRows={2} />
+            <ArtistGrid artists={artists.slice(0, 10)} numRows={2} />
           )}
           {tracks.length > 0 && (
             <Row>
