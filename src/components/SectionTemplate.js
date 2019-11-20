@@ -58,13 +58,13 @@ const SectionTemplate = ({ title, timeRange }) => {
           )}
           {tracks.length > 0 && (
             <Row>
-              <Col>
+              <Col xs={6} style={{padding: "1em 0.5em 0 0"}}>
                 <WordCloud
                   genres={[...artists.map(a => a.genres).flat()]}
-                  count={100}
+                  count={30}
                 />
               </Col>
-              <Col>
+              <Col xs={6} style={{padding: "1em 0 0 0.5em"}}>
                 <TrackGrid tracks={tracks} title="Top tracks" count={5} />
               </Col>
             </Row>

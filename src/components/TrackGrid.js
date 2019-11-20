@@ -12,12 +12,12 @@ const TrackGrid = ({ tracks, title, count }) => {
 
   return (
     <div>
-      <h2>{title}</h2>
+      <h2 style={{ textAlign: "left" }}>{title}</h2>
       <Container className="track-grid">
-        <ul style={{ listStyleType: "none" }}>
+        <ul style={{ listStyleType: "none", padding: "0" }}>
           {uniqueTracks.map((track, i) => (
             <Row key={i}>
-              <Col md={8}>
+              <Col style={{ padding: "0" }}>
                 <li>
                   <div style={{ float: "left" }}>
                     <img

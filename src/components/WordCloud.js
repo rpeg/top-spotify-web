@@ -41,7 +41,14 @@ const WordCloud = ({ genres, count }) => {
   };
 
   return (
-    <div style={{ height: 750, width: 750 }}>
+    <div
+      style={{
+        maxHeight: "100%",
+        maxWidth: "100%",
+        height: "100%",
+        width: "auto"
+      }}
+    >
       <ReactWordcloud options={options} words={words} />
     </div>
   );
