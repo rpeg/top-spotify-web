@@ -6,6 +6,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import ArtistGrid from "./components/ArtistGrid";
+import TrackGrid from "./components/TrackGrid";
 import PieChart from "./components/PieChart";
 import Profile from "./components/Profile";
 
@@ -13,6 +14,9 @@ const App = () => {
   const [artistsLongTerm, setArtistsLongTerm] = useState([]);
   const [artistsMedTerm, setArtistsMedTerm] = useState([]);
   const [artistsShortTerm, setArtistsShortTerm] = useState([]);
+  const [tracksLongTerm, setTracksLongTerm] = useState([]);
+  const [tracksMedTerm, setTracksMedTerm] = useState([]);
+  const [tracksShortTerm, setTracksShortTerm] = useState([]);
   const [profile, setProfile] = useState({});
 
   const loginSpotify = e => {
@@ -29,6 +33,7 @@ const App = () => {
     getArtistsLongTerm();
     getArtistsMedTerm();
     getArtistsShortTerm();
+    getTracksLongTerm();
     getProfile();
   };
 
@@ -68,6 +73,42 @@ const App = () => {
       .catch(err => console.log(err));
   };
 
+  const getTracksLongTerm = () => {
+    axios
+      .get("http://localhost:3000/my-top-tracks", {
+        params: {
+          time_range: "long_term",
+          limit: 50
+        }
+      })
+      .then(res => setTracksLongTerm(res.data.items))
+      .catch(err => console.log(err));
+  };
+
+  const getTracksMedTerm = () => {
+    axios
+      .get("http://localhost:3000/my-top-tracks", {
+        params: {
+          time_range: "medium_term",
+          limit: 50
+        }
+      })
+      .then(res => setTracksMedTerm(res.data.items))
+      .catch(err => console.log(err));
+  };
+
+  const getTracksShortTerm = () => {
+    axios
+      .get("http://localhost:3000/my-top-tracks", {
+        params: {
+          time_range: "short_term",
+          limit: 50
+        }
+      })
+      .then(res => setTracksShortTerm(res.data.items))
+      .catch(err => console.log(err));
+  };
+
   const getProfile = () => {
     axios
       .get("http://localhost:3000/my-profile")
@@ -84,11 +125,9 @@ const App = () => {
         Get data
       </Button>
       {!isEmpty(profile) && (
-        <Profile
-          userName={profile.id}
-          imageSrc={profile.images[0].url}
-        />
+        <Profile userName={profile.id} imageSrc={profile.images[0].url} />
       )}
+      {tracksLongTerm.length > 0 && <TrackGrid tracks={tracksLongTerm} title="All-time tracks" count={5}/>}
       {artistsLongTerm.length > 0 && artistsMedTerm.length > 0 && (
         <PieChart
           genres={[
