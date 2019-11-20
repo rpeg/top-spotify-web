@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import ArtistGrid from "./components/ArtistGrid";
 import TrackGrid from "./components/TrackGrid";
-import PieChart from "./components/PieChart";
+import WordCloud from "./components/WordCloud";
 import Profile from "./components/Profile";
 
 const App = () => {
@@ -129,12 +129,12 @@ const App = () => {
       )}
       {tracksLongTerm.length > 0 && <TrackGrid tracks={tracksLongTerm} title="All-time tracks" count={5}/>}
       {artistsLongTerm.length > 0 && artistsMedTerm.length > 0 && (
-        <PieChart
+        <WordCloud
           genres={[
             ...artistsLongTerm.map(a => a.genres).flat(),
             ...artistsMedTerm.map(a => a.genres).flat()
           ]}
-          count={15}
+          count={100}
         />
       )}
       <div>
