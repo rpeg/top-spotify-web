@@ -4,6 +4,7 @@ import { uniqBy } from "lodash";
 import ComponentHeader from "./ComponentHeader";
 
 import "./TrackGrid.css";
+import OrdinalCircle from "./OrdinalCircle";
 
 const TrackGrid = ({ tracks, count }) => {
   // Isolate top [count] tracks from unique albums
@@ -13,14 +14,14 @@ const TrackGrid = ({ tracks, count }) => {
 
   return (
     <div>
-      <ComponentHeader title="Top tracks" />
+      <ComponentHeader title="Tracks" />
       <Container className="track-grid">
-        <ul style={{ listStyleType: "none", padding: "0" }}>
+        <ul style={{ listStyleType: "none", padding: "0", marginTop: "1em" }}>
           {uniqueTracks.map((track, i) => (
-            <Row key={i}>
+            <Row key={i} style={{ marginTop: "1em" }}>
               <Col style={{ padding: "0" }}>
                 <li>
-                  <div style={{ float: "left" }}>
+                  <div style={{ display: "inline-flex", float: "left" }}>
                     <img
                       height="50"
                       width="50"
@@ -28,9 +29,29 @@ const TrackGrid = ({ tracks, count }) => {
                       alt={track.name}
                       style={{ objectFit: "cover" }}
                     />
-                    <span style={{ marginLeft: "1em" }}>
-                      <b>{track.artists[0].name}</b> - {track.name}
-                    </span>
+                    <OrdinalCircle position={i + 1} />
+                    <div style={{ marginLeft: "0.5em" }}>
+                      <div>
+                        <p
+                          style={{
+                            margin: "0",
+                            textAlign: "left"
+                          }}
+                        >
+                          <b>{track.artists[0].name}</b>
+                        </p>
+                      </div>
+                      <div>
+                        <p
+                          style={{
+                            margin: "0",
+                            textAlign: "left"
+                          }}
+                        >
+                          {track.name}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </li>
               </Col>

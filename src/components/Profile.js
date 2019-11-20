@@ -24,7 +24,7 @@ const Profile = () => {
         style={{
           display: "inline-flex",
           alignItems: "center",
-          margin: "1em 1em 0 auto"
+          marginLeft: "auto"
         }}
       >
         <p style={{ margin: "0 0.5em 0 0" }}>

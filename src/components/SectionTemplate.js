@@ -45,26 +45,26 @@ const SectionTemplate = ({ title, timeRange }) => {
     fetchTracks();
   }, [timeRange]);
   return (
-    <div>
+    <div style={{ marginTop: "2em" }}>
       <SectionHeader title={title} />
       {!isFetchComplete && <Spinner animation="border" />}
       {isFetchComplete && (
         <Container>
           <Row>
-            <ComponentHeader title="Top artists" />
+            <ComponentHeader title="Artists" />
           </Row>
           {artists.length > 0 && (
             <ArtistGrid artists={artists.slice(0, 10)} numRows={2} />
           )}
           {tracks.length > 0 && (
-            <Row>
-              <Col xs={6} style={{ padding: "1em 0.5em 0 0" }}>
+            <Row style={{ paddingTop: "2em" }}>
+              <Col xs={8} style={{ padding: "0 0.5em 0 0" }}>
                 <WordCloud
                   genres={[...artists.map(a => a.genres).flat()]}
-                  count={25}
+                  count={40}
                 />
               </Col>
-              <Col xs={6} style={{ padding: "1em 0 0 0.5em" }}>
+              <Col xs={4} style={{ padding: "0 0 0 0.5em" }}>
                 <TrackGrid tracks={tracks} count={5} />
               </Col>
             </Row>

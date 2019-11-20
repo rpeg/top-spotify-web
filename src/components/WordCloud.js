@@ -44,7 +44,7 @@ const WordCloud = ({ genres, count }) => {
 
   return (
     <div>
-      <ComponentHeader title="Top genres" />
+      <ComponentHeader title="Genres" />
       <div
         style={{
           maxHeight: "100%",
