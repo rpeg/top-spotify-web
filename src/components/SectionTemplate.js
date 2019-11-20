@@ -10,7 +10,8 @@ import WordCloud from "./WordCloud";
 const SectionTemplate = ({ title, timeRange }) => {
   const [artists, setArtists] = useState([]);
   const [tracks, setTracks] = useState([]);
-  const [fetchComplete] = useState(artists.length > 0 && tracks.length > 0);
+
+  const isFetchComplete = () => artists.length > 0 && tracks.length > 0;
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -44,32 +45,33 @@ const SectionTemplate = ({ title, timeRange }) => {
   }, [timeRange]);
 
   return (
-    <Container>
-      <Row>
-        <SectionHeader title={title} />
-      </Row>
-      <Row hidden={fetchComplete}>
-        <Col>
-          <Spinner animation="border" />
-        </Col>
-      </Row>
-      {artists.length > 0 && (
-        <ArtistGrid artists={artists.slice(0, 8)} numRows={2} />
+    <div>
+      {!isFetchComplete && <Spinner animation="border" />}
+      {isFetchComplete && (
+        <Container>
+          <Row>
+            <SectionHeader title={title} />
+          </Row>
+
+          {artists.length > 0 && (
+            <ArtistGrid artists={artists.slice(0, 8)} numRows={2} />
+          )}
+          {tracks.length > 0 && (
+            <Row>
+              <Col>
+                <WordCloud
+                  genres={[...artists.map(a => a.genres).flat()]}
+                  count={100}
+                />
+              </Col>
+              <Col>
+                <TrackGrid tracks={tracks} title="Top tracks" count={5} />
+              </Col>
+            </Row>
+          )}
+        </Container>
       )}
-      {tracks.length > 0 && (
-        <Row>
-          <Col>
-            <WordCloud
-              genres={[...artists.map(a => a.genres).flat()]}
-              count={100}
-            />
-          </Col>
-          <Col>
-            <TrackGrid />
-          </Col>
-        </Row>
-      )}
-    </Container>
+    </div>
   );
 };
 

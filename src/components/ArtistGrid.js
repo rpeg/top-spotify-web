@@ -11,8 +11,8 @@ const ArtistGrid = ({ artists, numRows }) => {
       {artistRow.map((artist, i) => (
         <Col key={i}>
           <img
-            height="300"
-            width="300"
+            height="200"
+            width="200"
             src={artist.images[0].url}
             alt={artist.name}
             style={{ objectFit: "cover" }}
