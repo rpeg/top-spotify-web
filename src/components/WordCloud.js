@@ -3,6 +3,8 @@ import Palette from "google-palette";
 import { countBy } from "lodash";
 import ReactWordcloud from "react-wordcloud";
 
+import ComponentHeader from "./ComponentHeader";
+
 const WordCloud = ({ genres, count }) => {
   const freqDict = countBy(genres, each => {
     return each;
@@ -28,8 +30,8 @@ const WordCloud = ({ genres, count }) => {
     colors: colors,
     enableTooltip: true,
     deterministic: false,
-    fontFamily: "sans-serif",
-    fontSizes: [12, 52],
+    fontFamily: "DM Sans, sans-serif",
+    fontSizes: [10, 48],
     fontStyle: "normal",
     fontWeight: "bold",
     padding: 1,
@@ -41,8 +43,18 @@ const WordCloud = ({ genres, count }) => {
   };
 
   return (
-    <div style={{ height: 750, width: 750 }}>
-      <ReactWordcloud options={options} words={words} />
+    <div>
+      <ComponentHeader title="Genres" />
+      <div
+        style={{
+          maxHeight: "100%",
+          maxWidth: "100%",
+          height: "100%",
+          width: "auto"
+        }}
+      >
+        <ReactWordcloud options={options} words={words} />
+      </div>
     </div>
   );
 };

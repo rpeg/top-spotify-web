@@ -1,18 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const Profile = ({ userName, imageSrc }) => {
+import { isEmpty } from "lodash";
+
+const Profile = () => {
+  const [profile, setProfile] = useState({});
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const result = await axios
+        .get("http://localhost:3000/my-profile")
+        .catch(err => console.log(err));
+
+      setProfile(result.data);
+    };
+
+    fetchProfile();
+  }, []);
+
   return (
-    <div>
-      <img
-        src={imageSrc}
-        alt={userName}
+    !isEmpty(profile) && (
+      <span
         style={{
-          objectFit: "cover",
-          borderRadius: "50%"
+          display: "inline-flex",
+          alignItems: "center",
+          marginLeft: "auto"
         }}
-      />
-      <h4>{userName}</h4>
-    </div>
+      >
+        <p style={{ margin: "0 0.5em 0 0" }}>
+          <b>{profile.id}</b>
+        </p>
+        <img
+          height="50px"
+          src={profile.images[0].url}
+          alt={profile.id}
+          style={{
+            objectFit: "cover",
+            borderRadius: "50%"
+          }}
+        />
+      </span>
+    )
   );
 };
 
