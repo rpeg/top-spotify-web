@@ -6,8 +6,8 @@ import { useQueryParam, BooleanParam } from "use-query-params";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Profile from "./components/Profile";
 import SectionTemplate from "./components/SectionTemplate";
+import MainHeader from "./components/MainHeader";
 
 const App = () => {
   const [isLoggedIn] = useQueryParam("login", BooleanParam);
@@ -29,7 +29,7 @@ const App = () => {
       >
         Login to Spotify
       </Button>
-      {isLoggedIn && <Profile />}
+      {isLoggedIn && <MainHeader />}
       {isLoggedIn && <SectionTemplate title="All-time" timeRange="long" />}
     </div>
   );

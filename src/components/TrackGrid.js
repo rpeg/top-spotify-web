@@ -1,10 +1,11 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { uniqBy } from "lodash";
+import ComponentHeader from "./ComponentHeader";
 
 import "./TrackGrid.css";
 
-const TrackGrid = ({ tracks, title, count }) => {
+const TrackGrid = ({ tracks, count }) => {
   // Isolate top [count] tracks from unique albums
   const uniqueTracks = uniqBy(tracks, "album.id").slice(0, count);
 
@@ -12,7 +13,7 @@ const TrackGrid = ({ tracks, title, count }) => {
 
   return (
     <div>
-      <h2 style={{ textAlign: "left" }}>{title}</h2>
+      <ComponentHeader title="Top tracks" />
       <Container className="track-grid">
         <ul style={{ listStyleType: "none", padding: "0" }}>
           {uniqueTracks.map((track, i) => (

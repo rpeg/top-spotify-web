@@ -20,30 +20,26 @@ const Profile = () => {
 
   return (
     !isEmpty(profile) && (
-      <div style={{ width: "100%", display: "flex" }}>
-        <span
+      <span
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          margin: "1em 1em 0 auto"
+        }}
+      >
+        <p style={{ margin: "0 0.5em 0 0" }}>
+          <b>{profile.id}</b>
+        </p>
+        <img
+          height="50px"
+          src={profile.images[0].url}
+          alt={profile.id}
           style={{
-            display: "inline-flex",
-            alignItems: "center",
-            marginLeft: "auto",
-            marginRight: "1em",
-            marginTop: "1em"
+            objectFit: "cover",
+            borderRadius: "50%"
           }}
-        >
-          <p style={{ margin: "0 0.5em 0 0" }}>
-            <b>{profile.id}</b>
-          </p>
-          <img
-            height="50px"
-            src={profile.images[0].url}
-            alt={profile.id}
-            style={{
-              objectFit: "cover",
-              borderRadius: "50%"
-            }}
-          />
-        </span>
-      </div>
+        />
+      </span>
     )
   );
 };

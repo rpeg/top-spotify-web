@@ -6,6 +6,7 @@ import SectionHeader from "./SectionHeader";
 import ArtistGrid from "./ArtistGrid";
 import TrackGrid from "./TrackGrid";
 import WordCloud from "./WordCloud";
+import ComponentHeader from "./ComponentHeader";
 
 const SectionTemplate = ({ title, timeRange }) => {
   const [artists, setArtists] = useState([]);
@@ -43,29 +44,28 @@ const SectionTemplate = ({ title, timeRange }) => {
     fetchArtists();
     fetchTracks();
   }, [timeRange]);
-
   return (
     <div>
+      <SectionHeader title={title} />
       {!isFetchComplete && <Spinner animation="border" />}
       {isFetchComplete && (
         <Container>
           <Row>
-            <SectionHeader title={title} />
+            <ComponentHeader title="Top artists" />
           </Row>
-
           {artists.length > 0 && (
             <ArtistGrid artists={artists.slice(0, 10)} numRows={2} />
           )}
           {tracks.length > 0 && (
             <Row>
-              <Col xs={6} style={{padding: "1em 0.5em 0 0"}}>
+              <Col xs={6} style={{ padding: "1em 0.5em 0 0" }}>
                 <WordCloud
                   genres={[...artists.map(a => a.genres).flat()]}
-                  count={30}
+                  count={25}
                 />
               </Col>
-              <Col xs={6} style={{padding: "1em 0 0 0.5em"}}>
-                <TrackGrid tracks={tracks} title="Top tracks" count={5} />
+              <Col xs={6} style={{ padding: "1em 0 0 0.5em" }}>
+                <TrackGrid tracks={tracks} count={5} />
               </Col>
             </Row>
           )}
