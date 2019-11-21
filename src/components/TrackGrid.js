@@ -10,8 +10,6 @@ const TrackGrid = ({ tracks, count }) => {
   // Isolate top [count] tracks from unique albums
   const uniqueTracks = uniqBy(tracks, "album.id").slice(0, count);
 
-  console.log(uniqueTracks);
-
   return (
     <div>
       <ComponentHeader title="Tracks" />
