@@ -5,13 +5,11 @@ import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
 import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
 import SaveIcon from "@material-ui/icons/Save";
 import ShareIcon from "@material-ui/icons/Share";
+import html2canvas from "html2canvas";
 
 const useStyles = makeStyles(theme => ({
   speedDial: {
     position: "fixed",
-    "&.MuiFab-primary": {
-      backgroundColor: "#1DB954"
-    },
     "&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft": {
       bottom: theme.spacing(2),
       right: theme.spacing(2)
@@ -22,11 +20,6 @@ const useStyles = makeStyles(theme => ({
     }
   }
 }));
-
-const actions = [
-  { icon: <SaveIcon />, name: "Save" },
-  { icon: <ShareIcon />, name: "Share" }
-];
 
 const Fab = () => {
   const classes = useStyles();
@@ -39,6 +32,19 @@ const Fab = () => {
   const handleOpen = () => {
     setOpen(true);
   };
+
+  const handleSave = () => {
+    html2canvas(document.body).then(canvas => {
+      const imgData = canvas.toDataURL("image/png");
+    });
+  };
+
+  const handleShare = () => {};
+
+  const actions = [
+    { icon: <SaveIcon />, name: "Save", onClick: handleSave },
+    { icon: <ShareIcon />, name: "Share", onClick: handleShare }
+  ];
 
   return (
     <SpeedDial
@@ -55,7 +61,7 @@ const Fab = () => {
           key={action.name}
           icon={action.icon}
           tooltipTitle={action.name}
-          onClick={handleClose}
+          onClick={action.onClick}
         />
       ))}
     </SpeedDial>
