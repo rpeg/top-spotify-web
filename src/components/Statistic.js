@@ -1,14 +1,12 @@
 import React from "react";
 
-const Statistic = ({ title, stat }) => {
+const Statistic = ({ title, children }) => {
   return (
     <div>
       <div>
         <p>{title}</p>
       </div>
-      <div>
-        <h4>{stat}</h4>
-      </div>
+      <div>{children}</div>
     </div>
   );
 };
