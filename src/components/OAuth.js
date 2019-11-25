@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react";
-import FontAwesome from "react-fontawesome";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 
-import { API_URL } from "../config";
-import { Button } from "react-bootstrap";
+import { API_URL } from '../config';
 
-const OAuth = ({ socket }) => {
-  const [user, setUser] = useState({});
+const OAuth = ({ socket, user, setUser }) => {
   const [enabled, setEnabled] = useState(false);
 
   let popup;
 
   useEffect(() => {
-    socket.on('spotifyUser', user => {
+    socket.on('spotifyUser', (spotifyUser) => {
       popup.close();
-      setUser(user);
+      setUser(spotifyUser);
     });
   });
 
@@ -28,22 +26,22 @@ const OAuth = ({ socket }) => {
   };
 
   const openPopup = () => {
-    const width = 600,
-      height = 600;
+    const width = 600;
+    const height = 600;
     const left = window.innerWidth / 2 - width / 2;
     const top = window.innerHeight / 2 - height / 2;
     const url = `${API_URL}/auth/login?socketId=${socket.id}`;
 
     return window.open(
       url,
-      "",
+      '',
       `toolbar=no, location=no, directories=no, status=no, menubar=no, 
       scrollbars=no, resizable=no, copyhistory=no, width=${width}, 
-      height=${height}, top=${top}, left=${left}`
+      height=${height}, top=${top}, left=${left}`,
     );
   };
 
-  const startAuth = e => {
+  const startAuth = (e) => {
     if (!enabled) {
       e.preventDefault();
       popup = openPopup();
@@ -52,35 +50,29 @@ const OAuth = ({ socket }) => {
     }
   };
 
-  const closeCard = () => {
+  const logout = () => {
     setUser({});
   };
 
   return (
     <div>
       {user.id ? (
-        <div className={"card"}>
-          <FontAwesome
-            name={"times-circle"}
-            className={"close"}
-            onClick={closeCard.bind(this)}
-          />
-          <h4>{user.id}</h4>
-          <img src={user.image} alt={user.id} />
-        </div>
+        <Button variant="outline-primary" onClick={logout}>
+          Logout
+        </Button>
       ) : (
-        <div className={"button-wrapper fadein-fast"}>
-          <Button variant="outline-primary" onClick={startAuth}>
-            Login to Spotify
-          </Button>
-        </div>
+        <Button variant="outline-primary" onClick={startAuth}>
+          Login
+        </Button>
       )}
     </div>
   );
 };
 
 OAuth.propTypes = {
-  socket: PropTypes.object.isRequired
+  socket: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  setUser: PropTypes.func.isRequired,
 };
 
 export default OAuth;

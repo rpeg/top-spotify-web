@@ -1,15 +1,16 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import { createStore } from 'redux';
 import io from "socket.io-client";
 
 import OAuth from "./components/OAuth";
-import { useQueryParam, BooleanParam } from "use-query-params";
 import { API_URL } from "./config";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import app from './reducers/reducers';
+import SpotifyTopMusic from './components/SpotifyTopMusic';
+import MainHeader from './components/MainHeader';
 
-import SectionTemplate from "./components/SectionTemplate";
-import MainHeader from "./components/MainHeader";
+const store = createStore(app);
 
 const socket = io(API_URL);
 
