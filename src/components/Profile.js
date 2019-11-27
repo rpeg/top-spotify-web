@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Profile = (user) => (
-  user.id && (
+const Profile = ({ user }) => (
   <span
     style={{
       display: 'inline-flex',
@@ -23,7 +22,6 @@ const Profile = (user) => (
       }}
     />
   </span>
-  )
 );
 
 Profile.propTypes = {

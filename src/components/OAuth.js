@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
+import { setUser } from '../actions/actions';
 import { API_URL } from '../config';
 
-const OAuth = ({ socket, user, setUser }) => {
-  const [enabled, setEnabled] = useState(false);
+const OAuth = ({ socket }) => {
+  const [disabled, setDisabled] = useState(false);
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
 
   let popup;
 
   useEffect(() => {
     socket.on('spotifyUser', (spotifyUser) => {
-      popup.close();
-      setUser(spotifyUser);
+      if (popup) { popup.close(); }
+
+      dispatch(setUser(spotifyUser));
     });
   });
 
@@ -20,7 +25,7 @@ const OAuth = ({ socket, user, setUser }) => {
     const check = setInterval(() => {
       if (!popup || popup.closed || popup.closed === undefined) {
         clearInterval(check);
-        setEnabled(false);
+        setDisabled(false);
       }
     }, 1000);
   };
@@ -42,21 +47,21 @@ const OAuth = ({ socket, user, setUser }) => {
   };
 
   const startAuth = (e) => {
-    if (!enabled) {
+    if (!disabled) {
       e.preventDefault();
       popup = openPopup();
       checkPopup();
-      setEnabled(false);
+      setDisabled(true);
     }
   };
 
   const logout = () => {
-    setUser({});
+    dispatch(setUser({}));
   };
 
   return (
     <div>
-      {user.id ? (
+      {user && user.id ? (
         <Button variant="outline-primary" onClick={logout}>
           Logout
         </Button>
@@ -71,8 +76,6 @@ const OAuth = ({ socket, user, setUser }) => {
 
 OAuth.propTypes = {
   socket: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-  setUser: PropTypes.func.isRequired,
 };
 
 export default OAuth;
