@@ -17,6 +17,7 @@ import {
   N_ARTISTS,
   ARTIST_REQ_LIMIT,
   FEATURE_REQ_LIMIT,
+  SET_GENRE_COUNT,
 } from '../constants/constants';
 import { API_URL } from '../config';
 
@@ -24,16 +25,20 @@ export function setUser(user) {
   return { type: SET_USER, user };
 }
 
-export function setTimeRange(range) {
-  return { type: SET_TIME_RANGE, range };
+export function setTimeRange(timeRange) {
+  return { type: SET_TIME_RANGE, timeRange };
 }
 
-export function setArtistCount(count) {
-  return { type: SET_ARTIST_COUNT, count };
+export function setArtistCount(artistCount) {
+  return { type: SET_ARTIST_COUNT, artistCount };
 }
 
-export function setTrackCount(count) {
-  return { type: SET_TRACK_COUNT, count };
+export function setTrackCount(trackCount) {
+  return { type: SET_TRACK_COUNT, trackCount };
+}
+
+export function setGenreCount(genreCount) {
+  return { type: SET_GENRE_COUNT, genreCount };
 }
 
 function requestArtists(timeRange) {
@@ -43,7 +48,7 @@ function requestArtists(timeRange) {
   };
 }
 
-function receiveArtists(timeRange, items) {
+export function receiveArtists(timeRange, items) {
   return {
     type: RECEIVE_ARTISTS,
     timeRange,
@@ -54,39 +59,33 @@ function receiveArtists(timeRange, items) {
 const fetchArtistsFromOffset = (timeRange, offset) => async () => axios
   .get(`${API_URL}/api/my-top-artists`, {
     params: {
-      time_range: `${timeRange}_term`,
+      time_range: timeRange,
       offset,
       limit: ARTIST_REQ_LIMIT,
     },
   });
 
-function fetchArtists(timeRange) {
+function fetchArtists(timeRange, socketId) {
   return (dispatch) => {
     dispatch(requestArtists(timeRange));
 
-    const promises = [];
-
-    for (let i = 0; i <= N_ARTISTS; i += ARTIST_REQ_LIMIT) {
-      promises.push(fetchArtistsFromOffset(timeRange, i));
-    }
-
-    return async () => {
-      await Promise.all(promises)
-        .then((results) => {
-          const result = results.flat();
-          dispatch(receiveArtists(timeRange, result.data.items));
-        })
-        .catch((err) => console.log(err));
-    };
+    return axios.get(`${API_URL}/api/my-top-artists?socketId=${socketId}`, {
+      params: {
+        time_range: `${timeRange.range}`,
+        offset: 0,
+        n: N_ARTISTS,
+        limit: ARTIST_REQ_LIMIT,
+      },
+    });
   };
 }
 
 const shouldFetchArtists = (state, timeRange) => !state.artistsByTimeRange[timeRange];
 
-export function fetchArtistsIfNeeded(timeRange) {
+export function fetchArtistsIfNeeded(timeRange, socketId) {
   return (dispatch, getState) => {
     if (shouldFetchArtists(getState(), timeRange)) {
-      return dispatch(fetchArtists(timeRange));
+      return dispatch(fetchArtists(timeRange, socketId));
     }
     return Promise.resolve();
   };
