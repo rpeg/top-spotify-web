@@ -84,9 +84,9 @@ const SpotifyTopMusic = ({ socket }) => {
                   count={genreCount}
                 />
               ) : <Spinner animation="border" />}
-              {features && features.items && features.items.length && tracks && tracks.items && tracks.items.length ? 
-                (<Statistics features={features.items} tracks={tracks.items} />) : 
-                <Spinner animation="border" />}
+              {features && features.items && features.items.length && tracks && tracks.items && tracks.items.length
+                ? (<Statistics features={features.items} tracks={tracks.items} />)
+                : <Spinner animation="border" />}
             </Col>
             <Col xs={4} style={{ padding: '0 0 0 0.5em' }}>
               {tracks && tracks.items && tracks.items.length ? (<TrackGrid tracks={tracks.items} count={trackCount} />) : <Spinner animation="border" />}
