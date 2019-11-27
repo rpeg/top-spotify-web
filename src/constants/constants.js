@@ -10,10 +10,11 @@ export const RECEIVE_ARTISTS = 'RECEIVE_ARTIST';
 export const RECEIVE_TRACKS = 'RECEIVE_TRACKS';
 export const RECEIVE_FEATURES = 'RECEIVE_FEATURES';
 
-export const N_ARTISTS = 100;
+// TODO increase N once Spotify allows for more top artists/tracks
 export const ARTIST_REQ_LIMIT = 50;
-export const N_TRACKS = 250;
 export const TRACK_REQ_LIMIT = 50;
+export const N_ARTISTS = ARTIST_REQ_LIMIT;
+export const N_TRACKS = TRACK_REQ_LIMIT;
 export const FEATURE_REQ_LIMIT = 100;
 
 export const TimeRanges = {

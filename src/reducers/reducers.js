@@ -87,7 +87,7 @@ function tracks(state = {}, action) {
     case REQUEST_TRACKS:
       return { ...state, isFetching: true };
     case RECEIVE_TRACKS:
-      return { ...state, isFetching: false, items: action.tracks };
+      return { ...state, isFetching: false, items: action.items };
     default:
       return state;
   }

@@ -56,15 +56,6 @@ export function receiveArtists(timeRange, items) {
   };
 }
 
-const fetchArtistsFromOffset = (timeRange, offset) => async () => axios
-  .get(`${API_URL}/api/my-top-artists`, {
-    params: {
-      time_range: timeRange,
-      offset,
-      limit: ARTIST_REQ_LIMIT,
-    },
-  });
-
 function fetchArtists(timeRange, socketId) {
   return (dispatch) => {
     dispatch(requestArtists(timeRange));
@@ -98,7 +89,7 @@ function requestTracks(timeRange) {
   };
 }
 
-function receiveTracks(timeRange, items) {
+export function receiveTracks(timeRange, items) {
   return {
     type: RECEIVE_TRACKS,
     timeRange,
@@ -106,42 +97,27 @@ function receiveTracks(timeRange, items) {
   };
 }
 
-const fetchTracksFromOffset = (timeRange, offset) => async () => axios
-  .get(`${API_URL}/api/my-top-tracks`, {
-    params: {
-      time_range: `${timeRange}_term`,
-      offset,
-      limit: TRACK_REQ_LIMIT,
-    },
-  });
-
-function fetchTracks(timeRange) {
+function fetchTracks(timeRange, socketId) {
   return (dispatch) => {
     dispatch(requestTracks(timeRange));
 
-    const promises = [];
-
-    for (let i = 0; i <= N_TRACKS; i += TRACK_REQ_LIMIT) {
-      promises.push(fetchTracksFromOffset(timeRange, i));
-    }
-
-    return async () => {
-      await Promise.all(promises)
-        .then((results) => {
-          const result = results.flat();
-          dispatch(receiveTracks(timeRange, result.data.items));
-        })
-        .catch((err) => console.log(err));
-    };
+    return axios.get(`${API_URL}/api/my-top-tracks?socketId=${socketId}`, {
+      params: {
+        time_range: `${timeRange.range}`,
+        offset: 0,
+        n: N_TRACKS,
+        limit: TRACK_REQ_LIMIT,
+      },
+    });
   };
 }
 
 const shouldFetchTracks = (state, timeRange) => !state.tracksByTimeRange[timeRange];
 
-export function fetchTracksIfNeeded(timeRange) {
+export function fetchTracksIfNeeded(timeRange, socketId) {
   return (dispatch, getState) => {
     if (shouldFetchTracks(getState(), timeRange)) {
-      return dispatch(fetchTracks(timeRange));
+      return dispatch(fetchTracks(timeRange, socketId));
     }
     return Promise.resolve();
   };
@@ -153,7 +129,7 @@ function requestFeatures() {
   };
 }
 
-function receiveFeatures(timeRange, items) {
+export function receiveFeatures(timeRange, items) {
   return {
     type: RECEIVE_FEATURES,
     timeRange,
