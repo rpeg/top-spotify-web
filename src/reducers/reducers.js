@@ -108,7 +108,17 @@ function features(state = {}, action) {
     case REQUEST_FEATURES:
       return { ...state, isFetching: true };
     case RECEIVE_FEATURES:
-      return { ...state, isFetching: false, items: action.features };
+      return { ...state, isFetching: false, items: action.items };
+    default:
+      return state;
+  }
+}
+
+function featuresByTimeRange(state = {}, action) {
+  switch (action.type) {
+    case RECEIVE_FEATURES:
+    case REQUEST_FEATURES:
+      return { ...state, [action.timeRange]: features(state[action.timeRange], action) };
     default:
       return state;
   }
@@ -125,6 +135,7 @@ const rootReducer = combineReducers({
   tracks,
   tracksByTimeRange,
   features,
+  featuresByTimeRange,
 });
 
 export default rootReducer;

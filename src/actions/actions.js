@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { chunk } from 'lodash';
 
 import {
   SET_USER,
@@ -16,7 +15,6 @@ import {
   N_TRACKS,
   N_ARTISTS,
   ARTIST_REQ_LIMIT,
-  FEATURE_REQ_LIMIT,
   SET_GENRE_COUNT,
 } from '../constants/constants';
 import { API_URL } from '../config';
@@ -137,41 +135,29 @@ export function receiveFeatures(timeRange, items) {
   };
 }
 
-const fetchFeaturesForChunk = (tracks) => async () => axios
-  .get(`${API_URL}/api/track-features`, {
-    params: {
-      ids: tracks.map((t) => t.id).join(','),
-    },
-  });
-
-function fetchFeatures(tracks) {
+function fetchFeatures(ids, timeRange, socketId) {
   return (dispatch) => {
     dispatch(requestFeatures());
 
-    const chunkedTracks = chunk(tracks, FEATURE_REQ_LIMIT);
-    const promises = [];
-
-    for (let i = 0; i < chunkedTracks.length; i += 1) {
-      promises.push(fetchFeaturesForChunk(chunkedTracks[i]));
-    }
-
-    return async () => {
-      await Promise.all(promises)
-        .then((results) => {
-          const result = results.flat();
-          dispatch(receiveFeatures(result.data.items));
-        })
-        .catch((err) => console.log(err));
-    };
+    return axios
+      .get(`${API_URL}/api/track-features?socketId=${socketId}`, {
+        params: {
+          time_range: `${timeRange.range}`,
+          ids,
+        },
+      });
   };
 }
 
-const shouldFetchFeatures = (state, timeRange) => !state.features[timeRange];
+const shouldFetchFeatures = (state, timeRange) => !state.featuresByTimeRange[timeRange];
 
-export function fetchFeaturesIfNeeded(timeRange) {
+export function fetchFeaturesIfNeeded(timeRange, socketId) {
   return (dispatch, getState) => {
     if (shouldFetchFeatures(getState(), timeRange)) {
-      return dispatch(fetchFeatures(getState().tracks));
+      const tracks = getState().tracksByTimeRange[timeRange];
+      const ids = tracks ? tracks.items.map((t) => t.id) : null;
+
+      if (ids) { return dispatch(fetchFeatures(ids, timeRange, socketId)); }
     }
     return Promise.resolve();
   };

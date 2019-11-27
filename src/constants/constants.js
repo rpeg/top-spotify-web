@@ -15,7 +15,6 @@ export const ARTIST_REQ_LIMIT = 50;
 export const TRACK_REQ_LIMIT = 50;
 export const N_ARTISTS = ARTIST_REQ_LIMIT;
 export const N_TRACKS = TRACK_REQ_LIMIT;
-export const FEATURE_REQ_LIMIT = 100;
 
 export const TimeRanges = {
   LONG: { range: 'long_term', title: 'All-time' },

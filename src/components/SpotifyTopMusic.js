@@ -42,24 +42,24 @@ const SpotifyTopMusic = ({ socket }) => {
   useEffect(() => {
     socket.on('topArtists', (result) => {
       const matchingTimeRange = findKey(TimeRanges, (r) => r.range === result.range);
-      dispatch(receiveArtists(matchingTimeRange || TimeRanges.LONG, result.items));
+      dispatch(receiveArtists(matchingTimeRange, result.items));
     });
   });
 
   useEffect(() => {
     socket.on('topTracks', (result) => {
       const matchingTimeRange = findKey(TimeRanges, (r) => r.range === result.range);
-      dispatch(receiveTracks(matchingTimeRange || TimeRanges.LONG, result.items));
+      dispatch(receiveTracks(matchingTimeRange, result.items));
 
       // Derive features from tracks
-      // dispatch(fetchFeaturesIfNeeded(matchingTimeRange, socket.id));
+      dispatch(fetchFeaturesIfNeeded(matchingTimeRange, socket.id));
     });
   });
 
   useEffect(() => {
-    socket.on('topFeatures', (result) => {
+    socket.on('features', (result) => {
       const matchingTimeRange = findKey(TimeRanges, (r) => r.range === result.range);
-      dispatch(receiveFeatures(matchingTimeRange || TimeRanges.LONG, result.items));
+      dispatch(receiveFeatures(matchingTimeRange, result.items));
     });
   });
 
@@ -67,7 +67,7 @@ const SpotifyTopMusic = ({ socket }) => {
     user && user.id ? (
       <div style={{ marginTop: '2em' }}>
         <div>
-          <h1>{TimeRanges[timeRange]}</h1>
+          <h1>{timeRange.title}</h1>
         </div>
         <Container>
           <Row>
@@ -78,13 +78,13 @@ const SpotifyTopMusic = ({ socket }) => {
           ) : <Spinner animation="border" />}
           <Row style={{ paddingTop: '2em' }}>
             <Col xs={8} style={{ padding: '0 0.5em 0 0' }}>
-              {artists.length ? (
+              {artists && artists.items && artists.items.length ? (
                 <WordCloud
-                  genres={[...artists.map((a) => a.genres).flat()]}
+                  genres={[...artists.items.map((a) => a.genres).flat()]}
                   count={genreCount}
                 />
               ) : <Spinner animation="border" />}
-              {features.length ? (<Features features={features} />) : <Spinner animation="border" />}
+              {features && features.items && features.items.length ? (<Features features={features.items} />) : <Spinner animation="border" />}
             </Col>
             <Col xs={4} style={{ padding: '0 0 0 0.5em' }}>
               {tracks && tracks.items && tracks.items.length ? (<TrackGrid tracks={tracks.items} count={trackCount} />) : <Spinner animation="border" />}
