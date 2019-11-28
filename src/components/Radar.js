@@ -1,8 +1,8 @@
-import React from "react";
-import Chart from "react-apexcharts";
+import React from 'react';
+import Chart from 'react-apexcharts';
 
 const getFeatureAvg = (features, name) => {
-  const featureArr = features.map(f => f[name]);
+  const featureArr = features.map((f) => f[name]);
   const total = featureArr.reduce((acc, curr) => acc + curr);
 
   return total / features.length;
@@ -10,35 +10,35 @@ const getFeatureAvg = (features, name) => {
 
 const Radar = ({ features }) => {
   const labels = [
-    "acousticness",
-    "danceability",
-    "energy",
-    "instrumentalness",
-    "liveness",
-    "speechiness",
-    "valence"
+    'acousticness',
+    'danceability',
+    'energy',
+    'instrumentalness',
+    'liveness',
+    'speechiness',
+    'valence',
   ];
 
   const options = {
-    labels: labels,
+    labels,
     yaxis: {
       min: 0,
       max: 1,
-      show: false
+      show: false,
     },
     chart: {
-      foreColor: "#FFFFFF",
-      fontFamily: "DM Sans, sans-serif",
+      foreColor: '#FFFFFF',
+      fontFamily: 'Karla, sans-serif',
       toolbar: {
-        show: false
-      }
-    }
+        show: false,
+      },
+    },
   };
 
   const series = [
     {
-      data: labels.map(l => getFeatureAvg(features, l))
-    }
+      data: labels.map((l) => getFeatureAvg(features, l)),
+    },
   ];
 
   return (

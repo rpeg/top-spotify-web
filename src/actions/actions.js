@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import {
   SET_USER,
+  SET_HAS_CLICKED_CREATE,
   SET_TIME_RANGE,
   SET_ARTIST_COUNT,
   SET_TRACK_COUNT,
@@ -21,6 +22,10 @@ import { API_URL } from '../config';
 
 export function setUser(user) {
   return { type: SET_USER, user };
+}
+
+export function setHasClickedCreate() {
+  return { type: SET_HAS_CLICKED_CREATE, hasClickedCreate: true };
 }
 
 export function setTimeRange(timeRange) {
@@ -121,9 +126,10 @@ export function fetchTracksIfNeeded(timeRange, socketId) {
   };
 }
 
-function requestFeatures() {
+function requestFeatures(timeRange) {
   return {
     type: REQUEST_FEATURES,
+    timeRange,
   };
 }
 
@@ -143,7 +149,7 @@ function fetchFeatures(ids, timeRange, socketId) {
       .get(`${API_URL}/api/track-features?socketId=${socketId}`, {
         params: {
           time_range: `${timeRange.range}`,
-          ids,
+          ids: `${ids.join(',')}`,
         },
       });
   };

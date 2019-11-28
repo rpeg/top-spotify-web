@@ -22,7 +22,7 @@ import {
 import { TimeRanges } from '../constants/constants';
 
 const SpotifyTopMusic = ({ socket }) => {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user);
   const timeRange = useSelector((state) => state.timeRange);
   const artistCount = useSelector((state) => state.artistCount);
   const trackCount = useSelector((state) => state.trackCount);
@@ -37,14 +37,14 @@ const SpotifyTopMusic = ({ socket }) => {
       dispatch(fetchArtistsIfNeeded(timeRange, socket.id));
       dispatch(fetchTracksIfNeeded(timeRange, socket.id));
     }
-  }, [user]);
+  }, [dispatch, socket, timeRange, user]);
 
   useEffect(() => {
     socket.on('topArtists', (result) => {
       const matchingTimeRange = findKey(TimeRanges, (r) => r.range === result.range);
       dispatch(receiveArtists(matchingTimeRange, result.items));
     });
-  });
+  }, [dispatch, socket, timeRange]);
 
   useEffect(() => {
     socket.on('topTracks', (result) => {
@@ -54,14 +54,14 @@ const SpotifyTopMusic = ({ socket }) => {
       // Derive features from tracks
       dispatch(fetchFeaturesIfNeeded(matchingTimeRange, socket.id));
     });
-  });
+  }, [dispatch, socket, timeRange]);
 
   useEffect(() => {
     socket.on('features', (result) => {
       const matchingTimeRange = findKey(TimeRanges, (r) => r.range === result.range);
       dispatch(receiveFeatures(matchingTimeRange, result.items));
     });
-  });
+  }, [dispatch, socket, timeRange]);
 
   return (
     user && user.id ? (
