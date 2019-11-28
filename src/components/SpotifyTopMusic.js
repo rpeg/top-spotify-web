@@ -75,7 +75,7 @@ const SpotifyTopMusic = ({ socket }) => {
             <ComponentHeader title="Artists" />
           </Row>
           {artists && artists.items && artists.items.length ? (
-            <ArtistGrid artists={artists.items.slice(0, artistCount)} numRows={2} />
+            <ArtistGrid artists={artists.items.slice(0, artistCount)} />
           ) : <Spinner animation="border" />}
           <Row style={{ paddingTop: '2em' }}>
             <Col xs={8} style={{ padding: '0 0.5em 0 0' }}>

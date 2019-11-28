@@ -27,3 +27,13 @@ body {
   font-family: 'Karla', sans-serif !important;
   margin-top: 3em !important;
 }
+
+.btn-outline-primary {
+  color: #1DB954 !important;
+  border-color: #1DB954 !important;
+}
+
+.btn-outline-primary:hover {
+  color: #fff !important;
+  background-color: #1DB954 !important;
+}
