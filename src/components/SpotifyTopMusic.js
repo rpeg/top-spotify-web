@@ -20,6 +20,9 @@ import {
   fetchFeaturesIfNeeded,
 } from '../actions/actions';
 import { TimeRanges } from '../constants/constants';
+import { getTimeRangeByName } from '../lib/timeRange';
+
+const matchingTimeRange = (range) => findKey(TimeRanges, (r) => r.range === range);
 
 const SpotifyTopMusic = ({ socket }) => {
   const user = useSelector((state) => state.user);
@@ -41,25 +44,23 @@ const SpotifyTopMusic = ({ socket }) => {
 
   useEffect(() => {
     socket.on('topArtists', (result) => {
-      const matchingTimeRange = findKey(TimeRanges, (r) => r.range === result.range);
-      dispatch(receiveArtists(matchingTimeRange, result.items));
+      dispatch(receiveArtists(matchingTimeRange(result.range), result.items));
     });
   }, [dispatch, socket, timeRangeName]);
 
   useEffect(() => {
     socket.on('topTracks', (result) => {
-      const matchingTimeRange = findKey(TimeRanges, (r) => r.range === result.range);
-      dispatch(receiveTracks(matchingTimeRange, result.items));
+      const timeRange = matchingTimeRange(result.range);
+      dispatch(receiveTracks(timeRange, result.items));
 
       // Derive features from tracks
-      dispatch(fetchFeaturesIfNeeded(matchingTimeRange, socket.id));
+      dispatch(fetchFeaturesIfNeeded(timeRange, socket.id));
     });
   }, [dispatch, socket, timeRangeName]);
 
   useEffect(() => {
     socket.on('features', (result) => {
-      const matchingTimeRange = findKey(TimeRanges, (r) => r.range === result.range);
-      dispatch(receiveFeatures(matchingTimeRange, result.items));
+      dispatch(receiveFeatures(matchingTimeRange(result.range), result.items));
     });
   }, [dispatch, socket, timeRangeName]);
 
@@ -67,7 +68,7 @@ const SpotifyTopMusic = ({ socket }) => {
     user && user.id ? (
       <div style={{ marginTop: '2em' }}>
         <div>
-          <h1>{timeRangeName.title}</h1>
+          <h1>{getTimeRangeByName(timeRangeName).title}</h1>
         </div>
         <Container>
           <Row>
