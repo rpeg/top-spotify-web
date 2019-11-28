@@ -13,7 +13,7 @@ import {
   TimeRanges, DEFAULT_ARTIST_COUNT, DEFAULT_TRACK_COUNT, DEFAULT_GENRE_COUNT,
 } from '../constants/constants';
 import {
-  setTimeRange, setArtistCount, setTrackCount, setGenreCount, setHasClickedCreate,
+  setTimeRangeName, setArtistCount, setTrackCount, setGenreCount, setHasClickedCreate,
 } from '../actions/actions';
 
 const useStyles = makeStyles({
@@ -42,19 +42,24 @@ const useStyles = makeStyles({
 });
 
 const Controls = () => {
-  const [selectedTimeRange, setSelectedTimeRange] = useState(TimeRanges.LONG);
+  const user = useSelector((state) => state.user);
+  const timeRangeName = useSelector((state) => state.timeRangeName);
+  const genreCount = useSelector((state) => state.genreCount);
+  const artistCount = useSelector((state) => state.artistCount);
+  const trackCount = useSelector((state) => state.trackCount);
+
+  const [selectedTimeRangeName, setSelectedTimeRangeName] = useState(timeRangeName);
   const [selectedArtistCount, setSelectedArtistCount] = useState(DEFAULT_ARTIST_COUNT);
   const [selectedTrackCount, setSelectedTrackCount] = useState(DEFAULT_TRACK_COUNT);
   const [selectedGenreCount, setSelectedGenreCount] = useState(DEFAULT_GENRE_COUNT);
 
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const processClick = () => {
-    dispatch(setTimeRange(selectedTimeRange));
-    dispatch(setGenreCount(selectedGenreCount));
-    dispatch(setArtistCount(selectedArtistCount));
-    dispatch(setTrackCount(selectedTrackCount));
+    if (selectedTimeRangeName !== timeRangeName) { dispatch(setTimeRangeName(selectedTimeRangeName)); }
+    if (selectedGenreCount !== genreCount) { dispatch(setGenreCount(selectedGenreCount)); }
+    if (selectedArtistCount !== artistCount) { dispatch(setArtistCount(selectedArtistCount)); }
+    if (selectedTrackCount !== trackCount) { dispatch(setTrackCount(selectedTrackCount)); }
     dispatch(setHasClickedCreate());
   };
 
@@ -69,13 +74,13 @@ const Controls = () => {
           Age
             </InputLabel>
             <Select
-              value={selectedTimeRange}
+              value={selectedTimeRangeName}
               className={classes.select}
-              onChange={(e) => setSelectedTimeRange(e.target.value)}
+              onChange={(e) => setSelectedTimeRangeName(e.target.value)}
             >
-              <MenuItem value={TimeRanges.LONG}>{TimeRanges.LONG.title}</MenuItem>
-              <MenuItem value={TimeRanges.MEDIUM}>{TimeRanges.MEDIUM.title}</MenuItem>
-              <MenuItem value={TimeRanges.SHORT}>{TimeRanges.SHORT.title}</MenuItem>
+              <MenuItem value={TimeRanges.LONG.name}>{TimeRanges.LONG.title}</MenuItem>
+              <MenuItem value={TimeRanges.MEDIUM.name}>{TimeRanges.MEDIUM.title}</MenuItem>
+              <MenuItem value={TimeRanges.SHORT.name}>{TimeRanges.SHORT.title}</MenuItem>
             </Select>
           </Col>
           <Col>
@@ -83,14 +88,13 @@ const Controls = () => {
           # of Genres
             </InputLabel>
             <Slider
-              value={selectedGenreCount}
               defaultValue={DEFAULT_GENRE_COUNT}
               step={1}
               valueLabelDisplay="auto"
               min={1}
               max={100}
               className={classes.slider}
-              onChange={(e) => setSelectedGenreCount(e.target.value)}
+              onChange={(e, newValue) => setSelectedGenreCount(newValue)}
             />
           </Col>
         </Row>

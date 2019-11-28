@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import {
   SET_USER,
-  SET_TIME_RANGE,
+  SET_TIME_RANGE_NAME,
   TimeRanges,
   REQUEST_ARTISTS,
   RECEIVE_ARTISTS,
@@ -38,10 +38,10 @@ function hasClickedCreate(state = false, action) {
   }
 }
 
-function timeRange(state = LONG, action) {
+function timeRangeName(state = LONG.name, action) {
   switch (action.type) {
-    case SET_TIME_RANGE:
-      return action.timeRange;
+    case SET_TIME_RANGE_NAME:
+      return action.timeRangeName;
     default:
       return state;
   }
@@ -85,11 +85,11 @@ function artists(state = {}, action) {
   }
 }
 
-function artistsByTimeRange(state = {}, action) {
+function artistsByTimeRangeName(state = {}, action) {
   switch (action.type) {
     case RECEIVE_ARTISTS:
     case REQUEST_ARTISTS:
-      return { ...state, [action.timeRange]: artists(state[action.timeRange], action) };
+      return { ...state, [action.timeRangeName]: artists(state[action.timeRangeName], action) };
     default:
       return state;
   }
@@ -106,11 +106,11 @@ function tracks(state = {}, action) {
   }
 }
 
-function tracksByTimeRange(state = {}, action) {
+function tracksByTimeRangeName(state = {}, action) {
   switch (action.type) {
     case RECEIVE_TRACKS:
     case REQUEST_TRACKS:
-      return { ...state, [action.timeRange]: tracks(state[action.timeRange], action) };
+      return { ...state, [action.timeRangeName]: tracks(state[action.timeRangeName], action) };
     default:
       return state;
   }
@@ -127,11 +127,11 @@ function features(state = {}, action) {
   }
 }
 
-function featuresByTimeRange(state = {}, action) {
+function featuresByTimeRangeName(state = {}, action) {
   switch (action.type) {
     case RECEIVE_FEATURES:
     case REQUEST_FEATURES:
-      return { ...state, [action.timeRange]: features(state[action.timeRange], action) };
+      return { ...state, [action.timeRangeName]: features(state[action.timeRangeName], action) };
     default:
       return state;
   }
@@ -140,16 +140,16 @@ function featuresByTimeRange(state = {}, action) {
 const rootReducer = combineReducers({
   user,
   hasClickedCreate,
-  timeRange,
+  timeRangeName,
   artistCount,
   trackCount,
   genreCount,
   artists,
-  artistsByTimeRange,
+  artistsByTimeRangeName,
   tracks,
-  tracksByTimeRange,
+  tracksByTimeRangeName,
   features,
-  featuresByTimeRange,
+  featuresByTimeRangeName,
 });
 
 export default rootReducer;

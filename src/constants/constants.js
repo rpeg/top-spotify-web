@@ -1,6 +1,6 @@
 export const SET_USER = 'SET_USER';
 export const SET_HAS_CLICKED_CREATE = 'SET_HAS_CLICKED_CREATE';
-export const SET_TIME_RANGE = 'SET_TIME_RANGE';
+export const SET_TIME_RANGE_NAME = 'SET_TIME_RANGE_NAME';
 export const SET_ARTIST_COUNT = 'SET_ARTIST_COUNT';
 export const SET_TRACK_COUNT = 'SET_TRACK_COUNT';
 export const SET_GENRE_COUNT = 'SET_GENRE_COUNT';
@@ -22,7 +22,7 @@ export const DEFAULT_TRACK_COUNT = 10;
 export const DEFAULT_GENRE_COUNT = 40;
 
 export const TimeRanges = {
-  LONG: { range: 'long_term', title: 'All-time' },
-  MEDIUM: { range: 'medium_term', title: 'Last Six Months' },
-  SHORT: { range: 'short_term', title: 'Recent' },
+  LONG: { name: 'LONG', range: 'long_term', title: 'All-time' },
+  MEDIUM: { name: 'MEDIUM', range: 'medium_term', title: 'Last Six Months' },
+  SHORT: { name: 'SHORT', range: 'short_term', title: 'Recent' },
 };
