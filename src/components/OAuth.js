@@ -8,7 +8,7 @@ import { API_URL } from '../config';
 
 const OAuth = ({ socket }) => {
   const [disabled, setDisabled] = useState(false);
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   let popup;

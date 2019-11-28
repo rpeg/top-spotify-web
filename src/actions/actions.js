@@ -2,7 +2,8 @@ import axios from 'axios';
 
 import {
   SET_USER,
-  SET_TIME_RANGE,
+  SET_HAS_CLICKED_CREATE,
+  SET_TIME_RANGE_NAME,
   SET_ARTIST_COUNT,
   SET_TRACK_COUNT,
   RECEIVE_TRACKS,
@@ -16,15 +17,22 @@ import {
   N_ARTISTS,
   ARTIST_REQ_LIMIT,
   SET_GENRE_COUNT,
+  TimeRanges,
 } from '../constants/constants';
 import { API_URL } from '../config';
+
+const getTimeRangeByName = (name) => Object.values(TimeRanges).find((r) => r.name === name);
 
 export function setUser(user) {
   return { type: SET_USER, user };
 }
 
-export function setTimeRange(timeRange) {
-  return { type: SET_TIME_RANGE, timeRange };
+export function setHasClickedCreate() {
+  return { type: SET_HAS_CLICKED_CREATE, hasClickedCreate: true };
+}
+
+export function setTimeRangeName(timeRangeName) {
+  return { type: SET_TIME_RANGE_NAME, timeRangeName };
 }
 
 export function setArtistCount(artistCount) {
@@ -39,24 +47,26 @@ export function setGenreCount(genreCount) {
   return { type: SET_GENRE_COUNT, genreCount };
 }
 
-function requestArtists(timeRange) {
+function requestArtists(timeRangeName) {
   return {
     type: REQUEST_ARTISTS,
-    timeRange,
+    timeRangeName,
   };
 }
 
-export function receiveArtists(timeRange, items) {
+export function receiveArtists(timeRangeName, items) {
   return {
     type: RECEIVE_ARTISTS,
-    timeRange,
+    timeRangeName,
     items,
   };
 }
 
-function fetchArtists(timeRange, socketId) {
+function fetchArtists(timeRangeName, socketId) {
   return (dispatch) => {
-    dispatch(requestArtists(timeRange));
+    dispatch(requestArtists(timeRangeName));
+
+    const timeRange = getTimeRangeByName(timeRangeName);
 
     return axios.get(`${API_URL}/api/my-top-artists?socketId=${socketId}`, {
       params: {
@@ -69,35 +79,37 @@ function fetchArtists(timeRange, socketId) {
   };
 }
 
-const shouldFetchArtists = (state, timeRange) => !state.artistsByTimeRange[timeRange];
+const shouldFetchArtists = (state, timeRangeName) => !state.artistsByTimeRangeName[timeRangeName];
 
-export function fetchArtistsIfNeeded(timeRange, socketId) {
+export function fetchArtistsIfNeeded(timeRangeName, socketId) {
   return (dispatch, getState) => {
-    if (shouldFetchArtists(getState(), timeRange)) {
-      return dispatch(fetchArtists(timeRange, socketId));
+    if (shouldFetchArtists(getState(), timeRangeName)) {
+      return dispatch(fetchArtists(timeRangeName, socketId));
     }
     return Promise.resolve();
   };
 }
 
-function requestTracks(timeRange) {
+function requestTracks(timeRangeName) {
   return {
     type: REQUEST_TRACKS,
-    timeRange,
+    timeRangeName,
   };
 }
 
-export function receiveTracks(timeRange, items) {
+export function receiveTracks(timeRangeName, items) {
   return {
     type: RECEIVE_TRACKS,
-    timeRange,
+    timeRangeName,
     items,
   };
 }
 
-function fetchTracks(timeRange, socketId) {
+function fetchTracks(timeRangeName, socketId) {
   return (dispatch) => {
-    dispatch(requestTracks(timeRange));
+    dispatch(requestTracks(timeRangeName));
+
+    const timeRange = getTimeRangeByName(timeRangeName);
 
     return axios.get(`${API_URL}/api/my-top-tracks?socketId=${socketId}`, {
       params: {
@@ -110,54 +122,57 @@ function fetchTracks(timeRange, socketId) {
   };
 }
 
-const shouldFetchTracks = (state, timeRange) => !state.tracksByTimeRange[timeRange];
+const shouldFetchTracks = (state, timeRangeName) => !state.tracksByTimeRangeName[timeRangeName];
 
-export function fetchTracksIfNeeded(timeRange, socketId) {
+export function fetchTracksIfNeeded(timeRangeName, socketId) {
   return (dispatch, getState) => {
-    if (shouldFetchTracks(getState(), timeRange)) {
-      return dispatch(fetchTracks(timeRange, socketId));
+    if (shouldFetchTracks(getState(), timeRangeName)) {
+      return dispatch(fetchTracks(timeRangeName, socketId));
     }
     return Promise.resolve();
   };
 }
 
-function requestFeatures() {
+function requestFeatures(timeRangeName) {
   return {
     type: REQUEST_FEATURES,
+    timeRangeName,
   };
 }
 
-export function receiveFeatures(timeRange, items) {
+export function receiveFeatures(timeRangeName, items) {
   return {
     type: RECEIVE_FEATURES,
-    timeRange,
+    timeRangeName,
     items,
   };
 }
 
-function fetchFeatures(ids, timeRange, socketId) {
+function fetchFeatures(ids, timeRangeName, socketId) {
   return (dispatch) => {
     dispatch(requestFeatures());
+
+    const timeRange = getTimeRangeByName(timeRangeName);
 
     return axios
       .get(`${API_URL}/api/track-features?socketId=${socketId}`, {
         params: {
           time_range: `${timeRange.range}`,
-          ids,
+          ids: `${ids.join(',')}`,
         },
       });
   };
 }
 
-const shouldFetchFeatures = (state, timeRange) => !state.featuresByTimeRange[timeRange];
+const shouldFetchFeatures = (state, timeRangeName) => !state.featuresByTimeRangeName[timeRangeName];
 
-export function fetchFeaturesIfNeeded(timeRange, socketId) {
+export function fetchFeaturesIfNeeded(timeRangeName, socketId) {
   return (dispatch, getState) => {
-    if (shouldFetchFeatures(getState(), timeRange)) {
-      const tracks = getState().tracksByTimeRange[timeRange];
+    if (shouldFetchFeatures(getState(), timeRangeName)) {
+      const tracks = getState().tracksByTimeRangeName[timeRangeName];
       const ids = tracks ? tracks.items.map((t) => t.id) : null;
 
-      if (ids) { return dispatch(fetchFeatures(ids, timeRange, socketId)); }
+      if (ids) { return dispatch(fetchFeatures(ids, timeRangeName, socketId)); }
     }
     return Promise.resolve();
   };

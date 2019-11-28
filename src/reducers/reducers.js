@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import {
   SET_USER,
-  SET_TIME_RANGE,
+  SET_TIME_RANGE_NAME,
   TimeRanges,
   REQUEST_ARTISTS,
   RECEIVE_ARTISTS,
@@ -12,6 +12,10 @@ import {
   SET_ARTIST_COUNT,
   SET_TRACK_COUNT,
   SET_GENRE_COUNT,
+  DEFAULT_ARTIST_COUNT,
+  DEFAULT_TRACK_COUNT,
+  DEFAULT_GENRE_COUNT,
+  SET_HAS_CLICKED_CREATE,
 } from '../constants/constants';
 
 const { LONG } = TimeRanges;
@@ -19,43 +23,52 @@ const { LONG } = TimeRanges;
 function user(state = {}, action) {
   switch (action.type) {
     case SET_USER:
-      return { ...state, user: action.user };
+      return action.user;
     default:
       return state;
   }
 }
 
-function timeRange(state = LONG, action) {
+function hasClickedCreate(state = false, action) {
   switch (action.type) {
-    case SET_TIME_RANGE:
-      return { ...state, timeRange: action.timeRange };
+    case SET_HAS_CLICKED_CREATE:
+      return true;
     default:
       return state;
   }
 }
 
-function artistCount(state = 10, action) {
+function timeRangeName(state = LONG.name, action) {
+  switch (action.type) {
+    case SET_TIME_RANGE_NAME:
+      return action.timeRangeName;
+    default:
+      return state;
+  }
+}
+
+function artistCount(state = DEFAULT_ARTIST_COUNT, action) {
   switch (action.type) {
     case SET_ARTIST_COUNT:
-      return { ...state, artistCount: action.artistCount };
+      return action.artistCount;
     default:
       return state;
   }
 }
 
-function trackCount(state = 15, action) {
+function trackCount(state = DEFAULT_TRACK_COUNT, action) {
   switch (action.type) {
     case SET_TRACK_COUNT:
-      return { ...state, trackCount: action.trackCount };
+      return action.trackCount;
     default:
       return state;
   }
 }
 
-function genreCount(state = 40, action) {
+function genreCount(state = DEFAULT_GENRE_COUNT, action) {
   switch (action.type) {
     case SET_GENRE_COUNT:
-      return { ...state, genreCount: action.genreCount };
+      return action.genreCount;
     default:
       return state;
   }
@@ -72,11 +85,11 @@ function artists(state = {}, action) {
   }
 }
 
-function artistsByTimeRange(state = {}, action) {
+function artistsByTimeRangeName(state = {}, action) {
   switch (action.type) {
     case RECEIVE_ARTISTS:
     case REQUEST_ARTISTS:
-      return { ...state, [action.timeRange]: artists(state[action.timeRange], action) };
+      return { ...state, [action.timeRangeName]: artists(state[action.timeRangeName], action) };
     default:
       return state;
   }
@@ -93,11 +106,11 @@ function tracks(state = {}, action) {
   }
 }
 
-function tracksByTimeRange(state = {}, action) {
+function tracksByTimeRangeName(state = {}, action) {
   switch (action.type) {
     case RECEIVE_TRACKS:
     case REQUEST_TRACKS:
-      return { ...state, [action.timeRange]: tracks(state[action.timeRange], action) };
+      return { ...state, [action.timeRangeName]: tracks(state[action.timeRangeName], action) };
     default:
       return state;
   }
@@ -114,11 +127,11 @@ function features(state = {}, action) {
   }
 }
 
-function featuresByTimeRange(state = {}, action) {
+function featuresByTimeRangeName(state = {}, action) {
   switch (action.type) {
     case RECEIVE_FEATURES:
     case REQUEST_FEATURES:
-      return { ...state, [action.timeRange]: features(state[action.timeRange], action) };
+      return { ...state, [action.timeRangeName]: features(state[action.timeRangeName], action) };
     default:
       return state;
   }
@@ -126,16 +139,17 @@ function featuresByTimeRange(state = {}, action) {
 
 const rootReducer = combineReducers({
   user,
-  timeRange,
+  hasClickedCreate,
+  timeRangeName,
   artistCount,
   trackCount,
   genreCount,
   artists,
-  artistsByTimeRange,
+  artistsByTimeRangeName,
   tracks,
-  tracksByTimeRange,
+  tracksByTimeRangeName,
   features,
-  featuresByTimeRange,
+  featuresByTimeRangeName,
 });
 
 export default rootReducer;

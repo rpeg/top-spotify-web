@@ -6,7 +6,7 @@ import Moment from 'moment';
 import Profile from './Profile';
 
 const MainHeader = () => {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user);
 
   return (
     user && user.id ? (

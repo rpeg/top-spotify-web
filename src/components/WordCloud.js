@@ -1,34 +1,34 @@
-import React from "react";
-import Palette from "google-palette";
-import ReactWordcloud from "react-wordcloud";
-import { makeSortedFrequencyArr } from "../lib/frequency";
+import React from 'react';
+import Palette from 'google-palette';
+import ReactWordcloud from 'react-wordcloud';
+import { makeSortedFrequencyArr } from '../lib/frequency';
 
-import ComponentHeader from "./ComponentHeader";
+import ComponentHeader from './ComponentHeader';
 
 const WordCloud = ({ genres, count }) => {
   const sortedGenres = makeSortedFrequencyArr(genres).slice(0, count);
 
   const words = sortedGenres.map((genre, i) => ({
     text: genre.name,
-    value: genre.freq
+    value: genre.freq,
   }));
 
-  const colors = Palette("tol-rainbow", count).map(c => "#" + c);
+  const colors = Palette('tol-rainbow', count).map((c) => `#${c}`);
 
   const options = {
-    colors: colors,
+    colors,
     enableTooltip: true,
     deterministic: false,
-    fontFamily: "DM Sans, sans-serif",
+    fontFamily: 'Karla, sans-serif',
     fontSizes: [10, 48],
-    fontStyle: "normal",
-    fontWeight: "bold",
+    fontStyle: 'normal',
+    fontWeight: 'bold',
     padding: 1,
     rotations: 2,
     rotationAngles: [0, 90],
-    scale: "sqrt",
-    spiral: "archimedean",
-    transitionDuration: 1000
+    scale: 'sqrt',
+    spiral: 'archimedean',
+    transitionDuration: 1000,
   };
 
   return (
@@ -36,10 +36,10 @@ const WordCloud = ({ genres, count }) => {
       <ComponentHeader title="Genres" />
       <div
         style={{
-          maxHeight: "100%",
-          maxWidth: "100%",
-          height: "100%",
-          width: "auto"
+          maxHeight: '100%',
+          maxWidth: '100%',
+          height: '100%',
+          width: 'auto',
         }}
       >
         <ReactWordcloud options={options} words={words} />
