@@ -8,9 +8,11 @@ const ArtistGrid = ({ artists }) => {
 
   return chunkedArtists.map((artistRow, i) => (
     <div>
-      <Row>
-        <ComponentHeader title="Artists" />
-      </Row>
+      {i === 0 && (
+        <Row>
+          <ComponentHeader title="Artists" />
+        </Row>
+      )}
       <Row key={chunkedArtists[i].toString()} style={{ paddingTop: `${i > 0 ? '4px' : '0px'}` }}>
         {artistRow.map((artist, j) => (
           <Col key={artistRow[j].toString()} style={{ padding: '0px 2px 0px 2px' }}>

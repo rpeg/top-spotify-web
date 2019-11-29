@@ -75,19 +75,25 @@ const SpotifyTopMusic = ({ socket }) => {
             <ArtistGrid artists={artists.items.slice(0, artistCount)} />
           ) : <Spinner animation="border" />}
           <Row style={{ paddingTop: '2em' }}>
-            <Col xs={8} style={{ padding: '0 0.5em 0 0' }}>
+            <Col xs={12}>
               {artists && artists.items && artists.items.length ? (
                 <WordCloud
                   genres={[...artists.items.map((a) => a.genres).flat()]}
                   count={genreCount}
                 />
               ) : <Spinner animation="border" />}
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              {tracks && tracks.items && tracks.items.length ? (<TrackGrid tracks={tracks.items} count={trackCount} />) : <Spinner animation="border" />}
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
               {features && features.items && features.items.length && tracks && tracks.items && tracks.items.length
                 ? (<Statistics features={features.items} tracks={tracks.items} />)
                 : <Spinner animation="border" />}
-            </Col>
-            <Col xs={4} style={{ padding: '0 0 0 0.5em' }}>
-              {tracks && tracks.items && tracks.items.length ? (<TrackGrid tracks={tracks.items} count={trackCount} />) : <Spinner animation="border" />}
             </Col>
           </Row>
         </Container>
