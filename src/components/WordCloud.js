@@ -32,6 +32,7 @@ const WordCloud = ({ genres, count }) => {
   };
 
   return (
+    count > 0 && (
     <div>
       <ComponentHeader title="Genres" />
       <div
@@ -45,6 +46,7 @@ const WordCloud = ({ genres, count }) => {
         <ReactWordcloud options={options} words={words} />
       </div>
     </div>
+    )
   );
 };
 

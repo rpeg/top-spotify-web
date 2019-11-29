@@ -71,9 +71,6 @@ const SpotifyTopMusic = ({ socket }) => {
           <h1>{getTimeRangeByName(timeRangeName).title}</h1>
         </div>
         <Container>
-          <Row>
-            <ComponentHeader title="Artists" />
-          </Row>
           {artists && artists.items && artists.items.length ? (
             <ArtistGrid artists={artists.items.slice(0, artistCount)} />
           ) : <Spinner animation="border" />}
