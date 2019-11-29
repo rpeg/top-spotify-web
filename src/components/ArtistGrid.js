@@ -9,9 +9,7 @@ const ArtistGrid = ({ artists }) => {
   return chunkedArtists.map((artistRow, i) => (
     <div key={artistRow.map((a) => a.id).toString()}>
       {i === 0 && (
-        <Row>
-          <ComponentHeader title="Artists" />
-        </Row>
+        <ComponentHeader title="Artists" />
       )}
       <Row key={chunkedArtists[i].map((a) => a.id).toString()} style={{ paddingTop: `${i > 0 ? '4px' : '0px'}` }}>
         {artistRow.map((artist) => (
@@ -42,6 +40,7 @@ const ArtistGrid = ({ artists }) => {
                 }}
               >
                 <p
+                  className="s"
                   style={{
                     marginBottom: '0',
                     color: 'white',

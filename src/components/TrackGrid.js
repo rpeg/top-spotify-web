@@ -80,8 +80,9 @@ const TrackGrid = ({ tracks, count }) => {
                             />
                             <OrdinalCircle position={i * NUM_PER_ROW + j * NUM_PER_COL + k + 1} />
                             <div style={{ marginLeft: '0.5em' }}>
-                              <div>
+                              <div style={{ display: 'grid' }}>
                                 <p
+                                  className="s"
                                   style={{
                                     margin: '0',
                                     textAlign: 'left',
@@ -90,8 +91,9 @@ const TrackGrid = ({ tracks, count }) => {
                                   <b>{track.artists[0].name}</b>
                                 </p>
                               </div>
-                              <div>
+                              <div style={{ display: 'grid' }}>
                                 <p
+                                  className="xs"
                                   style={{
                                     margin: '0',
                                     textAlign: 'left',

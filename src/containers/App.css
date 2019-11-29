@@ -28,6 +28,12 @@ body {
   margin-top: 3em !important;
 }
 
+.xs, .s {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .btn-outline-primary {
   color: #1DB954 !important;
   border-color: #1DB954 !important;
