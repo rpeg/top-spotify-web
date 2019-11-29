@@ -6,7 +6,9 @@ import { Button } from 'react-bootstrap';
 import { setUser } from '../actions/actions';
 import { API_URL } from '../config';
 
-const buttonStyle = { right: '30px', top: '30px', position: 'absolute' };
+const buttonStyle = {
+  right: '30px', top: '30px', marginBottom: '30px', position: 'absolute',
+};
 
 const OAuth = ({ socket }) => {
   const [disabled, setDisabled] = useState(false);

@@ -16,6 +16,8 @@ import {
   DEFAULT_TRACK_COUNT,
   DEFAULT_GENRE_COUNT,
   SET_HAS_CLICKED_CREATE,
+  SET_STATS_OPTIONS,
+  SET_DISPLAY_PROFILE,
 } from '../constants/constants';
 
 const { LONG } = TimeRanges;
@@ -69,6 +71,24 @@ function genreCount(state = DEFAULT_GENRE_COUNT, action) {
   switch (action.type) {
     case SET_GENRE_COUNT:
       return action.genreCount;
+    default:
+      return state;
+  }
+}
+
+function statsOptions(state = ['key', 'bpm', 'decades', 'scale', 'features'], action) {
+  switch (action.type) {
+    case SET_STATS_OPTIONS:
+      return action.statsOptions;
+    default:
+      return state;
+  }
+}
+
+function displayProfile(state = true, action) {
+  switch (action.type) {
+    case SET_DISPLAY_PROFILE:
+      return action.displayProfile;
     default:
       return state;
   }
@@ -144,6 +164,8 @@ const rootReducer = combineReducers({
   artistCount,
   trackCount,
   genreCount,
+  statsOptions,
+  displayProfile,
   artists,
   artistsByTimeRangeName,
   tracks,

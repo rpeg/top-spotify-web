@@ -18,6 +18,8 @@ import {
   ARTIST_REQ_LIMIT,
   SET_GENRE_COUNT,
   TimeRanges,
+  SET_DISPLAY_PROFILE,
+  SET_STATS_OPTIONS,
 } from '../constants/constants';
 import { API_URL } from '../config';
 
@@ -45,6 +47,14 @@ export function setTrackCount(trackCount) {
 
 export function setGenreCount(genreCount) {
   return { type: SET_GENRE_COUNT, genreCount };
+}
+
+export function setStatsOptions(statsOptions) {
+  return { type: SET_STATS_OPTIONS, statsOptions };
+}
+
+export function setDisplayProfile(displayProfile) {
+  return { type: SET_DISPLAY_PROFILE, displayProfile };
 }
 
 function requestArtists(timeRangeName) {
