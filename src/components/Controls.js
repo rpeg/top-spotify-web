@@ -22,6 +22,7 @@ import {
   setHasClickedCreate,
   setStatsOptions,
   setDisplayProfile,
+  setOptimizeTracks,
 } from '../actions/actions';
 
 const useStyles = makeStyles((theme) => ({
@@ -105,6 +106,9 @@ const Controls = () => {
     if (selectedDisplayProfile !== displayProfile) {
       dispatch(setDisplayProfile(selectedDisplayProfile));
     }
+    if (selectedOptimizeTracks !== optimizeTracks) {
+      dispatch(setOptimizeTracks(selectedOptimizeTracks));
+    }
 
     dispatch(setHasClickedCreate());
   };
@@ -135,7 +139,7 @@ const Controls = () => {
             <Col xs={4}>
               <FormControl className={classes.formControl}>
                 <InputLabel shrink id="demo-simple-select-placeholder-label-label" className={classes.label}>
-                  # of Genres
+                  # of genres
                 </InputLabel>
                 <Slider
                   defaultValue={selectedGenreCount}
@@ -153,7 +157,7 @@ const Controls = () => {
             <Col xs={4}>
               <FormControl className={classes.formControl}>
                 <InputLabel shrink id="demo-simple-select-placeholder-label-label" className={classes.label}>
-                  # of Artists
+                  # of artists
                 </InputLabel>
                 <Slider
                   defaultValue={selectedArtistCount}
@@ -170,7 +174,7 @@ const Controls = () => {
             <Col xs={4}>
               <FormControl className={classes.formControl}>
                 <InputLabel shrink id="demo-simple-select-placeholder-label-label" className={classes.label}>
-                  # of Tracks
+                  # of tracks
                 </InputLabel>
                 <Slider
                   defaultValue={selectedTrackCount}
@@ -189,7 +193,7 @@ const Controls = () => {
             <Col xs={4}>
               <FormControl className={classes.formControl}>
                 <InputLabel shrink id="demo-simple-select-placeholder-label-label" className={classes.label}>
-                  Stats to Display
+                  Stats to display
                 </InputLabel>
                 <Select
                   value={selectedStatsOptions}
@@ -222,7 +226,7 @@ const Controls = () => {
             <Col xs={4}>
               <FormControl className={classes.formControl}>
                 <InputLabel shrink id="demo-simple-select-placeholder-label-label" className={classes.label}>
-                  Show Profile
+                  Display profile
                 </InputLabel>
                 <Switch
                   className={classes.switch}

@@ -1,8 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { chunk } from 'lodash';
-import ComponentHeader from './ComponentHeader';
 
 import './TrackGrid.css';
 import OrdinalCircle from './OrdinalCircle';

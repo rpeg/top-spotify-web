@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { findKey } from 'lodash';
-import {
-  Spinner, Container, Row, Col,
-} from 'react-bootstrap';
+import { Spinner, Container } from 'react-bootstrap';
 
 import ArtistGrid from './ArtistGrid';
 import TrackGrid from './TrackGrid';
@@ -77,41 +75,41 @@ const SpotifyTopMusic = ({ socket }) => {
           <h1>{getTimeRangeByName(timeRangeName).title}</h1>
         </div>
         <Container>
-          {haveArtists()
-            ? (artistCount > 0 && (
-            <div>
-              <ComponentHeader title="Artists" />
-              <ArtistGrid artists={artists.items.slice(0, artistCount)} />
-            </div>
-            ))
-            : <Spinner animation="border" />}
-          {haveArtists()
-            ? (genreCount > 0 && (
-            <div>
-              <ComponentHeader title="Genres" />
-              <WordCloud
-                genres={[...artists.items.map((a) => a.genres).flat()]}
-                count={genreCount}
-              />
-            </div>
-            ))
-            : <Spinner animation="border" />}
-          {haveTracks()
-            ? (trackCount > 0 && (
-            <div>
-              <ComponentHeader title="Tracks" />
-              <TrackGrid tracks={tracks.items} count={trackCount} />
-            </div>
-            ))
-            : <Spinner animation="border" />}
-          {haveTracks() && haveFeatures()
-            ? (statsOptions.length > 0 && (
-            <div>
-              <ComponentHeader title="Statistics" />
-              <Statistics features={features.items} tracks={tracks.items} />
-            </div>
-            ))
-            : <Spinner animation="border" />}
+          {artistCount > 0 && (haveArtists()
+            ? (
+              <div>
+                <ComponentHeader title="Artists" />
+                <ArtistGrid artists={artists.items.slice(0, artistCount)} />
+              </div>
+            )
+            : <Spinner animation="border" />)}
+          {genreCount > 0 && (haveArtists()
+            ? (
+              <div>
+                <ComponentHeader title="Genres" />
+                <WordCloud
+                  genres={[...artists.items.map((a) => a.genres).flat()]}
+                  count={genreCount}
+                />
+              </div>
+            )
+            : <Spinner animation="border" />)}
+          {trackCount > 0 && (haveTracks()
+            ? (
+              <div>
+                <ComponentHeader title="Tracks" />
+                <TrackGrid tracks={tracks.items} count={trackCount} />
+              </div>
+            )
+            : <Spinner animation="border" />)}
+          {statsOptions.length > 0 && (haveTracks() && haveFeatures()
+            ? (
+              <div>
+                <ComponentHeader title="Statistics" />
+                <Statistics features={features.items} tracks={tracks.items} />
+              </div>
+            )
+            : <Spinner animation="border" />)}
         </Container>
       </div>
     ) : null
