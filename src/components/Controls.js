@@ -74,6 +74,7 @@ const Controls = () => {
   const trackCount = useSelector((state) => state.trackCount);
   const statsOptions = useSelector((state) => state.statsOptions);
   const displayProfile = useSelector((state) => state.displayProfile);
+  const optimizeTracks = useSelector((state) => state.optimizeTracks);
 
   const [selectedTimeRangeName, setSelectedTimeRangeName] = useState(timeRangeName);
   const [selectedArtistCount, setSelectedArtistCount] = useState(artistCount);
@@ -81,6 +82,7 @@ const Controls = () => {
   const [selectedGenreCount, setSelectedGenreCount] = useState(genreCount);
   const [selectedStatsOptions, setSelectedStatsOptions] = useState(statsOptions);
   const [selectedDisplayProfile, setSelectedDisplayProfile] = useState(displayProfile);
+  const [selectedOptimizeTracks, setSelectedOptimizeTracks] = useState(optimizeTracks);
 
   const dispatch = useDispatch();
 
@@ -206,6 +208,20 @@ const Controls = () => {
             <Col xs={4}>
               <FormControl className={classes.formControl}>
                 <InputLabel shrink id="demo-simple-select-placeholder-label-label" className={classes.label}>
+                  Optimize tracks
+                </InputLabel>
+                <Switch
+                  className={classes.switch}
+                  checked={selectedOptimizeTracks}
+                  onChange={(e) => setSelectedOptimizeTracks(e.target.checked)}
+                />
+              </FormControl>
+            </Col>
+          </Row>
+          <Row className="justify-content-center">
+            <Col xs={4}>
+              <FormControl className={classes.formControl}>
+                <InputLabel shrink id="demo-simple-select-placeholder-label-label" className={classes.label}>
                   Show Profile
                 </InputLabel>
                 <Switch
@@ -215,6 +231,7 @@ const Controls = () => {
                 />
               </FormControl>
             </Col>
+            <Col xs={4} />
           </Row>
           <Row className="justify-content-center">
             <Button variant="outline-primary" style={{ margin: '30px 0 30px 0' }} onClick={processClick}>

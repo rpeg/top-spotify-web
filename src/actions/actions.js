@@ -20,6 +20,7 @@ import {
   TimeRanges,
   SET_DISPLAY_PROFILE,
   SET_STATS_OPTIONS,
+  SET_OPTIMIZE_TRACKS,
 } from '../constants/constants';
 import { API_URL } from '../config';
 
@@ -55,6 +56,10 @@ export function setStatsOptions(statsOptions) {
 
 export function setDisplayProfile(displayProfile) {
   return { type: SET_DISPLAY_PROFILE, displayProfile };
+}
+
+export function setOptimizeTracks(optimizeTracks) {
+  return { type: SET_OPTIMIZE_TRACKS, optimizeTracks };
 }
 
 function requestArtists(timeRangeName) {

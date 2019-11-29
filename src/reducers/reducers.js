@@ -18,6 +18,7 @@ import {
   SET_HAS_CLICKED_CREATE,
   SET_STATS_OPTIONS,
   SET_DISPLAY_PROFILE,
+  SET_OPTIMIZE_TRACKS,
 } from '../constants/constants';
 
 const { LONG } = TimeRanges;
@@ -89,6 +90,15 @@ function displayProfile(state = true, action) {
   switch (action.type) {
     case SET_DISPLAY_PROFILE:
       return action.displayProfile;
+    default:
+      return state;
+  }
+}
+
+function optimizeTracks(state = true, action) {
+  switch (action.type) {
+    case SET_OPTIMIZE_TRACKS:
+      return action.optimizeTracks;
     default:
       return state;
   }
@@ -166,6 +176,7 @@ const rootReducer = combineReducers({
   genreCount,
   statsOptions,
   displayProfile,
+  optimizeTracks,
   artists,
   artistsByTimeRangeName,
   tracks,

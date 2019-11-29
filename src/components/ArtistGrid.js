@@ -7,15 +7,15 @@ const ArtistGrid = ({ artists }) => {
   const chunkedArtists = chunk(artists, 5);
 
   return chunkedArtists.map((artistRow, i) => (
-    <div>
+    <div key={artistRow.map((a) => a.id).toString()}>
       {i === 0 && (
         <Row>
           <ComponentHeader title="Artists" />
         </Row>
       )}
-      <Row key={chunkedArtists[i].toString()} style={{ paddingTop: `${i > 0 ? '4px' : '0px'}` }}>
-        {artistRow.map((artist, j) => (
-          <Col key={artistRow[j].toString()} style={{ padding: '0px 2px 0px 2px' }}>
+      <Row key={chunkedArtists[i].map((a) => a.id).toString()} style={{ paddingTop: `${i > 0 ? '4px' : '0px'}` }}>
+        {artistRow.map((artist) => (
+          <Col key={artist.id} style={{ padding: '0px 2px 0px 2px' }}>
             <div style={{
               display: 'flex', paddingBottom: '100%', overflow: 'hidden', position: 'relative',
             }}
@@ -55,7 +55,6 @@ const ArtistGrid = ({ artists }) => {
         ))}
       </Row>
     </div>
-
   ));
 };
 
