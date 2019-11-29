@@ -5,12 +5,15 @@ import { chunk } from 'lodash';
 
 import './TrackGrid.css';
 import OrdinalCircle from './OrdinalCircle';
+import { TRACK_REQ_LIMIT } from '../constants/constants';
 
 const NUM_PER_ROW = 15;
 const NUM_PER_COL = 5;
 
-// Return as many non-duplicate album tracks as possible within given params
-const makeUniqueTracksArr = (tracks, count) => {
+// Return as many non-duplicate-album tracks as possible within given params
+const makeOptimizedTracks = (tracks, count) => {
+  if (count === TRACK_REQ_LIMIT) return tracks;
+
   const uniqueArr = [];
   const duplicateAlbumArr = [];
 
@@ -22,29 +25,22 @@ const makeUniqueTracksArr = (tracks, count) => {
     }
   });
 
-  console.log(uniqueArr);
-
   if (uniqueArr.length >= count) { return uniqueArr.map((u) => u[1]).slice(0, count); }
 
-  const combinedArr = [];
+  const combinedArr = [...uniqueArr];
 
-  for (let i = 0; i < count; i += 1) {
-    const unique = uniqueArr.find((u) => u[0] === i);
-
-    if (unique) {
-      combinedArr.push(unique[1]);
-    } else {
-      combinedArr.push(duplicateAlbumArr.find((d) => d[0] === i)[1]);
-    }
+  // Fill in remaining slots with duplicate-album tracks, favoring higher positions
+  for (let i = 0; i < (count - uniqueArr.length); i += 1) {
+    combinedArr.splice(duplicateAlbumArr[i][0], 0, duplicateAlbumArr[i]);
   }
 
-  return combinedArr.slice(0, count);
+  return combinedArr.map((t) => t[1]).slice(0, count);
 };
 
 const TrackGrid = ({ tracks, count }) => {
   const optimizeTracks = useSelector((state) => state.optimizeTracks);
 
-  const tracksToMap = optimizeTracks ? makeUniqueTracksArr(tracks, count) : tracks.slice(0, count);
+  const tracksToMap = optimizeTracks ? makeOptimizedTracks(tracks, count) : tracks.slice(0, count);
 
   const tracksByRow = chunk(tracksToMap, NUM_PER_ROW);
 
