@@ -30,9 +30,11 @@ const SpotifyTopMusic = ({ socket }) => {
   const artistCount = useSelector((state) => state.artistCount);
   const trackCount = useSelector((state) => state.trackCount);
   const genreCount = useSelector((state) => state.genreCount);
+  const statsOptions = useSelector((state) => state.statsOptions);
   const artists = useSelector((state) => state.artistsByTimeRangeName[timeRangeName]);
   const tracks = useSelector((state) => state.tracksByTimeRangeName[timeRangeName]);
   const features = useSelector((state) => state.featuresByTimeRangeName[timeRangeName]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -64,6 +66,10 @@ const SpotifyTopMusic = ({ socket }) => {
     });
   }, [dispatch, socket, timeRangeName]);
 
+  const haveArtists = () => artists && artists.items && artists.items.length;
+  const haveTracks = () => tracks && tracks.items && tracks.items.length;
+  const haveFeatures = () => features && features.items && features.items.length;
+
   return (
     user && user.id ? (
       <div style={{ marginTop: '2em' }}>
@@ -71,31 +77,41 @@ const SpotifyTopMusic = ({ socket }) => {
           <h1>{getTimeRangeByName(timeRangeName).title}</h1>
         </div>
         <Container>
-          {artists && artists.items && artists.items.length ? (
-            <ArtistGrid artists={artists.items.slice(0, artistCount)} />
-          ) : <Spinner animation="border" />}
-          <Row style={{ paddingTop: '2em' }}>
-            <Col xs={12}>
-              {artists && artists.items && artists.items.length ? (
-                <WordCloud
-                  genres={[...artists.items.map((a) => a.genres).flat()]}
-                  count={genreCount}
-                />
-              ) : <Spinner animation="border" />}
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              {tracks && tracks.items && tracks.items.length ? (<TrackGrid tracks={tracks.items} count={trackCount} />) : <Spinner animation="border" />}
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              {features && features.items && features.items.length && tracks && tracks.items && tracks.items.length
-                ? (<Statistics features={features.items} tracks={tracks.items} />)
-                : <Spinner animation="border" />}
-            </Col>
-          </Row>
+          {haveArtists()
+            ? (artistCount > 0 && (
+            <div>
+              <ComponentHeader title="Artists" />
+              <ArtistGrid artists={artists.items.slice(0, artistCount)} />
+            </div>
+            ))
+            : <Spinner animation="border" />}
+          {haveArtists()
+            ? (genreCount > 0 && (
+            <div>
+              <ComponentHeader title="Genres" />
+              <WordCloud
+                genres={[...artists.items.map((a) => a.genres).flat()]}
+                count={genreCount}
+              />
+            </div>
+            ))
+            : <Spinner animation="border" />}
+          {haveTracks()
+            ? (trackCount > 0 && (
+            <div>
+              <ComponentHeader title="Tracks" />
+              <TrackGrid tracks={tracks.items} count={trackCount} />
+            </div>
+            ))
+            : <Spinner animation="border" />}
+          {haveTracks() && haveFeatures()
+            ? (statsOptions.length > 0 && (
+            <div>
+              <ComponentHeader title="Statistics" />
+              <Statistics features={features.items} tracks={tracks.items} />
+            </div>
+            ))
+            : <Spinner animation="border" />}
         </Container>
       </div>
     ) : null

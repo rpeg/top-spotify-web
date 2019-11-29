@@ -1,16 +1,12 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { chunk } from 'lodash';
-import ComponentHeader from './ComponentHeader';
 
 const ArtistGrid = ({ artists }) => {
   const chunkedArtists = chunk(artists, 5);
 
   return chunkedArtists.map((artistRow, i) => (
     <div key={artistRow.map((a) => a.id).toString()}>
-      {i === 0 && (
-        <ComponentHeader title="Artists" />
-      )}
       <Row key={chunkedArtists[i].map((a) => a.id).toString()} style={{ paddingTop: `${i > 0 ? '4px' : '0px'}` }}>
         {artistRow.map((artist) => (
           <Col key={artist.id} style={{ padding: '0px 2px 0px 2px' }}>
