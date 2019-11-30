@@ -92,7 +92,9 @@ function fetchArtists(timeRangeName) {
           limit: ARTIST_REQ_LIMIT,
         },
       })
-      .then((response) => dispatch(receiveArtists(timeRangeName, response)));
+      .then((response) => {
+        dispatch(receiveArtists(timeRangeName, response.data.items));
+      });
   };
 }
 
@@ -135,17 +137,16 @@ function fetchFeatures(ids, timeRangeName) {
           ids: `${ids.join(',')}`,
         },
       })
-      .then((response) => dispatch(receiveFeatures(timeRangeName, response)));
+      .then((response) => dispatch(receiveFeatures(timeRangeName, response.data.items)));
   };
 }
 
 const shouldFetchFeatures = (state, timeRangeName) => !state.featuresByTimeRangeName[timeRangeName];
 
-export function fetchFeaturesIfNeeded(timeRangeName) {
+export function fetchFeaturesIfNeeded(timeRangeName, tracks) {
   return (dispatch, getState) => {
     if (shouldFetchFeatures(getState(), timeRangeName)) {
-      const tracks = getState().tracksByTimeRangeName[timeRangeName];
-      const ids = tracks ? tracks.items.map((t) => t.id) : null;
+      const ids = tracks ? tracks.map((t) => t.id) : null;
 
       if (ids) { return dispatch(fetchFeatures(ids, timeRangeName)); }
     }
@@ -184,8 +185,8 @@ function fetchTracks(timeRangeName) {
         },
       })
       .then((response) => {
-        dispatch(receiveTracks(timeRangeName, response));
-        dispatch(fetchFeaturesIfNeeded(timeRangeName));
+        dispatch(receiveTracks(timeRangeName, response.data.items));
+        dispatch(fetchFeaturesIfNeeded(timeRangeName, response.data.items));
       });
   };
 }
