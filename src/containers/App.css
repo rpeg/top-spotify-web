@@ -72,5 +72,6 @@ body, #top-spotify {
 
 .stat-title p {
   font-weight: bold;
+  font-size: 18pt;
   margin: 1em 0 0.4em 0;
 }
