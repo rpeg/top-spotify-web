@@ -6,6 +6,8 @@ import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import SaveIcon from '@material-ui/icons/Save';
 import ShareIcon from '@material-ui/icons/Share';
 import html2canvas from 'html2canvas';
+import domtoimage from 'dom-to-image';
+
 
 const useStyles = makeStyles((theme) => ({
   speedDial: {
@@ -37,10 +39,15 @@ const Fab = () => {
   };
 
   const handleSave = () => {
-    html2canvas(document.body).then((canvas) => {
-      const img = canvas.toDataURL('image/png');
-      window.open().document.write(`<img src="${img}"/>`);
-    });
+    domtoimage.toPng(document.body)
+      .then((dataUrl) => {
+        const img = new Image();
+        img.src = dataUrl;
+        document.body.appendChild(img);
+      })
+      .catch((error) => {
+        console.error('oops, something went wrong!', error);
+      });
   };
 
   const handleShare = () => {};

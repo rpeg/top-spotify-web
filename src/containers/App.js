@@ -23,7 +23,6 @@ const App = () => {
       <Controls />
       {hasClickedCreate && <MainHeader />}
       {hasClickedCreate && <SpotifyTopMusic socket={socket} />}
-      {hasClickedCreate && <Fab />}
     </div>
   );
 };

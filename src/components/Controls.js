@@ -10,6 +10,7 @@ import Slider from '@material-ui/core/Slider';
 import Switch from '@material-ui/core/Switch';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
+import domtoimage from 'dom-to-image';
 
 import {
   TimeRanges,
@@ -114,6 +115,18 @@ const Controls = () => {
   };
 
   const classes = useStyles();
+
+  const handleSave = () => {
+    domtoimage.toPng(document.body)
+      .then((dataUrl) => {
+        const img = new Image();
+        img.src = dataUrl;
+        document.body.appendChild(img);
+      })
+      .catch((error) => {
+        console.error('oops, something went wrong!', error);
+      });
+  };
 
   return (
     user && user.id ? (
@@ -240,6 +253,9 @@ const Controls = () => {
           <Row className="justify-content-center">
             <Button variant="outline-primary" style={{ margin: '30px 0 30px 0' }} onClick={processClick}>
           Create
+            </Button>
+            <Button variant="outline-primary" style={{ margin: '30px 0 30px 0' }} onClick={handleSave}>
+          Export
             </Button>
           </Row>
         </Container>
