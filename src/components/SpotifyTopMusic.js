@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { findKey } from 'lodash';
-import {
-  Spinner, Container, Row, Col,
-} from 'react-bootstrap';
+import { Spinner, Container } from 'react-bootstrap';
 
 import ArtistGrid from './ArtistGrid';
 import TrackGrid from './TrackGrid';
@@ -30,9 +28,11 @@ const SpotifyTopMusic = ({ socket }) => {
   const artistCount = useSelector((state) => state.artistCount);
   const trackCount = useSelector((state) => state.trackCount);
   const genreCount = useSelector((state) => state.genreCount);
+  const statsOptions = useSelector((state) => state.statsOptions);
   const artists = useSelector((state) => state.artistsByTimeRangeName[timeRangeName]);
   const tracks = useSelector((state) => state.tracksByTimeRangeName[timeRangeName]);
   const features = useSelector((state) => state.featuresByTimeRangeName[timeRangeName]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -64,35 +64,52 @@ const SpotifyTopMusic = ({ socket }) => {
     });
   }, [dispatch, socket, timeRangeName]);
 
+  const haveArtists = () => artists && artists.items && artists.items.length;
+  const haveTracks = () => tracks && tracks.items && tracks.items.length;
+  const haveFeatures = () => features && features.items && features.items.length;
+
   return (
     user && user.id ? (
-      <div style={{ marginTop: '2em' }}>
+      <div style={{ margin: '2em 0 2em 0' }}>
         <div>
           <h1>{getTimeRangeByName(timeRangeName).title}</h1>
         </div>
         <Container>
-          <Row>
-            <ComponentHeader title="Artists" />
-          </Row>
-          {artists && artists.items && artists.items.length ? (
-            <ArtistGrid artists={artists.items.slice(0, artistCount)} numRows={2} />
-          ) : <Spinner animation="border" />}
-          <Row style={{ paddingTop: '2em' }}>
-            <Col xs={8} style={{ padding: '0 0.5em 0 0' }}>
-              {artists && artists.items && artists.items.length ? (
+          {artistCount > 0 && (haveArtists()
+            ? (
+              <div>
+                <ComponentHeader title="Artists" />
+                <ArtistGrid artists={artists.items.slice(0, artistCount)} />
+              </div>
+            )
+            : <Spinner animation="border" />)}
+          {genreCount > 0 && (haveArtists()
+            ? (
+              <div>
+                <ComponentHeader title="Genres" />
                 <WordCloud
                   genres={[...artists.items.map((a) => a.genres).flat()]}
                   count={genreCount}
                 />
-              ) : <Spinner animation="border" />}
-              {features && features.items && features.items.length && tracks && tracks.items && tracks.items.length
-                ? (<Statistics features={features.items} tracks={tracks.items} />)
-                : <Spinner animation="border" />}
-            </Col>
-            <Col xs={4} style={{ padding: '0 0 0 0.5em' }}>
-              {tracks && tracks.items && tracks.items.length ? (<TrackGrid tracks={tracks.items} count={trackCount} />) : <Spinner animation="border" />}
-            </Col>
-          </Row>
+              </div>
+            )
+            : <Spinner animation="border" />)}
+          {trackCount > 0 && (haveTracks()
+            ? (
+              <div>
+                <ComponentHeader title="Tracks" />
+                <TrackGrid tracks={tracks.items} count={trackCount} />
+              </div>
+            )
+            : <Spinner animation="border" />)}
+          {statsOptions.length > 0 && (haveTracks() && haveFeatures()
+            ? (
+              <div>
+                <ComponentHeader title="Statistics" />
+                <Statistics features={features.items} tracks={tracks.items} />
+              </div>
+            )
+            : <Spinner animation="border" />)}
         </Container>
       </div>
     ) : null

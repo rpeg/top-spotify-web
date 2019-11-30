@@ -6,6 +6,10 @@ import { Button } from 'react-bootstrap';
 import { setUser } from '../actions/actions';
 import { API_URL } from '../config';
 
+const buttonStyle = {
+  right: '30px', top: '30px', marginBottom: '30px', position: 'absolute',
+};
+
 const OAuth = ({ socket }) => {
   const [disabled, setDisabled] = useState(false);
   const user = useSelector((state) => state.user);
@@ -62,11 +66,11 @@ const OAuth = ({ socket }) => {
   return (
     <div>
       {user && user.id ? (
-        <Button variant="outline-primary" onClick={logout}>
+        <Button variant="outline-primary" style={buttonStyle} onClick={logout}>
           Logout
         </Button>
       ) : (
-        <Button variant="outline-primary" onClick={startAuth}>
+        <Button variant="outline-primary" style={buttonStyle} onClick={startAuth}>
           Login
         </Button>
       )}

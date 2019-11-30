@@ -1,9 +1,9 @@
 import React from 'react';
 import Palette from 'google-palette';
 import ReactWordcloud from 'react-wordcloud';
-import { makeSortedFrequencyArr } from '../lib/frequency';
+import { Row } from 'react-bootstrap';
 
-import ComponentHeader from './ComponentHeader';
+import { makeSortedFrequencyArr } from '../lib/frequency';
 
 const WordCloud = ({ genres, count }) => {
   const sortedGenres = makeSortedFrequencyArr(genres).slice(0, count);
@@ -32,19 +32,18 @@ const WordCloud = ({ genres, count }) => {
   };
 
   return (
-    <div>
-      <ComponentHeader title="Genres" />
+    count > 0 && (
+    <Row>
       <div
         style={{
-          maxHeight: '100%',
-          maxWidth: '100%',
           height: '100%',
-          width: 'auto',
+          width: '100%',
         }}
       >
         <ReactWordcloud options={options} words={words} />
       </div>
-    </div>
+    </Row>
+    )
   );
 };
 

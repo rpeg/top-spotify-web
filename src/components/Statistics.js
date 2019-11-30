@@ -1,78 +1,99 @@
-import React from "react";
-import { mean, mode } from "mathjs";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { mean, mode } from 'mathjs';
 
-import ComponentHeader from "./ComponentHeader";
-import Radar from "./Radar";
-import { Container, Row, Col } from "react-bootstrap";
-import Statistic from "./Statistic";
-import RadialBar from "./RadialBar";
-import Donut from "./Donut";
+import { Row, Col } from 'react-bootstrap';
+import Radar from './Radar';
+import Statistic from './Statistic';
+import Bar from './Bar';
+import Donut from './Donut';
 
-const getMode = items => mode(items)[0];
-const getMean = items => mean(items);
+const getMode = (items) => mode(items)[0];
+const getMean = (items) => mean(items);
 
-const getKey = pitch => {
+const getKey = (pitch) => {
   const letters = [
-    "C",
-    "C#",
-    "D",
-    "D#",
-    "E",
-    "F",
-    "F#",
-    "G",
-    "G#",
-    "A",
-    "A#",
-    "B"
+    'C',
+    'C#',
+    'D',
+    'D#',
+    'E',
+    'F',
+    'F#',
+    'G',
+    'G#',
+    'A',
+    'A#',
+    'B',
   ];
 
   return letters[pitch % 12];
 };
 
 const Statistics = ({ features, tracks }) => {
+  const statsOptions = useSelector((state) => state.statsOptions);
+
   return (
     <div>
-      <ComponentHeader title="Statistics" />
-      <Container>
-        <Row>
-          <Col>
-            <Statistic
-              title="Most Frequent Key"
-              children={<h4>{getKey(getMode(features.map(f => f.key)))}</h4>}
-            />
+      <Row className="justify-content-center">
+        {statsOptions.includes('key') && (
+        <Col>
+          <Statistic
+            title="Most Frequent Key"
+          >
+            <div>
+              <p>{getKey(getMode(features.map((f) => f.key)))}</p>
+            </div>
+          </Statistic>
+        </Col>
+        )}
+        {statsOptions.includes('bpm') && (
+        <Col>
+          <Statistic
+            title="Average BPM"
+          >
+            <div>
+              <p>{getMean(features.map((f) => f.tempo)).toFixed(1)}</p>
+            </div>
+          </Statistic>
+        </Col>
+        )}
+        <Col>
+          <Statistic
+            title="Scales"
+          >
+            <Row>
+              <Col>
+                <div>
+                  <Bar items={features.map((f) => `${f.mode ? 'Major' : 'Minor'}`)} />
+                </div>
+              </Col>
+            </Row>
+          </Statistic>
+        </Col>
+      </Row>
+      <Row className="justify-content-center">
+        {statsOptions.includes('decades') && (
+          <Col xs={12} md={4}>
+            <Statistic title="Decades">
+              <Row className="justify-content-center">
+                <Col xs={9} md={12}>
+                  <Donut
+                    items={tracks.map((t) => `${t.album.release_date[2]}0s`)}
+                  />
+                </Col>
+              </Row>
+            </Statistic>
           </Col>
-          <Col>
-            <Statistic
-              title="Average BPM"
-              children={<h4>{getMean(features.map(f => f.tempo))}</h4>}
-            />
+        )}
+        {statsOptions.includes('features') && (
+          <Col xs={12} md={8}>
+            <Statistic title="Features">
+              <Radar features={features} />
+            </Statistic>
           </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Statistic
-              title="Scale"
-              children={<RadialBar items={features.map(f => f.mode)} />}
-            />
-          </Col>
-          <Col>
-            <Statistic
-              title="Decades"
-              children={
-                <Donut
-                  items={tracks.map(t => t.album.release_date[2] + "0s")}
-                />
-              }
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <Radar features={features} />
-          </Col>
-        </Row>
-      </Container>
+        )}
+      </Row>
     </div>
   );
 };
