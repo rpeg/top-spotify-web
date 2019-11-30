@@ -21,8 +21,11 @@ const App = () => {
     <div className="App">
       <OAuth socket={socket} />
       <Controls />
-      {hasClickedCreate && <MainHeader />}
-      {hasClickedCreate && <SpotifyTopMusic socket={socket} />}
+      <div id="top-spotify">
+        {hasClickedCreate && <MainHeader />}
+        {hasClickedCreate && <SpotifyTopMusic socket={socket} />}
+      </div>
+
     </div>
   );
 };

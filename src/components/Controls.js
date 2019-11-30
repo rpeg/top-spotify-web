@@ -117,11 +117,18 @@ const Controls = () => {
   const classes = useStyles();
 
   const handleSave = () => {
-    domtoimage.toPng(document.body)
+    const scale = 2;
+    const elm = document.getElementById('top-spotify');
+
+    domtoimage.toPng(elm, {
+      height: elm.offsetHeight * scale,
+      style: {
+        transform: `scale(${scale}) translate(${elm.offsetWidth / 2 / scale}px, ${elm.offsetHeight / 2 / scale}px)`,
+      },
+      width: elm.offsetWidth * scale,
+    })
       .then((dataUrl) => {
-        const img = new Image();
-        img.src = dataUrl;
-        document.body.appendChild(img);
+        window.open().document.write(`<img src="${dataUrl}"/>`);
       })
       .catch((error) => {
         console.error('oops, something went wrong!', error);

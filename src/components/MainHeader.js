@@ -10,7 +10,7 @@ const MainHeader = () => {
 
   return (
     user && user.id ? (
-      <Container style={{ marginTop: '2em' }}>
+      <Container style={{ paddingTop: '2em' }}>
         <Row>
           <Col xs={6} style={{ padding: '0', display: 'inline-flex' }}>
             <span
