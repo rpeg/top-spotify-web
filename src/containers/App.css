@@ -43,3 +43,18 @@ body {
   color: #fff !important;
   background-color: #1DB954 !important;
 }
+
+.stat-content {
+  text-align: start;
+}
+
+.stat-content p {
+  margin: 0;
+  line-height: 1;
+  font-size: 32pt;
+}
+
+.stat-title p {
+  font-weight: bold;
+  margin: 1em 0 0.4em 0;
+}

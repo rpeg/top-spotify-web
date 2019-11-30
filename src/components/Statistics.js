@@ -5,7 +5,7 @@ import { mean, mode } from 'mathjs';
 import { Row, Col } from 'react-bootstrap';
 import Radar from './Radar';
 import Statistic from './Statistic';
-import RadialBar from './RadialBar';
+import Bar from './Bar';
 import Donut from './Donut';
 
 const getMode = (items) => mode(items)[0];
@@ -35,13 +35,15 @@ const Statistics = ({ features, tracks }) => {
 
   return (
     <div>
-      <Row>
+      <Row className="justify-content-center">
         {statsOptions.includes('key') && (
         <Col>
           <Statistic
             title="Most Frequent Key"
           >
-            <h4>{getKey(getMode(features.map((f) => f.key)))}</h4>
+            <div>
+              <p>{getKey(getMode(features.map((f) => f.key)))}</p>
+            </div>
           </Statistic>
         </Col>
         )}
@@ -50,39 +52,46 @@ const Statistics = ({ features, tracks }) => {
           <Statistic
             title="Average BPM"
           >
-            <h4>{getMean(features.map((f) => f.tempo))}</h4>
+            <div>
+              <p>{getMean(features.map((f) => f.tempo)).toFixed(1)}</p>
+            </div>
           </Statistic>
         </Col>
         )}
-      </Row>
-      <Row>
-        {statsOptions.includes('scale') && (
         <Col>
           <Statistic
-            title="Scale"
+            title="Scales"
           >
-            <RadialBar items={features.map((f) => f.mode)} />
-
+            <Row>
+              <Col>
+                <div>
+                  <Bar items={features.map((f) => `${f.mode ? 'Major' : 'Minor'}`)} />
+                </div>
+              </Col>
+            </Row>
           </Statistic>
         </Col>
-        )}
+      </Row>
+      <Row className="justify-content-center">
         {statsOptions.includes('decades') && (
-        <Col>
-          <Statistic
-            title="Decades"
-          >
-            <Donut
-              items={tracks.map((t) => `${t.album.release_date[2]}0s`)}
-            />
-          </Statistic>
-        </Col>
+          <Col xs={12} md={4}>
+            <Statistic title="Decades">
+              <Row className="justify-content-center">
+                <Col xs={9} md={12}>
+                  <Donut
+                    items={tracks.map((t) => `${t.album.release_date[2]}0s`)}
+                  />
+                </Col>
+              </Row>
+            </Statistic>
+          </Col>
         )}
-      </Row>
-      <Row>
         {statsOptions.includes('features') && (
-        <Col xs={12}>
-          <Radar features={features} />
-        </Col>
+          <Col xs={12} md={8}>
+            <Statistic title="Features">
+              <Radar features={features} />
+            </Statistic>
+          </Col>
         )}
       </Row>
     </div>

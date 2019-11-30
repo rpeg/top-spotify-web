@@ -1,35 +1,47 @@
-import React from "react";
-import Chart from "react-apexcharts";
-import { makeSortedFrequencyArr } from "../lib/frequency";
+import React from 'react';
+import PieChart from 'react-minimal-pie-chart';
+import Palette from 'google-palette';
+
+import { makeSortedFrequencyArr } from '../lib/frequency';
 
 const Donut = ({ items }) => {
   const sortedItems = makeSortedFrequencyArr(items);
 
-  const options = {
-    responsive: [
-      {
-        breakpoint: 250,
-        options: {
-          chart: {
-            width: 200
-          },
-          legend: {
-            show: false
-          }
-        }
-      }
-    ],
-    labels: sortedItems.map(i => i.name),
-    dataLabels: {
-      enabled: false
-    }
-  };
+  const colors = Palette('tol-rainbow', sortedItems.length).map((c) => `#${c}`);
 
-  const series = sortedItems.map(i => i.freq);
+  const data = sortedItems.map((item, i) => ({
+    color: colors[i],
+    title: item.name,
+    value: item.freq,
+  }));
 
   return (
     <div>
-      <Chart type="donut" options={options} series={series} />
+      <PieChart
+        className="minimal-pie"
+        animate
+        animationDuration={750}
+        animationEasing="ease-out"
+        cx={50}
+        cy={50}
+        data={data}
+        label={({ data, dataIndex }) => data[dataIndex].title}
+        labelPosition={60}
+        labelStyle={{
+          fontFamily: 'Karla, sans-serif',
+          fontSize: '5px',
+        }}
+        lengthAngle={360}
+        lineWidth={20}
+        onClick={undefined}
+        onMouseOut={undefined}
+        onMouseOver={undefined}
+        paddingAngle={0}
+        radius={50}
+        ratio={1}
+        rounded={false}
+        startAngle={0}
+      />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
-import Chart from 'react-apexcharts';
+import { Radar as RadarChart } from 'react-chartjs-2';
+
 
 const getFeatureAvg = (features, name) => {
   const featureArr = features.map((f) => f[name]);
@@ -20,30 +21,50 @@ const Radar = ({ features }) => {
   ];
 
   const options = {
-    labels,
-    yaxis: {
-      min: 0,
-      max: 1,
-      show: false,
+    gridLines: {
+      display: false,
     },
-    chart: {
-      foreColor: '#FFFFFF',
-      fontFamily: 'Karla, sans-serif',
-      toolbar: {
-        show: false,
+    scale: {
+      ticks: {
+        display: false,
+        beginAtZero: true,
+        max: 1,
+        min: 0,
+        stepSize: 1,
       },
+      pointLabels: {
+        fontFamily: 'Karla, sans-serif',
+        fontSize: 14,
+        fontColor: 'white',
+      },
+      gridLines: {
+        color: 'rgba(255, 255, 255, .5)',
+      },
+    },
+    legend: {
+      display: false,
     },
   };
 
-  const series = [
-    {
-      data: labels.map((l) => getFeatureAvg(features, l)),
-    },
-  ];
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: undefined,
+        backgroundColor: 'rgba(29, 185, 84, 0.1)',
+        borderColor: 'rgba(29, 185, 84, 1)',
+        pointBackgroundColor: 'rgba(29, 185, 84,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(29, 185, 84,1)',
+        data: labels.map((l) => getFeatureAvg(features, l)),
+      },
+    ],
+  };
 
   return (
     <div>
-      <Chart type="radar" options={options} series={series} />
+      <RadarChart data={data} options={options} />
     </div>
   );
 };
