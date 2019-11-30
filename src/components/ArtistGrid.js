@@ -15,7 +15,7 @@ const ArtistGrid = ({ artists }) => {
             }}
             >
               <img
-                src={artist.images[0] ? artist.images[0].url : ''}
+                src={artist.images[0] ? artist.images[0].url : 'images/person.svg'}
                 alt={artist.name}
                 style={{
                   width: '100%',

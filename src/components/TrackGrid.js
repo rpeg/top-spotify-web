@@ -67,7 +67,7 @@ const TrackGrid = ({ tracks, count }) => {
                           <img
                             height="50"
                             width="50"
-                            src={track.album.images.length ? track.album.images[0].url : null}
+                            src={track.album.images.length ? track.album.images[0].url : 'images/music_note.svg'}
                             alt={track.name}
                             style={{ objectFit: 'cover' }}
                           />
