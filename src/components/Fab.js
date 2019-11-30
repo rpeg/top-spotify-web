@@ -1,24 +1,27 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import SpeedDial from "@material-ui/lab/SpeedDial";
-import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
-import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
-import SaveIcon from "@material-ui/icons/Save";
-import ShareIcon from "@material-ui/icons/Share";
-import html2canvas from "html2canvas";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+import SaveIcon from '@material-ui/icons/Save';
+import ShareIcon from '@material-ui/icons/Share';
+import html2canvas from 'html2canvas';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   speedDial: {
-    position: "fixed",
-    "&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft": {
-      bottom: theme.spacing(2),
-      right: theme.spacing(2)
+    position: 'fixed',
+    '& .MuiFab-primary': {
+      backgroundColor: '#1DB954',
     },
-    "&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight": {
+    '&.MuiSpeedDial-directionUp, &.MuiSpeedDial-directionLeft': {
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
+    },
+    '&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
       top: theme.spacing(2),
-      left: theme.spacing(2)
-    }
-  }
+      left: theme.spacing(2),
+    },
+  },
 }));
 
 const Fab = () => {
@@ -34,16 +37,17 @@ const Fab = () => {
   };
 
   const handleSave = () => {
-    html2canvas(document.body).then(canvas => {
-      const imgData = canvas.toDataURL("image/png");
+    html2canvas(document.body).then((canvas) => {
+      const img = canvas.toDataURL('image/png');
+      window.open().document.write(`<img src="${img}"/>`);
     });
   };
 
   const handleShare = () => {};
 
   const actions = [
-    { icon: <SaveIcon />, name: "Save", onClick: handleSave },
-    { icon: <ShareIcon />, name: "Share", onClick: handleShare }
+    { icon: <SaveIcon />, name: 'Save', onClick: handleSave },
+    { icon: <ShareIcon />, name: 'Share', onClick: handleShare },
   ];
 
   return (
@@ -56,7 +60,7 @@ const Fab = () => {
       open={open}
       direction="up"
     >
-      {actions.map(action => (
+      {actions.map((action) => (
         <SpeedDialAction
           key={action.name}
           icon={action.icon}
