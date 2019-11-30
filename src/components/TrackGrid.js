@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
-import { chunk } from 'lodash';
+import { chunk, debounce } from 'lodash';
 
 import './TrackGrid.css';
 import OrdinalCircle from './OrdinalCircle';
 import { TRACK_REQ_LIMIT } from '../constants/constants';
 
-const NUM_PER_ROW = 15;
+const SM_WIDTH_BOUNDARY = 991;
+const NUM_PER_ROW_MOBILE = 10;
+const NUM_PER_ROW_DESKTOP = 15;
 const NUM_PER_COL = 5;
 
 // Return as many non-duplicate-album tracks as possible within given params
@@ -37,12 +39,37 @@ const makeOptimizedTracks = (tracks, count) => {
   return combinedArr.map((t) => t[1]).slice(0, count);
 };
 
+const getWindowDimensions = () => {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height,
+  };
+};
+
 const TrackGrid = ({ tracks, count }) => {
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
   const optimizeTracks = useSelector((state) => state.optimizeTracks);
 
   const tracksToMap = optimizeTracks ? makeOptimizedTracks(tracks, count) : tracks.slice(0, count);
 
-  const tracksByRow = chunk(tracksToMap, NUM_PER_ROW);
+  const makeTracksByRow = () => chunk(tracksToMap,
+    windowDimensions.width <= SM_WIDTH_BOUNDARY
+      ? NUM_PER_ROW_MOBILE
+      : NUM_PER_ROW_DESKTOP);
+
+  const [tracksByRow, setTracksByRow] = useState(makeTracksByRow(tracksToMap, windowDimensions));
+
+  useEffect(() => {
+    const handleResize = debounce(() => {
+      setWindowDimensions(getWindowDimensions());
+      setTracksByRow(makeTracksByRow());
+    }, 100);
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [tracksToMap, windowDimensions]);
 
   return (
     count > 0 ? (
@@ -56,7 +83,7 @@ const TrackGrid = ({ tracks, count }) => {
             </Row>
             <Row className="track-grid" key={rowTracks.map((t) => t.id).join()} style={{ marginTop: '1em' }}>
               {chunk(rowTracks, NUM_PER_COL).map((colTracks, j) => (
-                <Col xs={6} md={4} key={colTracks.map((t) => t.id).toString()}>
+                <Col xs={6} sm={6} md={4} key={colTracks.map((t) => t.id).toString()}>
                   <ul style={{ listStyleType: 'none', padding: '0', marginTop: '1em' }}>
                     {colTracks.map((track, k) => (
                       <li key={track.id}>
@@ -71,7 +98,9 @@ const TrackGrid = ({ tracks, count }) => {
                             alt={track.name}
                             style={{ objectFit: 'cover' }}
                           />
-                          <OrdinalCircle position={i * NUM_PER_ROW + j * NUM_PER_COL + k + 1} />
+                          <OrdinalCircle
+                            position={i * NUM_PER_ROW_MOBILE + j * NUM_PER_COL + k + 1}
+                          />
                           <div style={{ marginLeft: '0.5em', lineHeight: '1.3' }}>
                             <div style={{ display: 'grid' }}>
                               <p
