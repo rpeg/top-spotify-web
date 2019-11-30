@@ -8,6 +8,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MainHeader from '../components/MainHeader';
 import SpotifyTopMusic from '../components/SpotifyTopMusic';
+
 import Controls from '../components/Controls';
 
 const socket = io(API_URL);
@@ -19,8 +20,10 @@ const App = () => {
     <div className="App">
       <OAuth socket={socket} />
       <Controls />
-      {hasClickedCreate && <MainHeader />}
-      {hasClickedCreate && <SpotifyTopMusic socket={socket} />}
+      <div id="top-spotify">
+        {hasClickedCreate && <MainHeader />}
+        {hasClickedCreate && <SpotifyTopMusic socket={socket} />}
+      </div>
     </div>
   );
 };

@@ -70,7 +70,7 @@ const SpotifyTopMusic = ({ socket }) => {
 
   return (
     user && user.id ? (
-      <div style={{ margin: '2em 0 2em 0' }}>
+      <div style={{ padding: '5em 0 5em 0' }}>
         <div>
           <h1>{getTimeRangeByName(timeRangeName).title}</h1>
         </div>
