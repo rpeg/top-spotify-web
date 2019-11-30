@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { findKey } from 'lodash';
 import { Spinner, Container } from 'react-bootstrap';
 
 import ArtistGrid from './ArtistGrid';
@@ -10,19 +8,12 @@ import WordCloud from './WordCloud';
 import Statistics from './Statistics';
 import ComponentHeader from './ComponentHeader';
 import {
-  receiveArtists,
-  receiveTracks,
-  receiveFeatures,
   fetchArtistsIfNeeded,
   fetchTracksIfNeeded,
-  fetchFeaturesIfNeeded,
 } from '../actions/actions';
-import { TimeRanges } from '../constants/constants';
 import { getTimeRangeByName } from '../lib/timeRange';
 
-const matchingTimeRange = (range) => findKey(TimeRanges, (r) => r.range === range);
-
-const SpotifyTopMusic = ({ socket }) => {
+const SpotifyTopMusic = () => {
   const user = useSelector((state) => state.user);
   const timeRangeName = useSelector((state) => state.timeRangeName);
   const artistCount = useSelector((state) => state.artistCount);
@@ -37,32 +28,10 @@ const SpotifyTopMusic = ({ socket }) => {
 
   useEffect(() => {
     if (user && user.id) {
-      dispatch(fetchArtistsIfNeeded(timeRangeName, socket.id));
-      dispatch(fetchTracksIfNeeded(timeRangeName, socket.id));
+      dispatch(fetchArtistsIfNeeded(timeRangeName));
+      dispatch(fetchTracksIfNeeded(timeRangeName));
     }
-  }, [dispatch, socket, timeRangeName, user]);
-
-  useEffect(() => {
-    socket.on('topArtists', (result) => {
-      dispatch(receiveArtists(matchingTimeRange(result.range), result.items));
-    });
-  }, [dispatch, socket, timeRangeName]);
-
-  useEffect(() => {
-    socket.on('topTracks', (result) => {
-      const timeRange = matchingTimeRange(result.range);
-      dispatch(receiveTracks(timeRange, result.items));
-
-      // Derive features from tracks
-      dispatch(fetchFeaturesIfNeeded(timeRange, socket.id));
-    });
-  }, [dispatch, socket, timeRangeName]);
-
-  useEffect(() => {
-    socket.on('features', (result) => {
-      dispatch(receiveFeatures(matchingTimeRange(result.range), result.items));
-    });
-  }, [dispatch, socket, timeRangeName]);
+  }, [dispatch, timeRangeName, user]);
 
   const haveArtists = () => artists && artists.items && artists.items.length;
   const haveTracks = () => tracks && tracks.items && tracks.items.length;
@@ -114,10 +83,6 @@ const SpotifyTopMusic = ({ socket }) => {
       </div>
     ) : null
   );
-};
-
-SpotifyTopMusic.propTypes = {
-  socket: PropTypes.object.isRequired,
 };
 
 export default SpotifyTopMusic;
