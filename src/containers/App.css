@@ -60,6 +60,10 @@ body, #top-spotify {
   background-color: #1DB954 !important;
 }
 
+.grid-row li:not(:first-child) > div {
+  margin-top: 1em;
+}
+
 .stat-content {
   text-align: start;
 }

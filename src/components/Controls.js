@@ -261,17 +261,24 @@ const Controls = () => {
           </Row>
           <Row className="justify-content-center">
             <Col xs={3}>
-              <Button variant="outline-primary" style={{ margin: '30px 0 30px 0' }} onClick={processClick}>
+              <Button
+                variant="outline-primary"
+                style={{ margin: '30px 0 30px 0' }}
+                onClick={processClick}
+              >
                 Create
               </Button>
             </Col>
-            {hasClickedCreate && (
             <Col xs={3}>
-              <Button variant="outline-primary" style={{ margin: '30px 0 30px 0' }} onClick={handleSave}>
+              <Button
+                variant="outline-primary"
+                style={{ margin: '30px 0 30px 0' }}
+                onClick={handleSave}
+                disabled={!hasClickedCreate}
+              >
                 Export
               </Button>
             </Col>
-            )}
           </Row>
         </Container>
       </div>
