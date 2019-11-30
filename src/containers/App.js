@@ -10,7 +10,6 @@ import MainHeader from '../components/MainHeader';
 import SpotifyTopMusic from '../components/SpotifyTopMusic';
 
 import Controls from '../components/Controls';
-import Fab from '../components/Fab';
 
 const socket = io(API_URL);
 
@@ -25,7 +24,6 @@ const App = () => {
         {hasClickedCreate && <MainHeader />}
         {hasClickedCreate && <SpotifyTopMusic socket={socket} />}
       </div>
-
     </div>
   );
 };

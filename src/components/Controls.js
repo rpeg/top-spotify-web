@@ -75,6 +75,7 @@ const Controls = () => {
   const artistCount = useSelector((state) => state.artistCount);
   const trackCount = useSelector((state) => state.trackCount);
   const statsOptions = useSelector((state) => state.statsOptions);
+  const hasClickedCreate = useSelector((state) => state.hasClickedCreate);
   const displayProfile = useSelector((state) => state.displayProfile);
   const optimizeTracks = useSelector((state) => state.optimizeTracks);
 
@@ -120,6 +121,7 @@ const Controls = () => {
     const scale = 2;
     const elm = document.getElementById('top-spotify');
 
+    // Transform hack to minimize rasterization artifacts
     domtoimage.toPng(elm, {
       height: elm.offsetHeight * scale,
       style: {
@@ -128,10 +130,10 @@ const Controls = () => {
       width: elm.offsetWidth * scale,
     })
       .then((dataUrl) => {
-        window.open().document.write(`<img src="${dataUrl}"/>`);
+        window.open().document.write(`<div><img src="${dataUrl}" style="position: absolute; width: 100%"/></div>`);
       })
-      .catch((error) => {
-        console.error('oops, something went wrong!', error);
+      .catch((err) => {
+        console.error('Could not export PNG', err);
       });
   };
 
@@ -258,12 +260,18 @@ const Controls = () => {
             <Col xs={4} />
           </Row>
           <Row className="justify-content-center">
-            <Button variant="outline-primary" style={{ margin: '30px 0 30px 0' }} onClick={processClick}>
-          Create
-            </Button>
-            <Button variant="outline-primary" style={{ margin: '30px 0 30px 0' }} onClick={handleSave}>
-          Export
-            </Button>
+            <Col xs={3}>
+              <Button variant="outline-primary" style={{ margin: '30px 0 30px 0' }} onClick={processClick}>
+                Create
+              </Button>
+            </Col>
+            {hasClickedCreate && (
+            <Col xs={3}>
+              <Button variant="outline-primary" style={{ margin: '30px 0 30px 0' }} onClick={handleSave}>
+                Export
+              </Button>
+            </Col>
+            )}
           </Row>
         </Container>
       </div>
