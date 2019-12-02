@@ -24,6 +24,7 @@ export const N_TRACKS = TRACK_REQ_LIMIT;
 export const DEFAULT_ARTIST_COUNT = 10;
 export const DEFAULT_TRACK_COUNT = 15;
 export const DEFAULT_GENRE_COUNT = 50;
+export const DEFAULT_STATS_OPTIONS = ['key', 'bpm', 'decades', 'scale', 'features'];
 
 export const TimeRanges = {
   LONG: { name: 'LONG', range: 'long_term', title: 'All-time' },
