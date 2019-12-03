@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 
 import { setUser } from '../actions/actions';
 import { API_URL } from '../config';
+import { selectUser } from '../reducers/selectors';
 
 const buttonStyle = {
   right: '30px', top: '30px', marginBottom: '30px', position: 'absolute',
@@ -12,7 +13,7 @@ const buttonStyle = {
 
 const OAuth = ({ socket }) => {
   const [disabled, setDisabled] = useState(false);
-  const user = useSelector((state) => state.user);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   let popup;

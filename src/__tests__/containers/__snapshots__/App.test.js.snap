@@ -153,7 +153,7 @@ exports[`App initial renders correctly 1`] = `
                 "rejectUnauthorized": true,
                 "requestTimeout": undefined,
                 "supportsBinary": false,
-                "uri": "http://127.0.0.1:3000/socket.io/?EIO=3&transport=polling&t=MxDNrtb&b64=1",
+                "uri": "http://127.0.0.1:3000/socket.io/?EIO=3&transport=polling&t=MxDWiWK&b64=1",
                 "withCredentials": true,
                 "xd": true,
                 "xhr": XMLHttpRequest {
@@ -188,7 +188,7 @@ exports[`App initial renders correctly 1`] = `
               "query": Object {
                 "EIO": 3,
                 "b64": 1,
-                "t": "MxDNrtb",
+                "t": "MxDWiWK",
                 "transport": "polling",
               },
               "readyState": "opening",

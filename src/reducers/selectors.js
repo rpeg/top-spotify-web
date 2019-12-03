@@ -1,1 +1,15 @@
-export const hasClickedCreate = state => state.hasClickedCreate;
+export const selectHasClickedCreate = state => state.hasClickedCreate;
+export const selectUser = state => state.user;
+export const selectTimeRangeName = state => state.timeRangeName;
+export const selectGenreCount = state => state.genreCount;
+export const selectArtistCount = state => state.artistCount;
+export const selectTrackCount = state => state.trackCount;
+export const selectStatsOptions = state => state.statsOptions;
+export const selectDisplayProfile = state => state.displayProfile;
+export const selectOptimizeTracks = state => state.optimizeTracks;
+export const selectArtists = state => state.artists;
+export const selectArtistsByTimeRangeName = state => state.artistsByTimeRangeName;
+export const selectTracks = state => state.tracks;
+export const selectTracksByTimeRangeName = state => state.tracksByTimeRangeName;
+export const selectFeatures = state => state.features;
+export const selectFeaturesByTimeRangeName = state => state.featuresByTimeRangeName;

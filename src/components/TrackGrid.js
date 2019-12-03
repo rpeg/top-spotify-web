@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import OrdinalCircle from './OrdinalCircle';
 import { TRACK_REQ_LIMIT } from '../constants/constants';
+import { selectOptimizeTracks } from '../reducers/selectors';
 
 const SM_WIDTH_BOUNDARY = 991;
 const NUM_PER_ROW_MOBILE = 10;
@@ -162,7 +163,7 @@ TrackRow.propTypes = {
 const TrackGrid = ({ tracks, count }) => {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
-  const optimizeTracks = useSelector((state) => state.optimizeTracks);
+  const optimizeTracks = useSelector(selectOptimizeTracks);
 
   const tracksToMap = optimizeTracks ? makeOptimizedTracks(tracks, count) : tracks.slice(0, count);
 

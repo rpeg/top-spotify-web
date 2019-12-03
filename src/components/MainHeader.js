@@ -4,9 +4,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Moment from 'moment';
 
 import Profile from './Profile';
+import { selectUser } from '../reducers/selectors';
 
 const MainHeader = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector(selectUser);
 
   return (
     user && user.id ? (

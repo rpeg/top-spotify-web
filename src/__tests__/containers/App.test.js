@@ -12,7 +12,7 @@ jest.mock("react-redux", () => ({
 }));
 
 const setup = ({ hasClickedCreate = false }) => {
-  jest.spyOn(selectors, "hasClickedCreate").mockReturnValue(hasClickedCreate);
+  jest.spyOn(selectors, "selectHasClickedCreate").mockReturnValue(hasClickedCreate);
 };
 
 describe('App', () => {

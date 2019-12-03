@@ -25,6 +25,7 @@ import {
   setDisplayProfile,
   setOptimizeTracks,
 } from '../actions/actions';
+import * as selectors from '../reducers/selectors'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -69,15 +70,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Controls = () => {
-  const user = useSelector((state) => state.user);
-  const timeRangeName = useSelector((state) => state.timeRangeName);
-  const genreCount = useSelector((state) => state.genreCount);
-  const artistCount = useSelector((state) => state.artistCount);
-  const trackCount = useSelector((state) => state.trackCount);
-  const statsOptions = useSelector((state) => state.statsOptions);
-  const hasClickedCreate = useSelector((state) => state.hasClickedCreate);
-  const displayProfile = useSelector((state) => state.displayProfile);
-  const optimizeTracks = useSelector((state) => state.optimizeTracks);
+  const user = useSelector(selectors.selectUser);
+  const timeRangeName = useSelector(selectors.selectTimeRangeName);
+  const genreCount = useSelector(selectors.selectGenreCount);
+  const artistCount = useSelector(selectors.selectArtistCount);
+  const trackCount = useSelector(selectors.selectTrackCount);
+  const statsOptions = useSelector(selectors.selectStatsOptions);
+  const hasClickedCreate = useSelector(selectors.selectHasClickedCreate);
+  const displayProfile = useSelector(selectors.selectDisplayProfile);
+  const optimizeTracks = useSelector(selectors.selectOptimizeTracks);
 
   const [selectedTimeRangeName, setSelectedTimeRangeName] = useState(timeRangeName);
   const [selectedArtistCount, setSelectedArtistCount] = useState(artistCount);

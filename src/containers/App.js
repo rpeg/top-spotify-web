@@ -10,12 +10,11 @@ import MainHeader from '../components/MainHeader';
 import SpotifyTopMusic from '../components/SpotifyTopMusic';
 
 import Controls from '../components/Controls';
-import * as selectors from '../reducers/selectors';
-
+import { selectHasClickedCreate } from '../reducers/selectors';
 const socket = io(API_URL);
 
 const App = () => {
-  const hasClickedCreate = useSelector(selectors.hasClickedCreate);
+  const hasClickedCreate = useSelector(selectHasClickedCreate);
 
   return (
     <div className="App">

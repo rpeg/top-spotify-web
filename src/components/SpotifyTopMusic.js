@@ -12,17 +12,18 @@ import {
   fetchTracksIfNeeded,
 } from '../actions/actions';
 import { getTimeRangeByName } from '../lib/timeRange';
+import * as selectors from '../reducers/selectors';
 
 const SpotifyTopMusic = () => {
-  const user = useSelector((state) => state.user);
-  const timeRangeName = useSelector((state) => state.timeRangeName);
-  const artistCount = useSelector((state) => state.artistCount);
-  const trackCount = useSelector((state) => state.trackCount);
-  const genreCount = useSelector((state) => state.genreCount);
-  const statsOptions = useSelector((state) => state.statsOptions);
-  const artists = useSelector((state) => state.artistsByTimeRangeName[timeRangeName]);
-  const tracks = useSelector((state) => state.tracksByTimeRangeName[timeRangeName]);
-  const features = useSelector((state) => state.featuresByTimeRangeName[timeRangeName]);
+  const user = useSelector(selectors.selectUser);
+  const timeRangeName = useSelector(selectors.selectTimeRangeName);
+  const artistCount = useSelector(selectors.selectArtistCount);
+  const trackCount = useSelector(selectors.selectTrackCount);
+  const genreCount = useSelector(selectors.selectGenreCount);
+  const statsOptions = useSelector(selectors.selectStatsOptions);
+  const artists = useSelector(selectors.selectArtistsByTimeRangeName[timeRangeName]);
+  const tracks = useSelector(selectors.selectTracksByTimeRangeName[timeRangeName]);
+  const features = useSelector(selectors.selectFeaturesByTimeRangeName[timeRangeName]);
 
   const dispatch = useDispatch();
 

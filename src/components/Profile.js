@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { selectDisplayProfile } from '../reducers/selectors';
 
 const Profile = ({ user }) => {
-  const displayProfile = useSelector((state) => state.displayProfile);
+  const displayProfile = useSelector(selectDisplayProfile);
 
   return (user && user.id && displayProfile) ? (
     <span

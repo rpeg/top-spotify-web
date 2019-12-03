@@ -7,6 +7,7 @@ import Radar from './Radar';
 import Statistic from './Statistic';
 import Bar from './Bar';
 import Donut from './Donut';
+import { selectStatsOptions } from '../reducers/selectors';
 
 const getMode = (items) => mode(items)[0];
 const getMean = (items) => mean(items);
@@ -31,7 +32,7 @@ const getKey = (pitch) => {
 };
 
 const Statistics = ({ features, tracks }) => {
-  const statsOptions = useSelector((state) => state.statsOptions);
+  const statsOptions = useSelector(selectStatsOptions);
 
   return (
     <div>
