@@ -1,0 +1,262 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App initial renders correctly 1`] = `
+<div
+  className="App"
+>
+  <OAuth
+    socket={
+      Socket {
+        "_callbacks": Object {
+          "$connect": Array [
+            [Function],
+          ],
+          "$connecting": Array [
+            [Function],
+          ],
+        },
+        "acks": Object {},
+        "connected": false,
+        "disconnected": true,
+        "flags": Object {},
+        "ids": 0,
+        "io": Manager {
+          "_callbacks": Object {
+            "$close": Array [
+              [Function],
+            ],
+            "$open": Array [
+              [Function],
+            ],
+            "$packet": Array [
+              [Function],
+            ],
+          },
+          "_randomizationFactor": 0.5,
+          "_reconnection": true,
+          "_reconnectionAttempts": Infinity,
+          "_reconnectionDelay": 1000,
+          "_reconnectionDelayMax": 5000,
+          "_timeout": 20000,
+          "autoConnect": true,
+          "backoff": Backoff {
+            "attempts": 0,
+            "factor": 2,
+            "jitter": 0.5,
+            "max": 5000,
+            "ms": 1000,
+          },
+          "connecting": Array [
+            [Circular],
+          ],
+          "decoder": Decoder {
+            "reconstructor": null,
+          },
+          "encoder": Encoder {},
+          "encoding": false,
+          "engine": Socket {
+            "_callbacks": Object {
+              "$error": Array [
+                [Function],
+              ],
+              "$open": Array [
+                [Function],
+              ],
+            },
+            "agent": false,
+            "binaryType": null,
+            "ca": null,
+            "cert": null,
+            "ciphers": null,
+            "enablesXDR": false,
+            "forceBase64": false,
+            "forceJSONP": false,
+            "forceNode": false,
+            "hostname": "127.0.0.1",
+            "id": null,
+            "isReactNative": false,
+            "jsonp": true,
+            "key": null,
+            "onlyBinaryUpgrades": undefined,
+            "passphrase": null,
+            "path": "/socket.io/",
+            "perMessageDeflate": Object {
+              "threshold": 1024,
+            },
+            "pfx": null,
+            "pingInterval": null,
+            "pingIntervalTimer": null,
+            "pingTimeout": null,
+            "pingTimeoutTimer": null,
+            "policyPort": 843,
+            "port": "3000",
+            "prevBufferLen": 0,
+            "query": Object {},
+            "readyState": "opening",
+            "rejectUnauthorized": true,
+            "rememberUpgrade": false,
+            "secure": false,
+            "timestampParam": "t",
+            "timestampRequests": undefined,
+            "transport": XHR {
+              "_callbacks": Object {
+                "$close": Array [
+                  [Function],
+                ],
+                "$drain": Array [
+                  [Function],
+                ],
+                "$error": Array [
+                  [Function],
+                ],
+                "$packet": Array [
+                  [Function],
+                ],
+              },
+              "agent": false,
+              "ca": null,
+              "cert": null,
+              "ciphers": null,
+              "enablesXDR": false,
+              "extraHeaders": undefined,
+              "forceNode": false,
+              "hostname": "127.0.0.1",
+              "isReactNative": false,
+              "key": null,
+              "localAddress": undefined,
+              "passphrase": null,
+              "path": "/socket.io/",
+              "pfx": null,
+              "pollXhr": Request {
+                "_callbacks": Object {
+                  "$data": Array [
+                    [Function],
+                  ],
+                  "$error": Array [
+                    [Function],
+                  ],
+                },
+                "agent": false,
+                "async": true,
+                "ca": null,
+                "cert": null,
+                "ciphers": null,
+                "data": null,
+                "enablesXDR": false,
+                "extraHeaders": undefined,
+                "index": 0,
+                "isBinary": undefined,
+                "key": null,
+                "method": "GET",
+                "passphrase": null,
+                "pfx": null,
+                "rejectUnauthorized": true,
+                "requestTimeout": undefined,
+                "supportsBinary": false,
+                "uri": "http://127.0.0.1:3000/socket.io/?EIO=3&transport=polling&t=MxDNrtb&b64=1",
+                "withCredentials": true,
+                "xd": true,
+                "xhr": XMLHttpRequest {
+                  "DONE": 4,
+                  "HEADERS_RECEIVED": 2,
+                  "LOADING": 3,
+                  "OPENED": 1,
+                  "UNSENT": 0,
+                  "abort": [Function],
+                  "addEventListener": [Function],
+                  "dispatchEvent": [Function],
+                  "getAllResponseHeaders": [Function],
+                  "getRequestHeader": [Function],
+                  "getResponseHeader": [Function],
+                  "handleError": [Function],
+                  "onreadystatechange": [Function],
+                  "open": [Function],
+                  "readyState": 1,
+                  "removeEventListener": [Function],
+                  "responseText": "",
+                  "responseXML": "",
+                  "send": [Function],
+                  "setDisableHeaderCheck": [Function],
+                  "setRequestHeader": [Function],
+                  "status": null,
+                  "statusText": null,
+                },
+                "xs": false,
+              },
+              "polling": true,
+              "port": "3000",
+              "query": Object {
+                "EIO": 3,
+                "b64": 1,
+                "t": "MxDNrtb",
+                "transport": "polling",
+              },
+              "readyState": "opening",
+              "rejectUnauthorized": true,
+              "requestTimeout": undefined,
+              "secure": false,
+              "socket": [Circular],
+              "supportsBinary": false,
+              "timestampParam": "t",
+              "timestampRequests": undefined,
+              "withCredentials": true,
+              "xd": true,
+              "xs": false,
+            },
+            "transportOptions": Object {},
+            "transports": Array [
+              "polling",
+              "websocket",
+            ],
+            "upgrade": true,
+            "upgrades": null,
+            "withCredentials": true,
+            "writeBuffer": Array [],
+          },
+          "lastPing": null,
+          "nsps": Object {
+            "/": [Circular],
+          },
+          "opts": Object {
+            "hostname": "127.0.0.1",
+            "path": "/socket.io",
+            "port": "3000",
+            "secure": false,
+          },
+          "packetBuffer": Array [],
+          "readyState": "opening",
+          "skipReconnect": false,
+          "subs": Array [
+            Object {
+              "destroy": [Function],
+            },
+            Object {
+              "destroy": [Function],
+            },
+            Object {
+              "destroy": [Function],
+            },
+          ],
+          "uri": "http://127.0.0.1:3000",
+        },
+        "json": [Circular],
+        "nsp": "/",
+        "receiveBuffer": Array [],
+        "sendBuffer": Array [],
+        "subs": Array [
+          Object {
+            "destroy": [Function],
+          },
+          Object {
+            "destroy": [Function],
+          },
+          Object {
+            "destroy": [Function],
+          },
+        ],
+      }
+    }
+  />
+  <Controls />
+</div>
+`;

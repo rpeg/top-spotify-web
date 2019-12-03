@@ -1,23 +1,5 @@
 import * as constants from '../../constants/constants';
-import rootReducer from '../../reducers/reducers';
-
-const initialState = {
-  user: {},
-  hasClickedCreate: false,
-  timeRangeName: constants.TimeRanges.LONG.name,
-  artistCount: constants.DEFAULT_ARTIST_COUNT,
-  trackCount: constants.DEFAULT_TRACK_COUNT,
-  genreCount: constants.DEFAULT_GENRE_COUNT,
-  statsOptions: constants.DEFAULT_STATS_OPTIONS,
-  displayProfile: true,
-  optimizeTracks: true,
-  artists: {},
-  artistsByTimeRangeName: {},
-  tracks: {},
-  tracksByTimeRangeName: {},
-  features: {},
-  featuresByTimeRangeName: {},
-};
+import rootReducer, { initialState } from '../../reducers/reducers';
 
 describe('reducers', () => {
   describe('INITIAL_STATE', () => {

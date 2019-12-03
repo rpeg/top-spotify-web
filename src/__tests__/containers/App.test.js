@@ -1,19 +1,51 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import configureStore from 'redux-mock-store';
+import React from 'react';
+import { shallow } from 'enzyme';
 
-// import App from '../../containers/App';
-// import * as actions from '../../actions/actions';
+import App from '../../containers/App';
+import MainHeader from '../../components/MainHeader';
+import SpotifyTopMusic from '../../components/SpotifyTopMusic';
+import * as selectors from '../../reducers/selectors'
 
-// const mockStore = configureStore();
-// const store = mockStore();
+jest.mock("react-redux", () => ({
+  useSelector: jest.fn(fn => fn()),
+  useDispatch: () => jest.fn()
+}));
 
-// describe('clicking create', () => {
-//   it('displays header', () => {
-//     const div = document.createElement('div');
-//     ReactDOM.render(<App />, div);
-//     ReactDOM.unmountComponentAtNode(div);
+const setup = ({ hasClickedCreate = false }) => {
+  jest.spyOn(selectors, "hasClickedCreate").mockReturnValue(hasClickedCreate);
+};
 
-//     store.dispatch(actions.setHasClickedCreate());
-//   });
-// });
+describe('App', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('should not log errors in console', () => {
+    setup({ hasClickedCreate: false });
+    const wrapper = shallow(<App />);
+    const spy = jest.spyOn(global.console, 'error');
+    expect(wrapper).not.toBeNull();
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('initial renders correctly', () => {
+    setup({ hasClickedCreate: false });
+    const wrapper = shallow(<App />);
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.find(MainHeader).exists()).toBe(false);
+    expect(wrapper.find(SpotifyTopMusic).exists()).toBe(false);
+  });
+
+  describe('conditional renders', () => {
+    it('renders MainHeader and SpotifyTopMusic if hasClickedCreate', () => {
+      setup({ hasClickedCreate: true });
+      const wrapper = shallow((<App />));
+      expect(wrapper.find(MainHeader).exists()).toBe(true);
+      expect(wrapper.find(SpotifyTopMusic).exists()).toBe(true);
+    })
+  })
+});

@@ -10,20 +10,21 @@ import MainHeader from '../components/MainHeader';
 import SpotifyTopMusic from '../components/SpotifyTopMusic';
 
 import Controls from '../components/Controls';
+import * as selectors from '../reducers/selectors';
 
 const socket = io(API_URL);
 
 const App = () => {
-  const hasClickedCreate = useSelector((state) => state.hasClickedCreate);
+  const hasClickedCreate = useSelector(selectors.hasClickedCreate);
 
   return (
     <div className="App">
       <OAuth socket={socket} />
       <Controls />
-      <div id="top-spotify">
-        {hasClickedCreate && <MainHeader />}
-        {hasClickedCreate && <SpotifyTopMusic socket={socket} />}
-      </div>
+      {hasClickedCreate && (<div id="top-spotify">
+        <MainHeader />
+        <SpotifyTopMusic socket={socket} />
+      </div>)}
     </div>
   );
 };
