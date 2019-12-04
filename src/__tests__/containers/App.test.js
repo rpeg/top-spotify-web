@@ -4,15 +4,17 @@ import { shallow } from 'enzyme';
 import App from '../../containers/App';
 import MainHeader from '../../components/MainHeader';
 import SpotifyTopMusic from '../../components/SpotifyTopMusic';
-import * as selectors from '../../reducers/selectors'
+import * as selectors from '../../reducers/selectors';
+import OAuth from '../../components/OAuth';
+import Controls from '../../components/Controls';
 
-jest.mock("react-redux", () => ({
-  useSelector: jest.fn(fn => fn()),
-  useDispatch: () => jest.fn()
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn((fn) => fn()),
+  useDispatch: () => jest.fn(),
 }));
 
 const setup = ({ hasClickedCreate = false }) => {
-  jest.spyOn(selectors, "selectHasClickedCreate").mockReturnValue(hasClickedCreate);
+  jest.spyOn(selectors, 'selectHasClickedCreate').mockReturnValue(hasClickedCreate);
 };
 
 describe('App', () => {
@@ -32,12 +34,11 @@ describe('App', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('initial renders correctly', () => {
+  it('renders children correctly', () => {
     setup({ hasClickedCreate: false });
     const wrapper = shallow(<App />);
-    expect(wrapper).toMatchSnapshot();
-    expect(wrapper.find(MainHeader).exists()).toBe(false);
-    expect(wrapper.find(SpotifyTopMusic).exists()).toBe(false);
+    expect(wrapper.find(OAuth).exists()).toBe(true);
+    expect(wrapper.find(Controls).exists()).toBe(true);
   });
 
   describe('conditional renders', () => {
@@ -46,6 +47,6 @@ describe('App', () => {
       const wrapper = shallow((<App />));
       expect(wrapper.find(MainHeader).exists()).toBe(true);
       expect(wrapper.find(SpotifyTopMusic).exists()).toBe(true);
-    })
-  })
+    });
+  });
 });

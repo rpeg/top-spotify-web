@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { chunk } from 'lodash';
+import { chunk, isEmpty } from 'lodash';
 
 const ArtistGrid = ({ artists }) => {
   const chunkedArtists = chunk(artists, 5);
@@ -15,7 +15,7 @@ const ArtistGrid = ({ artists }) => {
             }}
             >
               <img
-                src={artist.images[0] ? artist.images[0].url : 'images/person.svg'}
+                src={!isEmpty(artist.images) && artist.images[0].url ? artist.images[0].url : 'images/person.svg'}
                 alt={artist.name}
                 style={{
                   width: '100%',

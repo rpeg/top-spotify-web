@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Statistics renders correctly 1`] = `
+<div>
+  <ForwardRef
+    className="justify-content-center"
+    noGutters={false}
+  >
+    <Col>
+      <Statistic
+        title="Scales"
+      >
+        <ForwardRef
+          noGutters={false}
+        >
+          <Col>
+            <div>
+              <Bar
+                items={Array []}
+              />
+            </div>
+          </Col>
+        </ForwardRef>
+      </Statistic>
+    </Col>
+  </ForwardRef>
+  <ForwardRef
+    className="justify-content-center"
+    noGutters={false}
+  >
+    <Col
+      md={4}
+      xs={12}
+    >
+      <Statistic
+        title="Decades"
+      >
+        <ForwardRef
+          className="justify-content-center"
+          noGutters={false}
+        >
+          <Col
+            md={12}
+            xs={9}
+          >
+            <Donut
+              items={Array []}
+            />
+          </Col>
+        </ForwardRef>
+      </Statistic>
+    </Col>
+    <Col
+      md={8}
+      xs={12}
+    >
+      <Statistic
+        title="Features"
+      >
+        <Radar
+          features={Array []}
+        />
+      </Statistic>
+    </Col>
+  </ForwardRef>
+</div>
+`;

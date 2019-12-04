@@ -31,7 +31,11 @@ const Profile = ({ user }) => {
 };
 
 Profile.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.shape({ id: PropTypes.string, image: PropTypes.string }),
+};
+
+Profile.defaultProps = {
+  user: {},
 };
 
 export default Profile;

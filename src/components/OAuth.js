@@ -67,11 +67,11 @@ const OAuth = ({ socket }) => {
   return (
     <div>
       {user && user.id ? (
-        <Button variant="outline-primary" style={buttonStyle} onClick={logout}>
+        <Button className="button-logout" variant="outline-primary" style={buttonStyle} onClick={logout}>
           Logout
         </Button>
       ) : (
-        <Button variant="outline-primary" style={buttonStyle} onClick={startAuth}>
+        <Button className="button-login" variant="outline-primary" style={buttonStyle} onClick={startAuth}>
           Login
         </Button>
       )}
@@ -80,7 +80,10 @@ const OAuth = ({ socket }) => {
 };
 
 OAuth.propTypes = {
-  socket: PropTypes.object.isRequired,
+  socket: PropTypes.shape({
+    id: PropTypes.string,
+    on: PropTypes.func,
+  }).isRequired,
 };
 
 export default OAuth;

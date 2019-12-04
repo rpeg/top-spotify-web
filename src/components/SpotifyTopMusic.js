@@ -21,9 +21,9 @@ const SpotifyTopMusic = () => {
   const trackCount = useSelector(selectors.selectTrackCount);
   const genreCount = useSelector(selectors.selectGenreCount);
   const statsOptions = useSelector(selectors.selectStatsOptions);
-  const artists = useSelector(selectors.selectArtistsByTimeRangeName[timeRangeName]);
-  const tracks = useSelector(selectors.selectTracksByTimeRangeName[timeRangeName]);
-  const features = useSelector(selectors.selectFeaturesByTimeRangeName[timeRangeName]);
+  const artists = useSelector(selectors.selectArtistsByCurrentTimeRange);
+  const tracks = useSelector(selectors.selectTracksByCurrentTimeRange);
+  const features = useSelector(selectors.selectFeaturesByCurrentTimeRange);
 
   const dispatch = useDispatch();
 

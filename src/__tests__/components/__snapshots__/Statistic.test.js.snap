@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Statistic renders correctly with title 1`] = `
+<div>
+  <div
+    className="stat-title"
+    style={
+      Object {
+        "textAlign": "start",
+      }
+    }
+  >
+    <p>
+      abc
+    </p>
+  </div>
+  <div
+    className="stat-content"
+  >
+    <Component />
+  </div>
+</div>
+`;
+
+exports[`Statistic renders correctly without title 1`] = `
+<div>
+  <div
+    className="stat-content"
+  >
+    <Component />
+  </div>
+</div>
+`;

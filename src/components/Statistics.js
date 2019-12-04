@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { mean, mode } from 'mathjs';
-
+import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
+
 import Radar from './Radar';
 import Statistic from './Statistic';
 import Bar from './Bar';
@@ -37,7 +38,7 @@ const Statistics = ({ features, tracks }) => {
   return (
     <div>
       <Row className="justify-content-center">
-        {statsOptions.includes('key') && (
+        {statsOptions.includes('key') && features.length > 0 && (
         <Col>
           <Statistic
             title="Most Frequent Key"
@@ -48,7 +49,7 @@ const Statistics = ({ features, tracks }) => {
           </Statistic>
         </Col>
         )}
-        {statsOptions.includes('bpm') && (
+        {statsOptions.includes('bpm') && features.length > 0 && (
         <Col>
           <Statistic
             title="Average BPM"
@@ -97,6 +98,16 @@ const Statistics = ({ features, tracks }) => {
       </Row>
     </div>
   );
+};
+
+Statistics.propTypes = {
+  features: PropTypes.arrayOf(PropTypes.object),
+  tracks: PropTypes.arrayOf(PropTypes.object),
+};
+
+Statistics.defaultProps = {
+  features: [],
+  tracks: [],
 };
 
 export default Statistics;
