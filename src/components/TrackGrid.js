@@ -170,6 +170,7 @@ TrackRow.propTypes = {
   numPerRow: PropTypes.number.isRequired,
 };
 
+// grid sets # of items per row based on window width
 const TrackGrid = ({ tracks, count }) => {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 

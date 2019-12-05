@@ -5,11 +5,24 @@ import { chunk, isEmpty } from 'lodash';
 const ArtistGrid = ({ artists }) => {
   const chunkedArtists = chunk(artists, 5);
 
+  const getColPadding = (index, length) => {
+    switch (index) {
+      case 0: return '0 2px 0 0';
+      case length: return '0 0 0 2px';
+      default: return '0 2px 0 2px';
+    }
+  };
+
   return chunkedArtists.map((artistRow, i) => (
     <div key={artistRow.map((a) => a.id).toString()}>
       <Row key={chunkedArtists[i].map((a) => a.id).toString()} style={{ paddingTop: `${i > 0 ? '4px' : '0px'}` }}>
-        {artistRow.map((artist) => (
-          <Col key={artist.id} style={{ padding: '0px 2px 0px 2px' }}>
+        {artistRow.map((artist, index) => (
+          <Col
+            key={artist.id}
+            style={{
+              padding: `${getColPadding(index, artistRow.length)}`,
+            }}
+          >
             <div style={{
               display: 'flex', paddingBottom: '100%', overflow: 'hidden', position: 'relative',
             }}
