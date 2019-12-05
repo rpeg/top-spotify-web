@@ -1,10 +1,10 @@
 import React from 'react';
 import { Radar as RadarChart } from 'react-chartjs-2';
-
+import PropTypes from 'prop-types';
 
 const getFeatureAvg = (features, name) => {
   const featureArr = features.map((f) => f[name]);
-  const total = featureArr.reduce((acc, curr) => acc + curr);
+  const total = featureArr.reduce((acc, curr) => acc + curr, 0);
 
   return total / features.length;
 };
@@ -67,6 +67,10 @@ const Radar = ({ features }) => {
       <RadarChart data={data} options={options} />
     </div>
   );
+};
+
+Radar.propTypes = {
+  features: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Radar;

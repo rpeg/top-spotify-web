@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radar renders correctly 1`] = `
+<div>
+  <Radar
+    data={
+      Object {
+        "datasets": Array [
+          Object {
+            "backgroundColor": "rgba(29, 185, 84, 0.1)",
+            "borderColor": "rgba(29, 185, 84, 1)",
+            "data": Array [
+              NaN,
+              NaN,
+              NaN,
+              NaN,
+              NaN,
+              NaN,
+              NaN,
+            ],
+            "label": undefined,
+            "pointBackgroundColor": "rgba(29, 185, 84,1)",
+            "pointBorderColor": "#fff",
+            "pointHoverBackgroundColor": "#fff",
+            "pointHoverBorderColor": "rgba(29, 185, 84,1)",
+          },
+        ],
+        "labels": Array [
+          "acousticness",
+          "danceability",
+          "energy",
+          "instrumentalness",
+          "liveness",
+          "speechiness",
+          "valence",
+        ],
+      }
+    }
+    options={
+      Object {
+        "gridLines": Object {
+          "display": false,
+        },
+        "legend": Object {
+          "display": false,
+        },
+        "scale": Object {
+          "gridLines": Object {
+            "color": "rgba(255, 255, 255, .5)",
+          },
+          "pointLabels": Object {
+            "fontColor": "white",
+            "fontFamily": "Karla, sans-serif",
+            "fontSize": 14,
+          },
+          "ticks": Object {
+            "beginAtZero": true,
+            "display": false,
+            "max": 1,
+            "min": 0,
+            "stepSize": 1,
+          },
+        },
+      }
+    }
+  />
+</div>
+`;

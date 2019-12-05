@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ProgressBar } from 'react-bootstrap';
 import { makeSortedFrequencyArr } from '../lib/frequency';
 
@@ -17,6 +18,10 @@ const Bar = ({ items }) => {
       ))}
     </ProgressBar>
   );
+};
+
+Bar.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Bar;

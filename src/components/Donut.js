@@ -1,6 +1,7 @@
 import React from 'react';
 import PieChart from 'react-minimal-pie-chart';
 import Palette from 'google-palette';
+import PropTypes from 'prop-types';
 
 import { makeSortedFrequencyArr } from '../lib/frequency';
 
@@ -9,7 +10,7 @@ const Donut = ({ items }) => {
 
   const colors = Palette('tol-rainbow', sortedItems.length).map((c) => `#${c}`);
 
-  const data = sortedItems.map((item, i) => ({
+  const donutData = sortedItems.map((item, i) => ({
     color: colors[i],
     title: item.name,
     value: item.freq,
@@ -24,7 +25,7 @@ const Donut = ({ items }) => {
         animationEasing="ease-out"
         cx={50}
         cy={50}
-        data={data}
+        data={donutData}
         label={({ data, dataIndex }) => data[dataIndex].title}
         labelPosition={60}
         labelStyle={{
@@ -44,6 +45,10 @@ const Donut = ({ items }) => {
       />
     </div>
   );
+};
+
+Donut.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Donut;

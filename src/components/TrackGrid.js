@@ -5,12 +5,14 @@ import { chunk, debounce } from 'lodash';
 import PropTypes from 'prop-types';
 
 import OrdinalCircle from './OrdinalCircle';
-import { TRACK_REQ_LIMIT } from '../constants/constants';
-
-const SM_WIDTH_BOUNDARY = 991;
-const NUM_PER_ROW_MOBILE = 10;
-const NUM_PER_ROW_DESKTOP = 15;
-const NUM_PER_COL = 5;
+import {
+  TRACK_REQ_LIMIT,
+  SM_WIDTH_BOUNDARY,
+  NUM_PER_ROW_DESKTOP,
+  NUM_PER_ROW_MOBILE,
+  NUM_PER_COL,
+} from '../constants/constants';
+import { selectOptimizeTracks } from '../reducers/selectors';
 
 // Return as many non-duplicate-album tracks as possible within given params
 const makeOptimizedTracks = (tracks, count) => {
@@ -33,7 +35,9 @@ const makeOptimizedTracks = (tracks, count) => {
 
   // Fill in remaining slots with duplicate-album tracks, favoring higher positions
   for (let i = 0; i < (count - uniqueArr.length); i += 1) {
-    combinedArr.splice(duplicateAlbumArr[i][0], 0, duplicateAlbumArr[i]);
+    if (duplicateAlbumArr[i]) {
+      combinedArr.splice(duplicateAlbumArr[i][0], 0, duplicateAlbumArr[i]);
+    }
   }
 
   return combinedArr.map((t) => t[1]).slice(0, count);
@@ -47,7 +51,7 @@ const getWindowDimensions = () => {
   };
 };
 
-const Track = ({ track, position }) => (
+export const Track = ({ track, position }) => (
   <li key={track.id}>
     <div style={{
       display: 'inline-flex',
@@ -100,7 +104,12 @@ const Track = ({ track, position }) => (
 );
 
 Track.propTypes = {
-  track: PropTypes.objectOf(PropTypes.object).isRequired,
+  track: PropTypes.shape({
+    id: PropTypes.string,
+    album: PropTypes.object,
+    artists: PropTypes.array,
+    name: PropTypes.string,
+  }).isRequired,
   position: PropTypes.number.isRequired,
 };
 
@@ -112,6 +121,7 @@ const TrackCol = ({
       {tracks.map((track, trackIndex) => (
         <Track
           track={track}
+          key={track.id}
           position={rowIndex * numPerRow + colIndex * NUM_PER_COL + trackIndex + 1}
         />
       ))}
@@ -126,7 +136,7 @@ TrackCol.propTypes = {
   colIndex: PropTypes.number.isRequired,
 };
 
-const TrackRow = ({ tracks, index, numPerRow }) => (
+export const TrackRow = ({ tracks, index, numPerRow }) => (
   <div key={tracks.map((t) => t.id).toString()}>
     <Row>
       {index > 0 && (
@@ -143,6 +153,7 @@ const TrackRow = ({ tracks, index, numPerRow }) => (
       {chunk(tracks, NUM_PER_COL).map((colTracks, colIndex) => (
         <TrackCol
           tracks={colTracks}
+          key={colTracks.map((t) => t.id).toString()}
           numPerRow={numPerRow}
           rowIndex={index}
           colIndex={colIndex}
@@ -162,7 +173,7 @@ TrackRow.propTypes = {
 const TrackGrid = ({ tracks, count }) => {
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
-  const optimizeTracks = useSelector((state) => state.optimizeTracks);
+  const optimizeTracks = useSelector(selectOptimizeTracks);
 
   const tracksToMap = optimizeTracks ? makeOptimizedTracks(tracks, count) : tracks.slice(0, count);
 
@@ -196,7 +207,12 @@ const TrackGrid = ({ tracks, count }) => {
     count > 0 ? (
       <div>
         {tracksByRow.map((rowTracks, i) => (
-          <TrackRow tracks={rowTracks} index={i} numPerRow={numPerRow} />
+          <TrackRow
+            tracks={rowTracks}
+            key={rowTracks.map((t) => t.id).toString()}
+            index={i}
+            numPerRow={numPerRow}
+          />
         ))}
       </div>
     ) : null

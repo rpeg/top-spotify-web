@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ComponentHeader renders correctly 1`] = `
+<ForwardRef
+  noGutters={false}
+  style={
+    Object {
+      "padding": "2em 0 0 0",
+    }
+  }
+>
+  <h3
+    style={
+      Object {
+        "backgroundColor": "#FFFFFF",
+        "color": "#191414",
+        "padding": "0 .25em 0 .25em",
+        "textAlign": "left",
+      }
+    }
+  >
+    Test
+  </h3>
+</ForwardRef>
+`;

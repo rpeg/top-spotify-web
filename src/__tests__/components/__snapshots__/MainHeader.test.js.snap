@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainHeader renders correctly with user 1`] = `
+<Container
+  fluid={false}
+  style={
+    Object {
+      "paddingTop": "2em",
+    }
+  }
+>
+  <ForwardRef
+    noGutters={false}
+  >
+    <Col
+      style={
+        Object {
+          "display": "inline-flex",
+          "padding": "0",
+        }
+      }
+      xs={6}
+    >
+      <span
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "inline-flex",
+          }
+        }
+      >
+        <img
+          alt="Spotify Logo"
+          src="/Spotify_Icon_RGB_Green.png"
+          style={
+            Object {
+              "height": "50px",
+              "width": "auto",
+            }
+          }
+        />
+        <div
+          style={
+            Object {
+              "margin": "0 0 0 0.5em",
+              "width": "auto",
+            }
+          }
+        >
+          <h4
+            style={
+              Object {
+                "margin": "0",
+                "textAlign": "left",
+              }
+            }
+          >
+            My Top Music
+          </h4>
+          <div>
+            <p
+              style={
+                Object {
+                  "margin": "0",
+                  "textAlign": "left",
+                }
+              }
+            >
+              Dec. 4th, 2019
+            </p>
+          </div>
+        </div>
+      </span>
+    </Col>
+    <Col
+      style={
+        Object {
+          "display": "inline-flex",
+          "padding": "0",
+        }
+      }
+      xs={6}
+    >
+      <Profile
+        user={
+          Object {
+            "id": "abc",
+          }
+        }
+      />
+    </Col>
+  </ForwardRef>
+</Container>
+`;
+
+exports[`MainHeader renders correctly without user 1`] = `""`;

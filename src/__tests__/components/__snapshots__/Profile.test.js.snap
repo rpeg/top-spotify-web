@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile renders correctly with !displayProfile 1`] = `""`;
+
+exports[`Profile renders correctly with displayProfile 1`] = `
+<span
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "inline-flex",
+      "marginLeft": "auto",
+    }
+  }
+>
+  <p
+    style={
+      Object {
+        "margin": "0 0.5em 0 0",
+      }
+    }
+  >
+    <b>
+      abc
+    </b>
+  </p>
+  <img
+    alt="abc"
+    height="50px"
+    style={
+      Object {
+        "borderRadius": "50%",
+        "objectFit": "cover",
+      }
+    }
+  />
+</span>
+`;
+
+exports[`Profile renders correctly with user 1`] = `
+<span
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "inline-flex",
+      "marginLeft": "auto",
+    }
+  }
+>
+  <p
+    style={
+      Object {
+        "margin": "0 0.5em 0 0",
+      }
+    }
+  >
+    <b>
+      abc
+    </b>
+  </p>
+  <img
+    alt="abc"
+    height="50px"
+    style={
+      Object {
+        "borderRadius": "50%",
+        "objectFit": "cover",
+      }
+    }
+  />
+</span>
+`;
+
+exports[`Profile renders correctly without user 1`] = `""`;

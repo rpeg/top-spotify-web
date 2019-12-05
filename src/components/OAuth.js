@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 
 import { setUser } from '../actions/actions';
 import { API_URL } from '../config';
+import { selectUser } from '../reducers/selectors';
 
 const buttonStyle = {
   right: '30px', top: '30px', marginBottom: '30px', position: 'absolute',
@@ -12,7 +13,7 @@ const buttonStyle = {
 
 const OAuth = ({ socket }) => {
   const [disabled, setDisabled] = useState(false);
-  const user = useSelector((state) => state.user);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   let popup;
@@ -66,11 +67,11 @@ const OAuth = ({ socket }) => {
   return (
     <div>
       {user && user.id ? (
-        <Button variant="outline-primary" style={buttonStyle} onClick={logout}>
+        <Button className="button-logout" variant="outline-primary" style={buttonStyle} onClick={logout}>
           Logout
         </Button>
       ) : (
-        <Button variant="outline-primary" style={buttonStyle} onClick={startAuth}>
+        <Button className="button-login" variant="outline-primary" style={buttonStyle} onClick={startAuth}>
           Login
         </Button>
       )}
@@ -79,7 +80,10 @@ const OAuth = ({ socket }) => {
 };
 
 OAuth.propTypes = {
-  socket: PropTypes.object.isRequired,
+  socket: PropTypes.shape({
+    id: PropTypes.string,
+    on: PropTypes.func,
+  }).isRequired,
 };
 
 export default OAuth;

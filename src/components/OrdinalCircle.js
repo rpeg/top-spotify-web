@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const OrdinalCircle = ({ position }) => (
   <div
@@ -20,5 +21,9 @@ const OrdinalCircle = ({ position }) => (
     {position}
   </div>
 );
+
+OrdinalCircle.propTypes = {
+  position: PropTypes.number.isRequired,
+};
 
 export default OrdinalCircle;

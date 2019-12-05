@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Donut renders correctly 1`] = `
+<div>
+  <ReactMinimalPieChart
+    animate={true}
+    animationDuration={750}
+    animationEasing="ease-out"
+    className="minimal-pie"
+    cx={50}
+    cy={50}
+    data={
+      Array [
+        Object {
+          "color": "#781c81",
+          "title": "b",
+          "value": 1,
+        },
+        Object {
+          "color": "#d92120",
+          "title": "a",
+          "value": 1,
+        },
+      ]
+    }
+    label={[Function]}
+    labelPosition={60}
+    labelStyle={
+      Object {
+        "fontFamily": "Karla, sans-serif",
+        "fontSize": "5px",
+      }
+    }
+    lengthAngle={360}
+    lineWidth={20}
+    paddingAngle={0}
+    radius={50}
+    ratio={1}
+    rounded={false}
+    startAngle={0}
+    viewBoxSize={
+      Array [
+        100,
+        100,
+      ]
+    }
+  />
+</div>
+`;

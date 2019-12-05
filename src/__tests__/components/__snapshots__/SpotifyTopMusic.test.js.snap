@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SpotifyTopMusic renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "padding": "5em 0 5em 0",
+    }
+  }
+>
+  <div>
+    <h1>
+      All-time
+    </h1>
+  </div>
+  <Container
+    fluid={false}
+  >
+    <Spinner
+      animation="border"
+    />
+    <Spinner
+      animation="border"
+    />
+    <Spinner
+      animation="border"
+    />
+    <Spinner
+      animation="border"
+    />
+  </Container>
+</div>
+`;

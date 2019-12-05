@@ -1,0 +1,315 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArtistGrid does not render without artists 1`] = `null`;
+
+exports[`ArtistGrid renders with artists 1`] = `
+<div
+  key="abc,cde,fgh,ijk,lmn"
+>
+  <ForwardRef
+    key="abc,cde,fgh,ijk,lmn"
+    noGutters={false}
+    style={
+      Object {
+        "paddingTop": "0px",
+      }
+    }
+  >
+    <Col
+      key="abc"
+      style={
+        Object {
+          "padding": "0px 2px 0px 2px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "overflow": "hidden",
+            "paddingBottom": "100%",
+            "position": "relative",
+          }
+        }
+      >
+        <img
+          alt="A"
+          src="images/person.svg"
+          style={
+            Object {
+              "height": "100%",
+              "objectFit": "cover",
+              "objectPosition": "center",
+              "position": "absolute",
+              "width": "100%",
+            }
+          }
+        />
+        <div
+          style={
+            Object {
+              "background": "rgba(0,0,0,0.5)",
+              "bottom": "0",
+              "marginBottom": "0",
+              "position": "absolute",
+              "width": "100%",
+              "zIndex": "10",
+            }
+          }
+        >
+          <p
+            className="s"
+            style={
+              Object {
+                "color": "white",
+                "marginBottom": "0",
+              }
+            }
+          >
+            <b>
+              A
+            </b>
+          </p>
+        </div>
+      </div>
+    </Col>
+    <Col
+      key="cde"
+      style={
+        Object {
+          "padding": "0px 2px 0px 2px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "overflow": "hidden",
+            "paddingBottom": "100%",
+            "position": "relative",
+          }
+        }
+      >
+        <img
+          alt="B"
+          src="images/person.svg"
+          style={
+            Object {
+              "height": "100%",
+              "objectFit": "cover",
+              "objectPosition": "center",
+              "position": "absolute",
+              "width": "100%",
+            }
+          }
+        />
+        <div
+          style={
+            Object {
+              "background": "rgba(0,0,0,0.5)",
+              "bottom": "0",
+              "marginBottom": "0",
+              "position": "absolute",
+              "width": "100%",
+              "zIndex": "10",
+            }
+          }
+        >
+          <p
+            className="s"
+            style={
+              Object {
+                "color": "white",
+                "marginBottom": "0",
+              }
+            }
+          >
+            <b>
+              B
+            </b>
+          </p>
+        </div>
+      </div>
+    </Col>
+    <Col
+      key="fgh"
+      style={
+        Object {
+          "padding": "0px 2px 0px 2px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "overflow": "hidden",
+            "paddingBottom": "100%",
+            "position": "relative",
+          }
+        }
+      >
+        <img
+          alt="C"
+          src="images/person.svg"
+          style={
+            Object {
+              "height": "100%",
+              "objectFit": "cover",
+              "objectPosition": "center",
+              "position": "absolute",
+              "width": "100%",
+            }
+          }
+        />
+        <div
+          style={
+            Object {
+              "background": "rgba(0,0,0,0.5)",
+              "bottom": "0",
+              "marginBottom": "0",
+              "position": "absolute",
+              "width": "100%",
+              "zIndex": "10",
+            }
+          }
+        >
+          <p
+            className="s"
+            style={
+              Object {
+                "color": "white",
+                "marginBottom": "0",
+              }
+            }
+          >
+            <b>
+              C
+            </b>
+          </p>
+        </div>
+      </div>
+    </Col>
+    <Col
+      key="ijk"
+      style={
+        Object {
+          "padding": "0px 2px 0px 2px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "overflow": "hidden",
+            "paddingBottom": "100%",
+            "position": "relative",
+          }
+        }
+      >
+        <img
+          alt="D"
+          src="images/person.svg"
+          style={
+            Object {
+              "height": "100%",
+              "objectFit": "cover",
+              "objectPosition": "center",
+              "position": "absolute",
+              "width": "100%",
+            }
+          }
+        />
+        <div
+          style={
+            Object {
+              "background": "rgba(0,0,0,0.5)",
+              "bottom": "0",
+              "marginBottom": "0",
+              "position": "absolute",
+              "width": "100%",
+              "zIndex": "10",
+            }
+          }
+        >
+          <p
+            className="s"
+            style={
+              Object {
+                "color": "white",
+                "marginBottom": "0",
+              }
+            }
+          >
+            <b>
+              D
+            </b>
+          </p>
+        </div>
+      </div>
+    </Col>
+    <Col
+      key="lmn"
+      style={
+        Object {
+          "padding": "0px 2px 0px 2px",
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "display": "flex",
+            "overflow": "hidden",
+            "paddingBottom": "100%",
+            "position": "relative",
+          }
+        }
+      >
+        <img
+          alt="E"
+          src="images/person.svg"
+          style={
+            Object {
+              "height": "100%",
+              "objectFit": "cover",
+              "objectPosition": "center",
+              "position": "absolute",
+              "width": "100%",
+            }
+          }
+        />
+        <div
+          style={
+            Object {
+              "background": "rgba(0,0,0,0.5)",
+              "bottom": "0",
+              "marginBottom": "0",
+              "position": "absolute",
+              "width": "100%",
+              "zIndex": "10",
+            }
+          }
+        >
+          <p
+            className="s"
+            style={
+              Object {
+                "color": "white",
+                "marginBottom": "0",
+              }
+            }
+          >
+            <b>
+              E
+            </b>
+          </p>
+        </div>
+      </div>
+    </Col>
+  </ForwardRef>
+</div>
+`;

@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WordCloud does not render with count === 0 1`] = `""`;
+
+exports[`WordCloud does not render without genres 1`] = `""`;
+
+exports[`WordCloud renders with genres and count > 0 1`] = `
+<ForwardRef
+  noGutters={false}
+>
+  <div
+    style={
+      Object {
+        "height": "100%",
+        "width": "100%",
+      }
+    }
+  >
+    <Wordcloud
+      callbacks={
+        Object {
+          "getWordTooltip": [Function],
+        }
+      }
+      maxWords={100}
+      minSize={
+        Array [
+          300,
+          300,
+        ]
+      }
+      options={
+        Object {
+          "colors": Array [
+            "#781c81",
+            "#447cbf",
+            "#83ba6d",
+            "#dbab3b",
+            "#d92120",
+          ],
+          "deterministic": false,
+          "enableTooltip": true,
+          "fontFamily": "Karla, sans-serif",
+          "fontSizes": Array [
+            10,
+            48,
+          ],
+          "fontStyle": "normal",
+          "fontWeight": "bold",
+          "padding": 1,
+          "rotationAngles": Array [
+            0,
+            90,
+          ],
+          "rotations": 2,
+          "scale": "sqrt",
+          "spiral": "archimedean",
+          "transitionDuration": 1000,
+        }
+      }
+      words={
+        Array [
+          Object {
+            "text": "e",
+            "value": 1,
+          },
+          Object {
+            "text": "d",
+            "value": 1,
+          },
+          Object {
+            "text": "c",
+            "value": 1,
+          },
+          Object {
+            "text": "b",
+            "value": 1,
+          },
+          Object {
+            "text": "a",
+            "value": 1,
+          },
+        ]
+      }
+    />
+  </div>
+</ForwardRef>
+`;
