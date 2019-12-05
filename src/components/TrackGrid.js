@@ -51,7 +51,7 @@ const getWindowDimensions = () => {
   };
 };
 
-const Track = ({ track, position }) => (
+export const Track = ({ track, position }) => (
   <li key={track.id}>
     <div style={{
       display: 'inline-flex',
