@@ -37,9 +37,9 @@ const Statistics = ({ features, tracks }) => {
 
   return (
     <div>
-      <Row className="justify-content-center">
+      <Row>
         {statsOptions.includes('key') && features.length > 0 && (
-        <Col>
+        <Col xs={4}>
           <Statistic
             title="Most Frequent Key"
           >
@@ -50,7 +50,7 @@ const Statistics = ({ features, tracks }) => {
         </Col>
         )}
         {statsOptions.includes('bpm') && features.length > 0 && (
-        <Col>
+        <Col xs={4}>
           <Statistic
             title="Average BPM"
           >
@@ -60,7 +60,8 @@ const Statistics = ({ features, tracks }) => {
           </Statistic>
         </Col>
         )}
-        <Col>
+        {statsOptions.includes('scale') && features.length > 0 && (
+        <Col xs={4}>
           <Statistic
             title="Scales"
           >
@@ -73,8 +74,9 @@ const Statistics = ({ features, tracks }) => {
             </Row>
           </Statistic>
         </Col>
+        )}
       </Row>
-      <Row className="justify-content-center">
+      <Row>
         {statsOptions.includes('decades') && (
           <Col xs={12} md={4}>
             <Statistic title="Decades">

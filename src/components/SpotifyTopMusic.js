@@ -49,7 +49,9 @@ const SpotifyTopMusic = () => {
             ? (
               <div>
                 <ComponentHeader title="Artists" />
-                <ArtistGrid artists={artists.items.slice(0, artistCount)} />
+                <div style={{ marginTop: '1em' }}>
+                  <ArtistGrid artists={artists.items.slice(0, artistCount)} />
+                </div>
               </div>
             )
             : <Spinner animation="border" />)}

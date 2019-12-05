@@ -67,11 +67,11 @@ const OAuth = ({ socket }) => {
   return (
     <div>
       {user && user.id ? (
-        <Button className="button-logout" variant="outline-primary" style={buttonStyle} onClick={logout}>
+        <Button className="button-logout" variant="primary" style={buttonStyle} onClick={logout}>
           Logout
         </Button>
       ) : (
-        <Button className="button-login" variant="outline-primary" style={buttonStyle} onClick={startAuth}>
+        <Button className="button-login" variant="primary" style={buttonStyle} onClick={startAuth}>
           Login
         </Button>
       )}

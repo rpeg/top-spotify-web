@@ -25,7 +25,7 @@ import {
   setDisplayProfile,
   setOptimizeTracks,
 } from '../actions/actions';
-import * as selectors from '../reducers/selectors'
+import * as selectors from '../reducers/selectors';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -263,7 +263,7 @@ const Controls = () => {
           <Row className="justify-content-center">
             <Col xs={3}>
               <Button
-                variant="outline-primary"
+                variant="primary"
                 style={{ margin: '30px 0 30px 0' }}
                 onClick={processClick}
               >
@@ -272,7 +272,7 @@ const Controls = () => {
             </Col>
             <Col xs={3}>
               <Button
-                variant="outline-primary"
+                variant="primary"
                 style={{ margin: '30px 0 30px 0' }}
                 onClick={handleSave}
                 disabled={!hasClickedCreate}

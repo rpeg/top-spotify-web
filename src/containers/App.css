@@ -56,8 +56,8 @@ body, #top-spotify {
 .splash-title {
   left: 10vw;
   text-align: left;
-  margin: 6vh 10vw 0 10vw;
-  font-size: 5vw;
+  margin: 6vh 10vw 0 9.75vw;
+  font-size: 6vw;
   font-weight: bold;
 }
 
@@ -84,14 +84,16 @@ body, #top-spotify {
   white-space: nowrap;
 }
 
-.btn-outline-primary {
-  color: #1DB954 !important;
-  border-color: #1DB954 !important;
+.btn-primary {
+  color: #fff !important;
+  background-color: rgba(29, 185, 84, 1) !important;
+  border-color: rgba(29, 185, 84, 1) !important;
 }
 
-.btn-outline-primary:hover {
+.btn-primary:hover {
   color: #fff !important;
-  background-color: #1DB954 !important;
+  border-color: rgba(29, 185, 84, 0.75) !important;
+  background-color: rgba(29, 185, 84, 0.75) !important;
 }
 
 .grid-row li:not(:first-child) > div {
