@@ -16,7 +16,7 @@ exports[`OAuth renders correctly with user 1`] = `
       }
     }
     type="button"
-    variant="outline-primary"
+    variant="primary"
   >
     Logout
   </Button>
@@ -39,7 +39,7 @@ exports[`OAuth renders correctly without user 1`] = `
       }
     }
     type="button"
-    variant="outline-primary"
+    variant="primary"
   >
     Login
   </Button>

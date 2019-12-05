@@ -13,8 +13,9 @@ jest.mock('react-redux', () => ({
   useDispatch: () => jest.fn(),
 }));
 
-const setup = ({ hasClickedCreate = false }) => {
+const setup = ({ hasClickedCreate = false, user = {} }) => {
   jest.spyOn(selectors, 'selectHasClickedCreate').mockReturnValue(hasClickedCreate);
+  jest.spyOn(selectors, 'selectUser').mockReturnValue(user);
 };
 
 describe('App', () => {
