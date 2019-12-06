@@ -13,6 +13,7 @@ import {
 } from '../actions/actions';
 import { getTimeRangeByName } from '../lib/timeRange';
 import * as selectors from '../reducers/selectors';
+import ArtistMap from './ArtistMap';
 
 const SpinnerBlock = () => (
   <div style={{ marginTop: '2em' }}>
@@ -30,6 +31,7 @@ const SpotifyTopMusic = () => {
   const artists = useSelector(selectors.selectArtistsByCurrentTimeRange);
   const tracks = useSelector(selectors.selectTracksByCurrentTimeRange);
   const features = useSelector(selectors.selectFeaturesByCurrentTimeRange);
+  const artistCountries = useSelector(selectors.selectArtistCountriesByCurrentTimeRange);
 
   const dispatch = useDispatch();
 
@@ -61,6 +63,16 @@ const SpotifyTopMusic = () => {
               </div>
             )
             : <SpinnerBlock />)}
+          {artistCountries
+            ? (
+              <div>
+                <ComponentHeader title="Artist Map" />
+                <div style={{ marginTop: '1em' }}>
+                  <ArtistMap artistCountries={artistCountries} />
+                </div>
+              </div>
+            )
+            : <SpinnerBlock />}
           {genreCount > 0 && (haveArtists()
             ? (
               <div>

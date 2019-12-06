@@ -21,6 +21,8 @@ import {
   SET_DISPLAY_PROFILE,
   SET_STATS_OPTIONS,
   SET_OPTIMIZE_TRACKS,
+  REQUEST_ARTIST_COUNTRIES,
+  RECEIVE_ARTIST_COUNTRIES,
 } from '../constants/constants';
 import API_URL from '../config';
 
@@ -62,6 +64,69 @@ export function setOptimizeTracks(optimizeTracks) {
   return { type: SET_OPTIMIZE_TRACKS, optimizeTracks };
 }
 
+function requestArtistCountries(timeRangeName) {
+  return {
+    type: REQUEST_ARTIST_COUNTRIES,
+    timeRangeName,
+  };
+}
+
+export function receiveArtistCountries(timeRangeName, items) {
+  return {
+    type: RECEIVE_ARTIST_COUNTRIES,
+    timeRangeName,
+    items,
+  };
+}
+
+// attain artist geo data from MusicBrainz's search API
+function fetchArtistCountries(artists, timeRangeName) {
+  return (dispatch) => {
+    dispatch(requestArtistCountries());
+
+    const names = artists ? artists.map((a) => a.name) : null;
+
+    const requests = [];
+
+    names.forEach((name) => {
+      requests.push(axios.get(`https://musicbrainz.org/ws/2/artist?query=%22${name}%22&fmt=json`));
+    });
+
+    return axios
+      .all(...requests)
+      .then(axios.spread((...responses) => {
+        const artistCountries = [];
+
+        responses.forEach((res) => {
+          const artist = res.artists ? res.artists[0] : null;
+          if (artist && artist.country) {
+            const { id } = artists.find((a) => a.name === artist.name);
+            if (id) {
+              artistCountries.push({
+                id,
+                country: artist.country,
+              });
+            }
+          }
+        });
+
+        dispatch(receiveArtistCountries(timeRangeName, artistCountries));
+      }));
+  };
+}
+
+const shouldFetchArtistCountries = (state, timeRangeName) => !state
+  .artistCountriesByTimeRangeName[timeRangeName];
+
+export function fetchArtistCountriesIfNeeded(timeRangeName, artists) {
+  return (dispatch, getState) => {
+    if (shouldFetchArtistCountries(getState(), timeRangeName)) {
+      if (artists) { return dispatch(fetchArtistCountries(artists, timeRangeName)); }
+    }
+    return Promise.resolve();
+  };
+}
+
 function requestArtists(timeRangeName) {
   return {
     type: REQUEST_ARTISTS,
@@ -94,6 +159,7 @@ function fetchArtists(timeRangeName) {
       })
       .then((response) => {
         dispatch(receiveArtists(timeRangeName, response.data.items));
+        dispatch(fetchArtistCountriesIfNeeded(timeRangeName, response.data.items));
       });
   };
 }

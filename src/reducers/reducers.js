@@ -20,6 +20,8 @@ import {
   SET_DISPLAY_PROFILE,
   SET_OPTIMIZE_TRACKS,
   DEFAULT_STATS_OPTIONS,
+  REQUEST_ARTIST_COUNTRIES,
+  RECEIVE_ARTIST_COUNTRIES,
 } from '../constants/constants';
 
 export const initialState = {
@@ -38,6 +40,8 @@ export const initialState = {
   tracksByTimeRangeName: {},
   features: {},
   featuresByTimeRangeName: {},
+  artistCountries: {},
+  artistCountriesByTimeRangeName: {},
 };
 
 function user(state = initialState.user, action) {
@@ -184,6 +188,34 @@ function featuresByTimeRangeName(state = initialState.featuresByTimeRangeName, a
   }
 }
 
+function artistCountries(state = initialState.artistCountries, action) {
+  switch (action.type) {
+    case REQUEST_ARTIST_COUNTRIES:
+      return { ...state, isFetching: true };
+    case RECEIVE_ARTIST_COUNTRIES:
+      return { ...state, isFetching: false, items: action.items };
+    default:
+      return state;
+  }
+}
+
+function artistCountriesByTimeRangeName(
+  state = initialState.artistCountriesByTimeRangeName,
+  action,
+) {
+  switch (action.type) {
+    case RECEIVE_ARTIST_COUNTRIES:
+    case REQUEST_ARTIST_COUNTRIES:
+      return {
+        ...state,
+        [action.timeRangeName]:
+        artistCountries(state[action.timeRangeName], action),
+      };
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   user,
   hasClickedCreate,
@@ -200,6 +232,8 @@ const rootReducer = combineReducers({
   tracksByTimeRangeName,
   features,
   featuresByTimeRangeName,
+  artistCountries,
+  artistCountriesByTimeRangeName,
 });
 
 export default rootReducer;

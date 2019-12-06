@@ -14,6 +14,8 @@ export const REQUEST_FEATURES = 'REQUEST_FEATURES';
 export const RECEIVE_ARTISTS = 'RECEIVE_ARTISTS';
 export const RECEIVE_TRACKS = 'RECEIVE_TRACKS';
 export const RECEIVE_FEATURES = 'RECEIVE_FEATURES';
+export const REQUEST_ARTIST_COUNTRIES = 'REQUEST_ARTIST_COUNTRIES';
+export const RECEIVE_ARTIST_COUNTRIES = 'RECEIVE_ARTIST_COUNTRIES';
 
 // TODO increase N once Spotify allows for more top artists/tracks
 export const ARTIST_REQ_LIMIT = 50;
