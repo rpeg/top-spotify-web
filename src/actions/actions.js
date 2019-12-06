@@ -22,7 +22,7 @@ import {
   SET_STATS_OPTIONS,
   SET_OPTIMIZE_TRACKS,
 } from '../constants/constants';
-import { API_URL } from '../config';
+import API_URL from '../config';
 
 const getTimeRangeByName = (name) => Object.values(TimeRanges).find((r) => r.name === name);
 
