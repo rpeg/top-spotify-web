@@ -19,7 +19,7 @@ exports[`ArtistGrid renders with artists 1`] = `
       key="abc"
       style={
         Object {
-          "padding": "0px 2px 0px 2px",
+          "padding": "0 2px 0 0",
         }
       }
     >
@@ -78,7 +78,7 @@ exports[`ArtistGrid renders with artists 1`] = `
       key="cde"
       style={
         Object {
-          "padding": "0px 2px 0px 2px",
+          "padding": "0 2px 0 2px",
         }
       }
     >
@@ -137,7 +137,7 @@ exports[`ArtistGrid renders with artists 1`] = `
       key="fgh"
       style={
         Object {
-          "padding": "0px 2px 0px 2px",
+          "padding": "0 2px 0 2px",
         }
       }
     >
@@ -196,7 +196,7 @@ exports[`ArtistGrid renders with artists 1`] = `
       key="ijk"
       style={
         Object {
-          "padding": "0px 2px 0px 2px",
+          "padding": "0 2px 0 2px",
         }
       }
     >
@@ -255,7 +255,7 @@ exports[`ArtistGrid renders with artists 1`] = `
       key="lmn"
       style={
         Object {
-          "padding": "0px 2px 0px 2px",
+          "padding": "0 2px 0 2px",
         }
       }
     >

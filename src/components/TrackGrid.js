@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import { chunk, debounce } from 'lodash';
@@ -178,13 +178,14 @@ const TrackGrid = ({ tracks, count }) => {
 
   const tracksToMap = optimizeTracks ? makeOptimizedTracks(tracks, count) : tracks.slice(0, count);
 
-  const getNumPerRow = () => (windowDimensions.width <= SM_WIDTH_BOUNDARY
+  const getNumPerRow = useCallback(() => (windowDimensions.width <= SM_WIDTH_BOUNDARY
     ? NUM_PER_ROW_MOBILE
-    : NUM_PER_ROW_DESKTOP);
+    : NUM_PER_ROW_DESKTOP), [windowDimensions]);
 
   const [numPerRow, setNumPerRow] = useState(getNumPerRow());
 
-  const makeTracksByRow = () => chunk(tracksToMap, numPerRow);
+  const makeTracksByRow = useCallback(() => (
+    chunk(tracksToMap, numPerRow)), [tracksToMap, numPerRow]);
 
   const [tracksByRow, setTracksByRow] = useState(makeTracksByRow(tracksToMap, windowDimensions));
 
@@ -202,7 +203,7 @@ const TrackGrid = ({ tracks, count }) => {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [tracksToMap, windowDimensions]);
+  }, [tracksToMap, windowDimensions, getNumPerRow, makeTracksByRow]);
 
   return (
     count > 0 ? (

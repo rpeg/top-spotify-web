@@ -14,6 +14,12 @@ import {
 import { getTimeRangeByName } from '../lib/timeRange';
 import * as selectors from '../reducers/selectors';
 
+const SpinnerBlock = () => (
+  <div style={{ marginTop: '2em' }}>
+    <Spinner animation="border" />
+  </div>
+);
+
 const SpotifyTopMusic = () => {
   const user = useSelector(selectors.selectUser);
   const timeRangeName = useSelector(selectors.selectTimeRangeName);
@@ -54,7 +60,7 @@ const SpotifyTopMusic = () => {
                 </div>
               </div>
             )
-            : <Spinner animation="border" />)}
+            : <SpinnerBlock />)}
           {genreCount > 0 && (haveArtists()
             ? (
               <div>
@@ -65,7 +71,7 @@ const SpotifyTopMusic = () => {
                 />
               </div>
             )
-            : <Spinner animation="border" />)}
+            : <SpinnerBlock />)}
           {trackCount > 0 && (haveTracks()
             ? (
               <div>
@@ -73,7 +79,7 @@ const SpotifyTopMusic = () => {
                 <TrackGrid tracks={tracks.items} count={trackCount} />
               </div>
             )
-            : <Spinner animation="border" />)}
+            : <SpinnerBlock />)}
           {statsOptions.length > 0 && (haveTracks() && haveFeatures()
             ? (
               <div>
@@ -81,7 +87,7 @@ const SpotifyTopMusic = () => {
                 <Statistics features={features.items} tracks={tracks.items} />
               </div>
             )
-            : <Spinner animation="border" />)}
+            : <SpinnerBlock />)}
         </Container>
       </div>
     ) : null

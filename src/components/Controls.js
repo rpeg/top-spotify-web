@@ -11,6 +11,7 @@ import Switch from '@material-ui/core/Switch';
 import MenuItem from '@material-ui/core/MenuItem';
 import { makeStyles } from '@material-ui/core/styles';
 import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
 
 import {
   TimeRanges,
@@ -69,6 +70,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// https://stackoverflow.com/a/46406124/9661059
+const dataUriToBlob = (dataUri) => {
+  const byteString = atob(dataUri.split(',')[1]);
+  const mimeString = dataUri.split(',')[0].split(':')[1].split(';')[0];
+  const ab = new ArrayBuffer(byteString.length);
+  const ia = new Uint8Array(ab);
+
+  for (let i = 0; i < byteString.length; i += 1) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+
+  return new Blob([ab], { type: mimeString });
+};
+
 const Controls = () => {
   const user = useSelector(selectors.selectUser);
   const timeRangeName = useSelector(selectors.selectTimeRangeName);
@@ -118,7 +133,7 @@ const Controls = () => {
 
   const classes = useStyles();
 
-  const handleSave = () => {
+  const handleExport = () => {
     const scale = 2;
     const elm = document.getElementById('top-spotify');
 
@@ -130,8 +145,9 @@ const Controls = () => {
       },
       width: elm.offsetWidth * scale,
     })
-      .then((dataUrl) => {
-        window.open().document.write(`<div><img src="${dataUrl}" style="position: absolute; width: 100%"/></div>`);
+      .then((dataUri) => {
+        const blob = dataUriToBlob(dataUri);
+        saveAs(blob, 'top-spotify.png');
       })
       .catch((err) => {
         console.error('Could not export PNG', err);
@@ -264,7 +280,7 @@ const Controls = () => {
             <Col xs={3}>
               <Button
                 variant="primary"
-                style={{ margin: '30px 0 30px 0' }}
+                style={{ margin: '1em 0 1.5em 0' }}
                 onClick={processClick}
               >
                 Create
@@ -273,8 +289,8 @@ const Controls = () => {
             <Col xs={3}>
               <Button
                 variant="primary"
-                style={{ margin: '30px 0 30px 0' }}
-                onClick={handleSave}
+                style={{ margin: '1em 0 1.5em 0' }}
+                onClick={handleExport}
                 disabled={!hasClickedCreate}
               >
                 Export

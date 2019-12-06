@@ -41,7 +41,7 @@ const Statistics = ({ features, tracks }) => {
         {statsOptions.includes('key') && features.length > 0 && (
         <Col xs={4}>
           <Statistic
-            title="Most Frequent Key"
+            title="Favorite Key"
           >
             <div>
               <p>{getKey(getMode(features.map((f) => f.key)))}</p>
@@ -52,7 +52,7 @@ const Statistics = ({ features, tracks }) => {
         {statsOptions.includes('bpm') && features.length > 0 && (
         <Col xs={4}>
           <Statistic
-            title="Average BPM"
+            title="Avg. BPM"
           >
             <div>
               <p>{getMean(features.map((f) => f.tempo)).toFixed(1)}</p>

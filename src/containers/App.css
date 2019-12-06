@@ -41,10 +41,14 @@ body, #top-spotify {
   background-color: #191414 !important;
   color: #FFFFFF !important;
   font-family: 'Karla', sans-serif !important;
-  margin-top: 3em !important;
+}
+
+#top-spotify {
+  padding-top: 2em;
 }
 
 .splash {
+  margin-top: 10vh;
   width: 100%
 }
 
@@ -56,8 +60,8 @@ body, #top-spotify {
 .splash-title {
   left: 10vw;
   text-align: left;
-  margin: 6vh 10vw 0 9.75vw;
-  font-size: 6vw;
+  margin: 0 10vw 0 9.75vw;
+  font-size: 5vw;
   font-weight: bold;
 }
 
