@@ -133,7 +133,7 @@ const Controls = () => {
 
   const classes = useStyles();
 
-  const handleSave = () => {
+  const handleExport = () => {
     const scale = 2;
     const elm = document.getElementById('top-spotify');
 
@@ -280,7 +280,7 @@ const Controls = () => {
             <Col xs={3}>
               <Button
                 variant="primary"
-                style={{ margin: '30px 0 30px 0' }}
+                style={{ margin: '1em 0 1.5em 0' }}
                 onClick={processClick}
               >
                 Create
@@ -289,8 +289,8 @@ const Controls = () => {
             <Col xs={3}>
               <Button
                 variant="primary"
-                style={{ margin: '30px 0 30px 0' }}
-                onClick={handleSave}
+                style={{ margin: '1em 0 1.5em 0' }}
+                onClick={handleExport}
                 disabled={!hasClickedCreate}
               >
                 Export
