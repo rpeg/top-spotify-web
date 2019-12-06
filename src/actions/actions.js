@@ -79,39 +79,17 @@ export function receiveArtistCountries(timeRangeName, items) {
   };
 }
 
-// attain artist geo data from MusicBrainz's search API
-function fetchArtistCountries(artists, timeRangeName) {
+function fetchArtistCountries(names, timeRangeName) {
   return (dispatch) => {
     dispatch(requestArtistCountries());
 
-    const names = artists ? artists.map((a) => a.name) : null;
-
-    const requests = [];
-
-    names.forEach((name) => {
-      requests.push(axios.get(`https://musicbrainz.org/ws/2/artist?query=%22${name}%22&fmt=json`));
-    });
-
     return axios
-      .all(...requests)
-      .then(axios.spread((...responses) => {
-        const artistCountries = [];
-
-        responses.forEach((res) => {
-          const artist = res.artists ? res.artists[0] : null;
-          if (artist && artist.country) {
-            const { id } = artists.find((a) => a.name === artist.name);
-            if (id) {
-              artistCountries.push({
-                id,
-                country: artist.country,
-              });
-            }
-          }
-        });
-
-        dispatch(receiveArtistCountries(timeRangeName, artistCountries));
-      }));
+      .get(`${API_URL}/api/artist-countries`, {
+        params: {
+          names: `${names.join(',')}`,
+        },
+      })
+      .then((response) => dispatch(receiveArtistCountries(timeRangeName, response.data.items)));
   };
 }
 
@@ -121,7 +99,9 @@ const shouldFetchArtistCountries = (state, timeRangeName) => !state
 export function fetchArtistCountriesIfNeeded(timeRangeName, artists) {
   return (dispatch, getState) => {
     if (shouldFetchArtistCountries(getState(), timeRangeName)) {
-      if (artists) { return dispatch(fetchArtistCountries(artists, timeRangeName)); }
+      const names = artists ? artists.map((a) => a.name) : null;
+
+      if (names) { return dispatch(fetchArtistCountries(names, timeRangeName)); }
     }
     return Promise.resolve();
   };
