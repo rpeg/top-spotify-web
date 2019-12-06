@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
 import { setUser } from '../actions/actions';
-import { API_URL } from '../config';
+import API_URL from '../config';
 import { selectUser } from '../reducers/selectors';
 
 const buttonStyle = {

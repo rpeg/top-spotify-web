@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
 
 import OAuth from '../components/OAuth';
-import { API_URL } from '../config';
+import API_URL from '../config';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MainHeader from '../components/MainHeader';
