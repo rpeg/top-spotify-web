@@ -46,7 +46,7 @@ const SpotifyTopMusic = () => {
 
   return (
     user && user.id ? (
-      <div style={{ padding: '2em 0 0 0' }}>
+      <div style={{ padding: '2em 0 3em 0' }}>
         <div>
           <p className="text-xl" style={{ marginBottom: '0uu' }}>{getTimeRangeByName(timeRangeName).title}</p>
         </div>
