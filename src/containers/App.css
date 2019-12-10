@@ -48,7 +48,7 @@ body, #top-spotify {
 }
 
 .splash {
-  margin-top: 10vh;
+  margin-top: 15vh;
   width: 100%
 }
 
@@ -72,7 +72,7 @@ body, #top-spotify {
 
 .splash-example {
   position: fixed;
-  top: 35%;
+  top: 40%;
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
@@ -126,7 +126,7 @@ body, #top-spotify {
 }
 
 .text-l {
-  font-size: 12pt;
+  font-size: 16pt;
 }
 
 .text-xl {
@@ -143,7 +143,7 @@ body, #top-spotify {
   }
   
   .text-l {
-    font-size: 20pt;
+    font-size: 32pt;
   }
 
   .text-xl {
