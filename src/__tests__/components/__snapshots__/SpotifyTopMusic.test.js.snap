@@ -4,14 +4,21 @@ exports[`SpotifyTopMusic renders correctly 1`] = `
 <div
   style={
     Object {
-      "padding": "5em 0 5em 0",
+      "padding": "2em 0 0 0",
     }
   }
 >
   <div>
-    <h1>
+    <p
+      className="text-xl"
+      style={
+        Object {
+          "marginBottom": "0uu",
+        }
+      }
+    >
       All-time
-    </h1>
+    </p>
   </div>
   <Container
     fluid={false}

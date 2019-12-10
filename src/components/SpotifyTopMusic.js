@@ -46,9 +46,9 @@ const SpotifyTopMusic = () => {
 
   return (
     user && user.id ? (
-      <div style={{ padding: '5em 0 5em 0' }}>
+      <div style={{ padding: '2em 0 0 0' }}>
         <div>
-          <h1>{getTimeRangeByName(timeRangeName).title}</h1>
+          <p className="text-xl" style={{ marginBottom: '0uu' }}>{getTimeRangeByName(timeRangeName).title}</p>
         </div>
         <Container>
           {artistCount > 0 && (haveArtists()

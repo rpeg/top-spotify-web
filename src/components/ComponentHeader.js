@@ -4,14 +4,19 @@ import PropTypes from 'prop-types';
 
 const ComponentHeader = ({ title }) => (
   <Row style={{ padding: '2em 0 0 0' }}>
-    <p
-      className="text-m"
-      style={{
-        textAlign: 'left', backgroundColor: '#FFFFFF', color: '#191414', padding: '0 .25em 0 .25em',
-      }}
-    >
-      {title}
-    </p>
+    <div>
+      <p
+        className="text-l"
+        style={{
+          textAlign: 'left', fontWeight: 'bold', marginBottom: '0', paddingLeft: '.1em',
+        }}
+      >
+        {title}
+      </p>
+    </div>
+    <div style={{ width: '100%' }}>
+      <hr style={{ borderTop: '1px solid #fff', margin: '0 0 2em 0' }} />
+    </div>
   </Row>
 );
 
