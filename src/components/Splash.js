@@ -3,8 +3,8 @@ import React from 'react';
 const Splash = () => (
   <div className="splash">
     <div className="splash-header">
-      <h1 className="splash-title">Spotify Data Visualizer</h1>
-      <p className="splash-desc">
+      <p className="text-xl splash-title">Spotify Data Visualizer</p>
+      <p className="text-l splash-desc">
         Create a custom chart displaying your Spotify data, including top artists, tracks, genres, and stats.
       </p>
     </div>

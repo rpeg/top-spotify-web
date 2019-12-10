@@ -49,7 +49,7 @@ const ArtistGrid = ({ artists }) => {
                 }}
               >
                 <p
-                  className="s"
+                  className="s text-s"
                   style={{
                     marginBottom: '0',
                     color: 'white',

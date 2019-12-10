@@ -16,18 +16,10 @@ exports[`SpotifyTopMusic renders correctly 1`] = `
   <Container
     fluid={false}
   >
-    <Spinner
-      animation="border"
-    />
-    <Spinner
-      animation="border"
-    />
-    <Spinner
-      animation="border"
-    />
-    <Spinner
-      animation="border"
-    />
+    <SpinnerBlock />
+    <SpinnerBlock />
+    <SpinnerBlock />
+    <SpinnerBlock />
   </Container>
 </div>
 `;

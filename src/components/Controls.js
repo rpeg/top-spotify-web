@@ -156,7 +156,7 @@ const Controls = () => {
 
   return (
     user && user.id ? (
-      <div style={{ borderBottom: '1px solid white' }}>
+      <div style={{ marginTop: '3em', borderBottom: '1px solid white' }}>
         <Container style={{ paddingTop: '30px' }}>
           <Row className="justify-content-center">
             <Col xs={4}>

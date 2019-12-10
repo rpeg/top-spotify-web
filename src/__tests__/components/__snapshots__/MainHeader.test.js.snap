@@ -47,7 +47,8 @@ exports[`MainHeader renders correctly with user 1`] = `
             }
           }
         >
-          <h4
+          <p
+            className="text-m"
             style={
               Object {
                 "margin": "0",
@@ -55,20 +56,21 @@ exports[`MainHeader renders correctly with user 1`] = `
               }
             }
           >
-            My Top Music
-          </h4>
-          <div>
-            <p
-              style={
-                Object {
-                  "margin": "0",
-                  "textAlign": "left",
-                }
+            <b>
+              My Top Music
+            </b>
+          </p>
+          <p
+            className="text-s"
+            style={
+              Object {
+                "margin": "0",
+                "textAlign": "left",
               }
-            >
-              Dec. 5th, 2019
-            </p>
-          </div>
+            }
+          >
+            Dec. 9th, 2019
+          </p>
         </div>
       </span>
     </Col>

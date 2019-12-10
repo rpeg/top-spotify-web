@@ -59,7 +59,7 @@ exports[`ArtistGrid renders with artists 1`] = `
           }
         >
           <p
-            className="s"
+            className="s text-s"
             style={
               Object {
                 "color": "white",
@@ -118,7 +118,7 @@ exports[`ArtistGrid renders with artists 1`] = `
           }
         >
           <p
-            className="s"
+            className="s text-s"
             style={
               Object {
                 "color": "white",
@@ -177,7 +177,7 @@ exports[`ArtistGrid renders with artists 1`] = `
           }
         >
           <p
-            className="s"
+            className="s text-s"
             style={
               Object {
                 "color": "white",
@@ -236,7 +236,7 @@ exports[`ArtistGrid renders with artists 1`] = `
           }
         >
           <p
-            className="s"
+            className="s text-s"
             style={
               Object {
                 "color": "white",
@@ -295,7 +295,7 @@ exports[`ArtistGrid renders with artists 1`] = `
           }
         >
           <p
-            className="s"
+            className="s text-s"
             style={
               Object {
                 "color": "white",

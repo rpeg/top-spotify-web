@@ -7,13 +7,13 @@ exports[`Splash renders correctly 1`] = `
   <div
     className="splash-header"
   >
-    <h1
-      className="splash-title"
+    <p
+      className="text-xl splash-title"
     >
       Spotify Data Visualizer
-    </h1>
+    </p>
     <p
-      className="splash-desc"
+      className="text-l splash-desc"
     >
       Create a custom chart displaying your Spotify data, including top artists, tracks, genres, and stats.
     </p>

@@ -42,7 +42,7 @@ exports[`WordCloud renders with genres and count > 0 1`] = `
           "enableTooltip": true,
           "fontFamily": "Karla, sans-serif",
           "fontSizes": Array [
-            10,
+            8,
             48,
           ],
           "fontStyle": "normal",

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 const Statistic = ({ title, children }) => (
   <div>
     {title && (
-      <div className="stat-title" style={{ textAlign: 'start' }}>
-        <p>{title}</p>
+      <div style={{ textAlign: 'start' }}>
+        <p className="text-m stat-title">{title}</p>
       </div>
     )}
     <div className="stat-content">{children}</div>

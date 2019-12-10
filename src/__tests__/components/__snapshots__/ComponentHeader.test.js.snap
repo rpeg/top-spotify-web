@@ -9,7 +9,8 @@ exports[`ComponentHeader renders correctly 1`] = `
     }
   }
 >
-  <h3
+  <p
+    className="text-m"
     style={
       Object {
         "backgroundColor": "#FFFFFF",
@@ -20,6 +21,6 @@ exports[`ComponentHeader renders correctly 1`] = `
     }
   >
     Test
-  </h3>
+  </p>
 </ForwardRef>
 `;
