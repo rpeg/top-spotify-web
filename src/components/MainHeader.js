@@ -27,11 +27,9 @@ const MainHeader = () => {
               />
               <div style={{ width: 'auto', margin: '0 0 0 0.5em' }}>
                 <p className="text-m" style={{ textAlign: 'left', margin: '0' }}><b>My Top Music</b></p>
-                <div>
-                  <p className="text-m" style={{ textAlign: 'left', margin: '0' }}>
-                    {Moment().format('MMM. Do, YYYY')}
-                  </p>
-                </div>
+                <p className="text-s" style={{ textAlign: 'left', margin: '0' }}>
+                  {Moment().format('MMM. Do, YYYY')}
+                </p>
               </div>
             </span>
           </Col>

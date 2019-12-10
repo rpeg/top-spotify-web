@@ -60,19 +60,17 @@ exports[`MainHeader renders correctly with user 1`] = `
               My Top Music
             </b>
           </p>
-          <div>
-            <p
-              className="text-m"
-              style={
-                Object {
-                  "margin": "0",
-                  "textAlign": "left",
-                }
+          <p
+            className="text-s"
+            style={
+              Object {
+                "margin": "0",
+                "textAlign": "left",
               }
-            >
-              Dec. 9th, 2019
-            </p>
-          </div>
+            }
+          >
+            Dec. 9th, 2019
+          </p>
         </div>
       </span>
     </Col>
