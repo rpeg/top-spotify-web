@@ -13,6 +13,7 @@ exports[`Profile renders correctly with displayProfile 1`] = `
   }
 >
   <p
+    className="text-m"
     style={
       Object {
         "margin": "0 0.5em 0 0",
@@ -47,6 +48,7 @@ exports[`Profile renders correctly with user 1`] = `
   }
 >
   <p
+    className="text-m"
     style={
       Object {
         "margin": "0 0.5em 0 0",

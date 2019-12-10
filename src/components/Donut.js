@@ -30,7 +30,7 @@ const Donut = ({ items }) => {
         labelPosition={60}
         labelStyle={{
           fontFamily: 'Karla, sans-serif',
-          fontSize: '5px',
+          fontSize: '6px',
         }}
         lengthAngle={360}
         lineWidth={20}

@@ -44,7 +44,7 @@ const Statistics = ({ features, tracks }) => {
             title="Favorite Key"
           >
             <div>
-              <p>{getKey(getMode(features.map((f) => f.key)))}</p>
+              <p className="text-l">{getKey(getMode(features.map((f) => f.key)))}</p>
             </div>
           </Statistic>
         </Col>
@@ -55,7 +55,7 @@ const Statistics = ({ features, tracks }) => {
             title="Avg. BPM"
           >
             <div>
-              <p>{getMean(features.map((f) => f.tempo)).toFixed(1)}</p>
+              <p className="text-l">{getMean(features.map((f) => f.tempo)).toFixed(1)}</p>
             </div>
           </Statistic>
         </Col>

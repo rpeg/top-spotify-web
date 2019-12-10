@@ -51,7 +51,7 @@ exports[`Radar renders correctly 1`] = `
           "pointLabels": Object {
             "fontColor": "white",
             "fontFamily": "Karla, sans-serif",
-            "fontSize": 14,
+            "fontSize": 12,
           },
           "ticks": Object {
             "beginAtZero": true,

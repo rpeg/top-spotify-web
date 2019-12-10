@@ -14,7 +14,7 @@ const Profile = ({ user }) => {
         marginLeft: 'auto',
       }}
     >
-      <p style={{ margin: '0 0.5em 0 0' }}>
+      <p className="text-m" style={{ margin: '0 0.5em 0 0' }}>
         <b>{user.id}</b>
       </p>
       <img

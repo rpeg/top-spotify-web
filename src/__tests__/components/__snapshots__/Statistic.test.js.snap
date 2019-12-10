@@ -3,14 +3,15 @@
 exports[`Statistic renders correctly with title 1`] = `
 <div>
   <div
-    className="stat-title"
     style={
       Object {
         "textAlign": "start",
       }
     }
   >
-    <p>
+    <p
+      className="text-m stat-title"
+    >
       abc
     </p>
   </div>

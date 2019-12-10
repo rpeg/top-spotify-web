@@ -34,7 +34,7 @@ const Radar = ({ features }) => {
       },
       pointLabels: {
         fontFamily: 'Karla, sans-serif',
-        fontSize: 14,
+        fontSize: 12,
         fontColor: 'white',
       },
       gridLines: {

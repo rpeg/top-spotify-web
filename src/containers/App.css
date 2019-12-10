@@ -61,7 +61,6 @@ body, #top-spotify {
   left: 10vw;
   text-align: left;
   margin: 0 10vw 0 9.75vw;
-  font-size: 5vw;
   font-weight: bold;
 }
 
@@ -69,7 +68,6 @@ body, #top-spotify {
   text-align: left;
   opacity: .9;
   margin: 2vh 10vw 0 10vw;
-  font-size: 3vh;
 }
 
 .splash-example {
@@ -114,8 +112,42 @@ body, #top-spotify {
   font-size: 32pt;
 }
 
-.stat-title p {
+.stat-title {
   font-weight: bold;
-  font-size: 18pt;
   margin: 1em 0 0.4em 0;
 }
+
+.text-s {
+  font-size: 8pt;
+}
+
+.text-m {
+  font-size: 10pt;
+}
+
+.text-l {
+  font-size: 12pt;
+}
+
+.text-xl {
+  font-size: 24pt;
+}
+
+@media (min-width: 768px) {
+  .text-s {
+    font-size: 12pt;
+  }
+  
+  .text-m {
+    font-size: 16pt;
+  }
+  
+  .text-l {
+    font-size: 20pt;
+  }
+
+  .text-xl {
+    font-size: 48pt;
+  }
+}
+

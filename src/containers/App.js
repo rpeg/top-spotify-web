@@ -26,7 +26,7 @@ const App = () => {
       {hasClickedCreate && (
         <div id="top-spotify">
           <MainHeader />
-          <SpotifyTopMusic socket={socket} />
+          <SpotifyTopMusic />
         </div>
       )}
       {!user.id && (

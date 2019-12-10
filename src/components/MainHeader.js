@@ -26,9 +26,9 @@ const MainHeader = () => {
                 alt="Spotify Logo"
               />
               <div style={{ width: 'auto', margin: '0 0 0 0.5em' }}>
-                <h4 style={{ textAlign: 'left', margin: '0' }}>My Top Music</h4>
+                <p className="text-m" style={{ textAlign: 'left', margin: '0' }}><b>My Top Music</b></p>
                 <div>
-                  <p style={{ textAlign: 'left', margin: '0' }}>
+                  <p className="text-m" style={{ textAlign: 'left', margin: '0' }}>
                     {Moment().format('MMM. Do, YYYY')}
                   </p>
                 </div>

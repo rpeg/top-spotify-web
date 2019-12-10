@@ -28,7 +28,7 @@ exports[`Donut renders correctly 1`] = `
     labelStyle={
       Object {
         "fontFamily": "Karla, sans-serif",
-        "fontSize": "5px",
+        "fontSize": "6px",
       }
     }
     lengthAngle={360}

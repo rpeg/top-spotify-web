@@ -77,7 +77,7 @@ export const Track = ({ track, position }) => (
         <div>
           <div style={{ display: 'grid' }}>
             <p
-              className="s"
+              className="text-s s"
               style={{
                 margin: '0',
                 textAlign: 'left',
@@ -88,7 +88,7 @@ export const Track = ({ track, position }) => (
           </div>
           <div style={{ display: 'grid' }}>
             <p
-              className="xs"
+              className="text-s xs"
               style={{
                 margin: '0',
                 textAlign: 'left',
