@@ -20,6 +20,9 @@ import {
   SET_DISPLAY_PROFILE,
   SET_OPTIMIZE_TRACKS,
   DEFAULT_STATS_OPTIONS,
+  ERROR_ARTISTS,
+  ERROR_TRACKS,
+  ERROR_FEATURES,
 } from '../constants/constants';
 
 export const initialState = {
@@ -127,6 +130,8 @@ function artists(state = initialState.artists, action) {
       return { ...state, isFetching: true };
     case RECEIVE_ARTISTS:
       return { ...state, isFetching: false, items: action.items };
+    case ERROR_ARTISTS:
+      return { ...state, isFetching: false };
     default:
       return state;
   }
@@ -148,6 +153,8 @@ function tracks(state = initialState.tracks, action) {
       return { ...state, isFetching: true };
     case RECEIVE_TRACKS:
       return { ...state, isFetching: false, items: action.items };
+    case ERROR_TRACKS:
+      return { ...state, isFetching: false };
     default:
       return state;
   }
@@ -169,6 +176,8 @@ function features(state = initialState.features, action) {
       return { ...state, isFetching: true };
     case RECEIVE_FEATURES:
       return { ...state, isFetching: false, items: action.items };
+    case ERROR_FEATURES:
+      return { ...state, isFetching: false };
     default:
       return state;
   }

@@ -21,7 +21,7 @@ const WordCloud = ({ genres, count }) => {
     enableTooltip: true,
     deterministic: false,
     fontFamily: 'Karla, sans-serif',
-    fontSizes: [8, 48],
+    fontSizes: [10, 48],
     fontStyle: 'normal',
     fontWeight: 'bold',
     padding: 1,

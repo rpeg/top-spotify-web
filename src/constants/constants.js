@@ -14,6 +14,9 @@ export const REQUEST_FEATURES = 'REQUEST_FEATURES';
 export const RECEIVE_ARTISTS = 'RECEIVE_ARTISTS';
 export const RECEIVE_TRACKS = 'RECEIVE_TRACKS';
 export const RECEIVE_FEATURES = 'RECEIVE_FEATURES';
+export const ERROR_ARTISTS = 'ERROR_ARTISTS';
+export const ERROR_TRACKS = 'ERROR_TRACKS';
+export const ERROR_FEATURES = 'ERROR_FEATURES';
 
 // TODO increase N once Spotify allows for more top artists/tracks
 export const ARTIST_REQ_LIMIT = 50;
@@ -24,7 +27,13 @@ export const N_TRACKS = TRACK_REQ_LIMIT;
 export const DEFAULT_ARTIST_COUNT = 10;
 export const DEFAULT_TRACK_COUNT = 15;
 export const DEFAULT_GENRE_COUNT = 50;
-export const DEFAULT_STATS_OPTIONS = ['key', 'bpm', 'decades', 'scale', 'features'];
+export const DEFAULT_STATS_OPTIONS = [
+  'key',
+  'bpm',
+  'decades',
+  'scale',
+  'features',
+];
 
 export const SM_WIDTH_BOUNDARY = 991;
 export const NUM_PER_ROW_MOBILE = 10;
