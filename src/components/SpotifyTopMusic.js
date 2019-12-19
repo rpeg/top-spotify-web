@@ -68,7 +68,7 @@ const SpotifyTopMusic = () => {
               <div>
                 <ComponentHeader title="Artist Map" />
                 <div style={{ marginTop: '1em' }}>
-                  <ArtistMap artistCountries={artistCountries} />
+                  <ArtistMap artistCountries={artistCountries.items} />
                 </div>
               </div>
             )

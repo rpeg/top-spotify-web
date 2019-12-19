@@ -23,8 +23,13 @@ import {
   SET_OPTIMIZE_TRACKS,
   REQUEST_ARTIST_COUNTRIES,
   RECEIVE_ARTIST_COUNTRIES,
+  REQUEST_ARTIST_RELEASES,
+  RECEIVE_ARTIST_RELEASES,
 } from '../constants/constants';
-import API_URL from '../config';
+import {
+  MUSICBRAINZ_API_URL,
+  SPOTIFY_API_URL,
+} from '../config';
 
 const getTimeRangeByName = (name) => Object.values(TimeRanges).find((r) => r.name === name);
 
@@ -79,29 +84,82 @@ export function receiveArtistCountries(timeRangeName, items) {
   };
 }
 
-function fetchArtistCountries(names, timeRangeName) {
+function fetchArtistCountries(artistReleases, timeRangeName) {
   return (dispatch) => {
     dispatch(requestArtistCountries());
 
     return axios
-      .get(`${API_URL}/api/artist-countries`, {
+      .get(`${MUSICBRAINZ_API_URL}/api/artist-locations`, {
         params: {
-          names: `${names.join(',')}`,
+          artistReleases: JSON.stringify(artistReleases),
         },
       })
-      .then((response) => dispatch(receiveArtistCountries(timeRangeName, response.data.items)));
+      .then((response) => dispatch(receiveArtistCountries(timeRangeName, response.data)));
   };
 }
 
 const shouldFetchArtistCountries = (state, timeRangeName) => !state
   .artistCountriesByTimeRangeName[timeRangeName];
 
-export function fetchArtistCountriesIfNeeded(timeRangeName, artists) {
+export function fetchArtistCountriesIfNeeded(timeRangeName, artistReleases) {
   return (dispatch, getState) => {
     if (shouldFetchArtistCountries(getState(), timeRangeName)) {
-      const names = artists ? artists.map((a) => a.name) : null;
+      if (artistReleases.length) {
+        return dispatch(fetchArtistCountries(artistReleases, timeRangeName));
+      }
+    }
+    return Promise.resolve();
+  };
+}
 
-      if (names) { return dispatch(fetchArtistCountries(names, timeRangeName)); }
+function requestArtistReleases(timeRangeName) {
+  return {
+    type: REQUEST_ARTIST_RELEASES,
+    timeRangeName,
+  };
+}
+
+export function receiveArtistReleases(timeRangeName, items) {
+  return {
+    type: RECEIVE_ARTIST_RELEASES,
+    timeRangeName,
+    items,
+  };
+}
+
+function fetchArtistReleases(ids, timeRangeName) {
+  return (dispatch) => {
+    dispatch(requestArtistReleases());
+
+    return axios
+      .get(`${SPOTIFY_API_URL}/api/albums-by-artists`, {
+        params: {
+          ids: ids.join(','),
+        },
+      })
+      .then((response) => {
+        dispatch(receiveArtistReleases(timeRangeName, response.data.items));
+
+        const artistReleases = response.data.items.map((item) => (
+          {
+            name: item.artists[0].name,
+            release: item.name,
+          }
+        ));
+
+        dispatch(fetchArtistCountriesIfNeeded(timeRangeName, artistReleases));
+      });
+  };
+}
+
+const shouldFetchArtistReleases = (state, timeRangeName) => !state
+  .artistReleasesByTimeRangeName[timeRangeName];
+
+export function fetchArtistReleasesIfNeeded(timeRangeName, artists) {
+  return (dispatch, getState) => {
+    if (shouldFetchArtistReleases(getState(), timeRangeName)) {
+      const ids = artists.map((a) => a.id);
+      if (ids.length) { return dispatch(fetchArtistReleases(ids, timeRangeName)); }
     }
     return Promise.resolve();
   };
@@ -129,7 +187,7 @@ function fetchArtists(timeRangeName) {
     const timeRange = getTimeRangeByName(timeRangeName);
 
     return axios
-      .get(`${API_URL}/api/my-top-artists`, {
+      .get(`${SPOTIFY_API_URL}/api/my-top-artists`, {
         params: {
           time_range: `${timeRange.range}`,
           offset: 0,
@@ -139,7 +197,7 @@ function fetchArtists(timeRangeName) {
       })
       .then((response) => {
         dispatch(receiveArtists(timeRangeName, response.data.items));
-        dispatch(fetchArtistCountriesIfNeeded(timeRangeName, response.data.items));
+        dispatch(fetchArtistReleasesIfNeeded(timeRangeName, response.data.items));
       });
   };
 }
@@ -177,7 +235,7 @@ function fetchFeatures(ids, timeRangeName) {
     const timeRange = getTimeRangeByName(timeRangeName);
 
     return axios
-      .get(`${API_URL}/api/track-features`, {
+      .get(`${SPOTIFY_API_URL}/api/track-features`, {
         params: {
           time_range: `${timeRange.range}`,
           ids: `${ids.join(',')}`,
@@ -222,7 +280,7 @@ function fetchTracks(timeRangeName) {
     const timeRange = getTimeRangeByName(timeRangeName);
 
     return axios
-      .get(`${API_URL}/api/my-top-tracks`, {
+      .get(`${SPOTIFY_API_URL}/api/my-top-tracks`, {
         params: {
           time_range: `${timeRange.range}`,
           offset: 0,

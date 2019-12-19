@@ -22,6 +22,8 @@ import {
   DEFAULT_STATS_OPTIONS,
   REQUEST_ARTIST_COUNTRIES,
   RECEIVE_ARTIST_COUNTRIES,
+  REQUEST_ARTIST_RELEASES,
+  RECEIVE_ARTIST_RELEASES,
 } from '../constants/constants';
 
 export const initialState = {
@@ -42,6 +44,8 @@ export const initialState = {
   featuresByTimeRangeName: {},
   artistCountries: {},
   artistCountriesByTimeRangeName: {},
+  artistReleases: {},
+  artistReleasesByTimeRangeName: {},
 };
 
 function user(state = initialState.user, action) {
@@ -216,6 +220,34 @@ function artistCountriesByTimeRangeName(
   }
 }
 
+function artistReleases(state = initialState.artistReleases, action) {
+  switch (action.type) {
+    case REQUEST_ARTIST_RELEASES:
+      return { ...state, isFetching: true };
+    case RECEIVE_ARTIST_RELEASES:
+      return { ...state, isFetching: false, items: action.items };
+    default:
+      return state;
+  }
+}
+
+function artistReleasesByTimeRangeName(
+  state = initialState.artistReleasesByTimeRangeName,
+  action,
+) {
+  switch (action.type) {
+    case RECEIVE_ARTIST_RELEASES:
+    case REQUEST_ARTIST_RELEASES:
+      return {
+        ...state,
+        [action.timeRangeName]:
+        artistReleases(state[action.timeRangeName], action),
+      };
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   user,
   hasClickedCreate,
@@ -234,6 +266,8 @@ const rootReducer = combineReducers({
   featuresByTimeRangeName,
   artistCountries,
   artistCountriesByTimeRangeName,
+  artistReleases,
+  artistReleasesByTimeRangeName,
 });
 
 export default rootReducer;

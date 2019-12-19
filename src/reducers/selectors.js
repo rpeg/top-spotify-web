@@ -19,3 +19,6 @@ export const selectFeaturesByCurrentTimeRange = (state) => state
 export const selectArtistCountries = (state) => state.artistCountries;
 export const selectArtistCountriesByCurrentTimeRange = (state) => state
   .artistCountriesByTimeRangeName[state.timeRangeName];
+export const selectArtistReleases = (state) => state.artistReleases;
+export const selectArtistReleasesByCurrentTimeRange = (state) => state
+  .artistReleasesByTimeRangeName[state.timeRangeName];
