@@ -20,6 +20,11 @@ import {
   SET_DISPLAY_PROFILE,
   SET_OPTIMIZE_TRACKS,
   DEFAULT_STATS_OPTIONS,
+  REQUEST_ARTIST_COUNTRIES,
+  RECEIVE_ARTIST_COUNTRIES,
+  REQUEST_ARTIST_RELEASES,
+  RECEIVE_ARTIST_RELEASES,
+  SET_DISPLAY_MAP,
 } from '../constants/constants';
 
 export const initialState = {
@@ -31,6 +36,7 @@ export const initialState = {
   genreCount: DEFAULT_GENRE_COUNT,
   statsOptions: DEFAULT_STATS_OPTIONS,
   displayProfile: true,
+  displayMap: true,
   optimizeTracks: true,
   artists: {},
   artistsByTimeRangeName: {},
@@ -38,6 +44,10 @@ export const initialState = {
   tracksByTimeRangeName: {},
   features: {},
   featuresByTimeRangeName: {},
+  artistCountries: {},
+  artistCountriesByTimeRangeName: {},
+  artistReleases: {},
+  artistReleasesByTimeRangeName: {},
 };
 
 function user(state = initialState.user, action) {
@@ -107,6 +117,15 @@ function displayProfile(state = initialState.displayProfile, action) {
   switch (action.type) {
     case SET_DISPLAY_PROFILE:
       return action.displayProfile;
+    default:
+      return state;
+  }
+}
+
+function displayMap(state = initialState.displayMap, action) {
+  switch (action.type) {
+    case SET_DISPLAY_MAP:
+      return action.displayMap;
     default:
       return state;
   }
@@ -184,6 +203,62 @@ function featuresByTimeRangeName(state = initialState.featuresByTimeRangeName, a
   }
 }
 
+function artistCountries(state = initialState.artistCountries, action) {
+  switch (action.type) {
+    case REQUEST_ARTIST_COUNTRIES:
+      return { ...state, isFetching: true };
+    case RECEIVE_ARTIST_COUNTRIES:
+      return { ...state, isFetching: false, items: action.items };
+    default:
+      return state;
+  }
+}
+
+function artistCountriesByTimeRangeName(
+  state = initialState.artistCountriesByTimeRangeName,
+  action,
+) {
+  switch (action.type) {
+    case RECEIVE_ARTIST_COUNTRIES:
+    case REQUEST_ARTIST_COUNTRIES:
+      return {
+        ...state,
+        [action.timeRangeName]:
+        artistCountries(state[action.timeRangeName], action),
+      };
+    default:
+      return state;
+  }
+}
+
+function artistReleases(state = initialState.artistReleases, action) {
+  switch (action.type) {
+    case REQUEST_ARTIST_RELEASES:
+      return { ...state, isFetching: true };
+    case RECEIVE_ARTIST_RELEASES:
+      return { ...state, isFetching: false, items: action.items };
+    default:
+      return state;
+  }
+}
+
+function artistReleasesByTimeRangeName(
+  state = initialState.artistReleasesByTimeRangeName,
+  action,
+) {
+  switch (action.type) {
+    case RECEIVE_ARTIST_RELEASES:
+    case REQUEST_ARTIST_RELEASES:
+      return {
+        ...state,
+        [action.timeRangeName]:
+        artistReleases(state[action.timeRangeName], action),
+      };
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   user,
   hasClickedCreate,
@@ -193,6 +268,7 @@ const rootReducer = combineReducers({
   genreCount,
   statsOptions,
   displayProfile,
+  displayMap,
   optimizeTracks,
   artists,
   artistsByTimeRangeName,
@@ -200,6 +276,10 @@ const rootReducer = combineReducers({
   tracksByTimeRangeName,
   features,
   featuresByTimeRangeName,
+  artistCountries,
+  artistCountriesByTimeRangeName,
+  artistReleases,
+  artistReleasesByTimeRangeName,
 });
 
 export default rootReducer;

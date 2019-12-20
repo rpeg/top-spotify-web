@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
 import { setUser } from '../actions/actions';
-import API_URL from '../config';
+import { SPOTIFY_API_URL } from '../config';
 import { selectUser } from '../reducers/selectors';
 
 const buttonStyle = {
@@ -40,7 +40,7 @@ const OAuth = ({ socket }) => {
     const height = 600;
     const left = window.innerWidth / 2 - width / 2;
     const top = window.innerHeight / 2 - height / 2;
-    const url = `${API_URL}/auth/login?socketId=${socket.id}`;
+    const url = `${SPOTIFY_API_URL}/auth/login?socketId=${socket.id}`;
 
     return window.open(
       url,

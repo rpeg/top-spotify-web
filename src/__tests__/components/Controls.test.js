@@ -21,6 +21,7 @@ const setup = (
   statsOptions = DEFAULT_STATS_OPTIONS,
   hasClickedCreate = false,
   displayProfile = true,
+  displayMap = true,
   optimizeTracks = true,
 ) => {
   jest.spyOn(selectors, 'selectUser').mockReturnValue(user);
@@ -31,6 +32,7 @@ const setup = (
   jest.spyOn(selectors, 'selectStatsOptions').mockReturnValue(statsOptions);
   jest.spyOn(selectors, 'selectHasClickedCreate').mockReturnValue(hasClickedCreate);
   jest.spyOn(selectors, 'selectDisplayProfile').mockReturnValue(displayProfile);
+  jest.spyOn(selectors, 'selectDisplayMap').mockReturnValue(displayMap);
   jest.spyOn(selectors, 'selectOptimizeTracks').mockReturnValue(optimizeTracks);
 };
 

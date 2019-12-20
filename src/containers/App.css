@@ -86,6 +86,13 @@ body, #top-spotify {
   white-space: nowrap;
 }
 
+.svg-content {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .btn-primary {
   color: #fff !important;
   background-color: rgba(29, 185, 84, 1) !important;
@@ -150,4 +157,3 @@ body, #top-spotify {
     font-size: 48pt;
   }
 }
-

@@ -13,6 +13,7 @@ import {
 } from '../actions/actions';
 import { getTimeRangeByName } from '../lib/timeRange';
 import * as selectors from '../reducers/selectors';
+import ArtistMap from './ArtistMap';
 
 const SpinnerBlock = () => (
   <div style={{ marginTop: '2em' }}>
@@ -30,6 +31,8 @@ const SpotifyTopMusic = () => {
   const artists = useSelector(selectors.selectArtistsByCurrentTimeRange);
   const tracks = useSelector(selectors.selectTracksByCurrentTimeRange);
   const features = useSelector(selectors.selectFeaturesByCurrentTimeRange);
+  const artistCountries = useSelector(selectors.selectArtistCountriesByCurrentTimeRange);
+  const displayMap = useSelector(selectors.selectDisplayMap);
 
   const dispatch = useDispatch();
 
@@ -41,6 +44,9 @@ const SpotifyTopMusic = () => {
   }, [dispatch, timeRangeName, user]);
 
   const haveArtists = () => artists && artists.items && artists.items.length;
+  const haveArtistCountries = () => artistCountries
+    && artistCountries.items
+    && artistCountries.items.length;
   const haveTracks = () => tracks && tracks.items && tracks.items.length;
   const haveFeatures = () => features && features.items && features.items.length;
 
@@ -57,6 +63,16 @@ const SpotifyTopMusic = () => {
                 <ComponentHeader title="Artists" />
                 <div style={{ marginTop: '1em' }}>
                   <ArtistGrid artists={artists.items.slice(0, artistCount)} />
+                </div>
+              </div>
+            )
+            : <SpinnerBlock />)}
+          {displayMap && (haveArtistCountries()
+            ? (
+              <div>
+                {artistCount === 0 && <ComponentHeader title="Artist Map" /> }
+                <div style={{ marginTop: '2em' }}>
+                  <ArtistMap artistCountries={artistCountries.items} />
                 </div>
               </div>
             )

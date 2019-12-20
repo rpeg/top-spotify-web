@@ -123,6 +123,20 @@ describe('actions', () => {
     });
   });
 
+  describe('setDisplayMap', () => {
+    test('Dispatches the correct action and payload', () => {
+      const expectedActions = [
+        {
+          displayMap: false,
+          type: constants.SET_DISPLAY_MAP,
+        },
+      ];
+
+      store.dispatch(actions.setDisplayMap(false));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
   describe('setOptimizeTracks', () => {
     test('Dispatches the correct action and payload', () => {
       const expectedActions = [

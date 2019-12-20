@@ -25,6 +25,7 @@ import {
   setStatsOptions,
   setDisplayProfile,
   setOptimizeTracks,
+  setDisplayMap,
 } from '../actions/actions';
 import * as selectors from '../reducers/selectors';
 
@@ -93,6 +94,7 @@ const Controls = () => {
   const statsOptions = useSelector(selectors.selectStatsOptions);
   const hasClickedCreate = useSelector(selectors.selectHasClickedCreate);
   const displayProfile = useSelector(selectors.selectDisplayProfile);
+  const displayMap = useSelector(selectors.selectDisplayMap);
   const optimizeTracks = useSelector(selectors.selectOptimizeTracks);
 
   const [selectedTimeRangeName, setSelectedTimeRangeName] = useState(timeRangeName);
@@ -101,6 +103,7 @@ const Controls = () => {
   const [selectedGenreCount, setSelectedGenreCount] = useState(genreCount);
   const [selectedStatsOptions, setSelectedStatsOptions] = useState(statsOptions);
   const [selectedDisplayProfile, setSelectedDisplayProfile] = useState(displayProfile);
+  const [selectedDisplayMap, setSelectedDisplayMap] = useState(displayMap);
   const [selectedOptimizeTracks, setSelectedOptimizeTracks] = useState(optimizeTracks);
 
   const dispatch = useDispatch();
@@ -123,6 +126,9 @@ const Controls = () => {
     }
     if (selectedDisplayProfile !== displayProfile) {
       dispatch(setDisplayProfile(selectedDisplayProfile));
+    }
+    if (selectedDisplayMap !== displayMap) {
+      dispatch(setDisplayMap(selectedDisplayMap));
     }
     if (selectedOptimizeTracks !== optimizeTracks) {
       dispatch(setOptimizeTracks(selectedOptimizeTracks));
@@ -274,7 +280,18 @@ const Controls = () => {
                 />
               </FormControl>
             </Col>
-            <Col xs={4} />
+            <Col xs={4}>
+              <FormControl className={classes.formControl}>
+                <InputLabel shrink id="demo-simple-select-placeholder-label-label" className={classes.label}>
+                  Display map
+                </InputLabel>
+                <Switch
+                  className={classes.switch}
+                  checked={selectedDisplayMap}
+                  onChange={(e) => setSelectedDisplayMap(e.target.checked)}
+                />
+              </FormControl>
+            </Col>
           </Row>
           <Row className="justify-content-center">
             <Col xs={3}>

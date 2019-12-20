@@ -19,9 +19,12 @@ const setup = (
   artistCount = DEFAULT_ARTIST_COUNT,
   trackCount = DEFAULT_TRACK_COUNT,
   statsOptions = DEFAULT_STATS_OPTIONS,
+  displayMap = false,
   artistsByTimeRangeName = {},
   tracksByTimeRangeName = {},
   featuresByTimeRangeName = {},
+  artistCountriesByTimeRangeName = {},
+  artistReleasesByTimeRangeName = {},
 ) => {
   jest.spyOn(selectors, 'selectUser').mockReturnValue(user);
   jest.spyOn(selectors, 'selectTimeRangeName').mockReturnValue(timeRangeName);
@@ -29,9 +32,12 @@ const setup = (
   jest.spyOn(selectors, 'selectArtistCount').mockReturnValue(artistCount);
   jest.spyOn(selectors, 'selectTrackCount').mockReturnValue(trackCount);
   jest.spyOn(selectors, 'selectStatsOptions').mockReturnValue(statsOptions);
+  jest.spyOn(selectors, 'selectDisplayMap').mockReturnValue(displayMap);
   jest.spyOn(selectors, 'selectArtistsByCurrentTimeRange').mockReturnValue(artistsByTimeRangeName);
   jest.spyOn(selectors, 'selectTracksByCurrentTimeRange').mockReturnValue(tracksByTimeRangeName);
   jest.spyOn(selectors, 'selectFeaturesByCurrentTimeRange').mockReturnValue(featuresByTimeRangeName);
+  jest.spyOn(selectors, 'selectArtistCountriesByCurrentTimeRange').mockReturnValue(artistCountriesByTimeRangeName);
+  jest.spyOn(selectors, 'selectArtistReleasesByCurrentTimeRange').mockReturnValue(artistReleasesByTimeRangeName);
 };
 
 describe('SpotifyTopMusic', () => {
@@ -43,6 +49,13 @@ describe('SpotifyTopMusic', () => {
       10,
       10,
       ['bpm'],
+      false,
+      {
+        LONG: [],
+      },
+      {
+        LONG: [],
+      },
       {
         LONG: [],
       },

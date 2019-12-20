@@ -94,6 +94,16 @@ describe('reducers', () => {
     });
   });
 
+  describe('SET_DISPLAY_MAP', () => {
+    test('returns the correct state', () => {
+      const action = { type: constants.SET_DISPLAY_MAP, displayMap: false };
+      const expectedState = { ...initialState };
+      expectedState.displayMap = false;
+
+      expect(rootReducer(undefined, action)).toEqual(expectedState);
+    });
+  });
+
   describe('SET_OPTIMIZE_TRACKS', () => {
     test('returns the correct state', () => {
       const action = { type: constants.SET_OPTIMIZE_TRACKS, optimizeTracks: false };
