@@ -32,6 +32,7 @@ const SpotifyTopMusic = () => {
   const tracks = useSelector(selectors.selectTracksByCurrentTimeRange);
   const features = useSelector(selectors.selectFeaturesByCurrentTimeRange);
   const artistCountries = useSelector(selectors.selectArtistCountriesByCurrentTimeRange);
+  const displayMap = useSelector(selectors.selectDisplayMap);
 
   const dispatch = useDispatch();
 
@@ -66,7 +67,7 @@ const SpotifyTopMusic = () => {
               </div>
             )
             : <SpinnerBlock />)}
-          {artistCountries && (haveArtistCountries()
+          {displayMap && artistCountries && (haveArtistCountries()
             ? (
               <div>
                 <ComponentHeader title="Artist Map" />
