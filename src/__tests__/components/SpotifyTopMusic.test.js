@@ -22,6 +22,8 @@ const setup = (
   artistsByTimeRangeName = {},
   tracksByTimeRangeName = {},
   featuresByTimeRangeName = {},
+  artistCountriesByTimeRangeName = {},
+  artistReleasesByTimeRangeName = {},
 ) => {
   jest.spyOn(selectors, 'selectUser').mockReturnValue(user);
   jest.spyOn(selectors, 'selectTimeRangeName').mockReturnValue(timeRangeName);
@@ -32,6 +34,8 @@ const setup = (
   jest.spyOn(selectors, 'selectArtistsByCurrentTimeRange').mockReturnValue(artistsByTimeRangeName);
   jest.spyOn(selectors, 'selectTracksByCurrentTimeRange').mockReturnValue(tracksByTimeRangeName);
   jest.spyOn(selectors, 'selectFeaturesByCurrentTimeRange').mockReturnValue(featuresByTimeRangeName);
+  jest.spyOn(selectors, 'selectArtistCountriesByCurrentTimeRange').mockReturnValue(artistCountriesByTimeRangeName);
+  jest.spyOn(selectors, 'selectArtistReleasesByCurrentTimeRange').mockReturnValue(artistReleasesByTimeRangeName);
 };
 
 describe('SpotifyTopMusic', () => {
@@ -43,6 +47,12 @@ describe('SpotifyTopMusic', () => {
       10,
       10,
       ['bpm'],
+      {
+        LONG: [],
+      },
+      {
+        LONG: [],
+      },
       {
         LONG: [],
       },

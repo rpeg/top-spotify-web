@@ -24,6 +24,7 @@ import {
   RECEIVE_ARTIST_COUNTRIES,
   REQUEST_ARTIST_RELEASES,
   RECEIVE_ARTIST_RELEASES,
+  SET_DISPLAY_MAP,
 } from '../constants/constants';
 
 export const initialState = {
@@ -35,6 +36,7 @@ export const initialState = {
   genreCount: DEFAULT_GENRE_COUNT,
   statsOptions: DEFAULT_STATS_OPTIONS,
   displayProfile: true,
+  displayMap: true,
   optimizeTracks: true,
   artists: {},
   artistsByTimeRangeName: {},
@@ -115,6 +117,15 @@ function displayProfile(state = initialState.displayProfile, action) {
   switch (action.type) {
     case SET_DISPLAY_PROFILE:
       return action.displayProfile;
+    default:
+      return state;
+  }
+}
+
+function displayMap(state = initialState.displayMap, action) {
+  switch (action.type) {
+    case SET_DISPLAY_MAP:
+      return action.displayMap;
     default:
       return state;
   }
@@ -257,6 +268,7 @@ const rootReducer = combineReducers({
   genreCount,
   statsOptions,
   displayProfile,
+  displayMap,
   optimizeTracks,
   artists,
   artistsByTimeRangeName,

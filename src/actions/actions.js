@@ -19,6 +19,7 @@ import {
   SET_GENRE_COUNT,
   TimeRanges,
   SET_DISPLAY_PROFILE,
+  SET_DISPLAY_MAP,
   SET_STATS_OPTIONS,
   SET_OPTIMIZE_TRACKS,
   REQUEST_ARTIST_COUNTRIES,
@@ -63,6 +64,10 @@ export function setStatsOptions(statsOptions) {
 
 export function setDisplayProfile(displayProfile) {
   return { type: SET_DISPLAY_PROFILE, displayProfile };
+}
+
+export function setDisplayMap(displayMap) {
+  return { type: SET_DISPLAY_MAP, displayMap };
 }
 
 export function setOptimizeTracks(optimizeTracks) {

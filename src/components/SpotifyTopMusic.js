@@ -43,6 +43,9 @@ const SpotifyTopMusic = () => {
   }, [dispatch, timeRangeName, user]);
 
   const haveArtists = () => artists && artists.items && artists.items.length;
+  const haveArtistCountries = () => artistCountries
+    && artistCountries.items
+    && artistCountries.items.length;
   const haveTracks = () => tracks && tracks.items && tracks.items.length;
   const haveFeatures = () => features && features.items && features.items.length;
 
@@ -63,7 +66,7 @@ const SpotifyTopMusic = () => {
               </div>
             )
             : <SpinnerBlock />)}
-          {artistCountries
+          {artistCountries && (haveArtistCountries()
             ? (
               <div>
                 <ComponentHeader title="Artist Map" />
@@ -72,7 +75,7 @@ const SpotifyTopMusic = () => {
                 </div>
               </div>
             )
-            : <SpinnerBlock />}
+            : <SpinnerBlock />)}
           {genreCount > 0 && (haveArtists()
             ? (
               <div>

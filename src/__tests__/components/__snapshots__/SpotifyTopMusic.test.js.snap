@@ -27,6 +27,7 @@ exports[`SpotifyTopMusic renders correctly 1`] = `
     <SpinnerBlock />
     <SpinnerBlock />
     <SpinnerBlock />
+    <SpinnerBlock />
   </Container>
 </div>
 `;

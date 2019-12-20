@@ -6,6 +6,7 @@ export const selectArtistCount = (state) => state.artistCount;
 export const selectTrackCount = (state) => state.trackCount;
 export const selectStatsOptions = (state) => state.statsOptions;
 export const selectDisplayProfile = (state) => state.displayProfile;
+export const selectDisplayMap = (state) => state.displayMap;
 export const selectOptimizeTracks = (state) => state.optimizeTracks;
 export const selectArtists = (state) => state.artists;
 export const selectArtistsByCurrentTimeRange = (state) => state

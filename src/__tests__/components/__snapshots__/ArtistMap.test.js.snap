@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArtistMap renders correctly 1`] = `
+<div
+  className="svg-container"
+  style={
+    Object {
+      "display": "inline-block",
+      "overflow": "hidden",
+      "paddingBottom": "calc(100% * 4 / 8)",
+      "position": "relative",
+      "verticalAlign": "top",
+      "width": "100%",
+    }
+  }
+>
+  <ComposableMap
+    className="svg-content"
+    height={400}
+    projectionConfig={
+      Object {
+        "rotate": Array [
+          -10,
+          0,
+          0,
+        ],
+        "scale": 147,
+      }
+    }
+    style={
+      Object {
+        "height": "auto",
+        "width": "100%",
+      }
+    }
+    viewBox="0 0 800 400"
+    width={800}
+  >
+    <Memo(Sphere)
+      stroke="#1db954"
+      strokeWidth={2}
+    />
+    <Geographies
+      geography="https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json"
+    >
+      <Component />
+    </Geographies>
+  </ComposableMap>
+</div>
+`;
