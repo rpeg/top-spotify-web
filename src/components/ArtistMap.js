@@ -6,10 +6,10 @@ import {
   Geography,
   Sphere,
 } from 'react-simple-maps';
+import LinearScale from 'linear-scale';
 
 import { makeSortedFrequencyArr } from '../lib/frequency';
-
-const geoUrl = 'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
+import worldGeo from '../assets/world-110m.json';
 
 const ArtistMap = ({ artistCountries }) => {
   const countries = artistCountries.map((a) => a.country);
@@ -18,6 +18,8 @@ const ArtistMap = ({ artistCountries }) => {
   const max = sortedCountries
     .map((c) => c.freq)
     .reduce((acc, curr) => Math.max(acc, curr));
+
+  const scale = LinearScale().domain([1, max]).range([0.5, 1]);
 
   return (
     <div
@@ -43,7 +45,7 @@ const ArtistMap = ({ artistCountries }) => {
         viewBox="0 0 800 400"
       >
         <Sphere stroke="#1db954" strokeWidth={2} />
-        <Geographies geography={geoUrl}>
+        <Geographies geography={worldGeo}>
           {({ geographies }) => geographies.map((geo) => {
             const match = sortedCountries.find(
               (c) => c.name.toLowerCase() === geo.properties.NAME_LONG.toLowerCase(),
@@ -56,7 +58,7 @@ const ArtistMap = ({ artistCountries }) => {
                 style={{
                   default: {
                     fill: `${match ? '#1db954' : '#282828'}`,
-                    fillOpacity: `${match ? `${Math.max(match.freq / max, 0.25)}` : '0.5'}`,
+                    fillOpacity: `${match ? `${scale(match.freq)}` : '0.5'}`,
                   },
                   hover: {
                     fill: '#D3D3D3',
