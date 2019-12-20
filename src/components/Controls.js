@@ -283,7 +283,7 @@ const Controls = () => {
             <Col xs={4}>
               <FormControl className={classes.formControl}>
                 <InputLabel shrink id="demo-simple-select-placeholder-label-label" className={classes.label}>
-                  Display artist map
+                  Display map
                 </InputLabel>
                 <Switch
                   className={classes.switch}
