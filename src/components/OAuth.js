@@ -7,10 +7,6 @@ import { setUser } from '../actions/actions';
 import { SPOTIFY_API_URL } from '../config';
 import { selectUser } from '../reducers/selectors';
 
-const buttonStyle = {
-  right: '30px', top: '30px', marginBottom: '30px', position: 'absolute',
-};
-
 const OAuth = ({ socket }) => {
   const [disabled, setDisabled] = useState(false);
   const user = useSelector(selectUser);
@@ -65,13 +61,27 @@ const OAuth = ({ socket }) => {
   };
 
   return (
-    <div>
+    <div style={{
+      top: '30px',
+      right: '30px',
+      position: 'absolute',
+      marginBottom: '30px',
+      display: 'inline-flex',
+      alignItems: 'center',
+    }}
+    >
+      <a href="https://github.com/scjohnson16/top-spotify-web" target="_blank" rel="noopener noreferrer" style={{ paddingRight: '30px' }}>
+        <img height="30" width="30" src="images/GitHub-Mark-Light-64px.png" alt="github" />
+      </a>
+      <a href="mailto:topspotdeveloper@gmail.com" target="_top" style={{ paddingRight: '30px' }}>
+        <img height="40" width="35" src="images/baseline_email_white_18dp.png" alt="email" />
+      </a>
       {user && user.id ? (
-        <Button className="button-logout" variant="primary" style={buttonStyle} onClick={logout}>
+        <Button className="button-logout" variant="primary" onClick={logout}>
           Logout
         </Button>
       ) : (
-        <Button className="button-login" variant="primary" style={buttonStyle} onClick={startAuth}>
+        <Button className="button-login" variant="primary" onClick={startAuth}>
           Login
         </Button>
       )}
