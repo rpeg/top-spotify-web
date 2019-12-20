@@ -56,7 +56,7 @@ const ArtistMap = ({ artistCountries }) => {
                 style={{
                   default: {
                     fill: `${match ? '#1db954' : '#282828'}`,
-                    fillOpacity: `${match ? `${match.freq / max}` : '0.25'}`,
+                    fillOpacity: `${match ? `${Math.max(match.freq / max, 0.25)}` : '0.5'}`,
                   },
                   hover: {
                     fill: '#D3D3D3',
