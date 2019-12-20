@@ -24,3 +24,4 @@ React frontend client for Spotify data visualizer. Makes async requests to Expre
 
 * Retry fetch on error
 * Optimize redux store with `normalizr`
+* Optimize responsive track grid + fix bug when changing count
