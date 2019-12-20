@@ -67,11 +67,11 @@ const SpotifyTopMusic = () => {
               </div>
             )
             : <SpinnerBlock />)}
-          {displayMap && artistCountries && (haveArtistCountries()
+          {displayMap && (haveArtistCountries()
             ? (
               <div>
-                <ComponentHeader title="Artist Map" />
-                <div style={{ marginTop: '1em' }}>
+                {artistCount === 0 && <ComponentHeader title="Artist Map" /> }
+                <div style={{ marginTop: '2em' }}>
                   <ArtistMap artistCountries={artistCountries.items} />
                 </div>
               </div>
