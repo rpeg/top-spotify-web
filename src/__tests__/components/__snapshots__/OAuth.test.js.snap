@@ -1,20 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`OAuth renders correctly with user 1`] = `
-<div>
+<div
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "inline-flex",
+      "marginBottom": "30px",
+      "position": "absolute",
+      "right": "30px",
+      "top": "30px",
+    }
+  }
+>
+  <a
+    href="https://github.com/scjohnson16/top-spotify-web"
+    rel="noopener noreferrer"
+    style={
+      Object {
+        "paddingRight": "30px",
+      }
+    }
+    target="_blank"
+  >
+    <img
+      alt="github"
+      height="30"
+      src="images/GitHub-Mark-Light-64px.png"
+      width="30"
+    />
+  </a>
+  <a
+    href="mailto:topspotdeveloper@gmail.com"
+    style={
+      Object {
+        "paddingRight": "30px",
+      }
+    }
+    target="_top"
+  >
+    <img
+      alt="email"
+      height="40"
+      src="images/baseline_email_white_18dp.png"
+      width="35"
+    />
+  </a>
   <Button
     active={false}
     className="button-logout"
     disabled={false}
     onClick={[Function]}
-    style={
-      Object {
-        "marginBottom": "30px",
-        "position": "absolute",
-        "right": "30px",
-        "top": "30px",
-      }
-    }
     type="button"
     variant="primary"
   >
@@ -24,20 +60,56 @@ exports[`OAuth renders correctly with user 1`] = `
 `;
 
 exports[`OAuth renders correctly without user 1`] = `
-<div>
+<div
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "inline-flex",
+      "marginBottom": "30px",
+      "position": "absolute",
+      "right": "30px",
+      "top": "30px",
+    }
+  }
+>
+  <a
+    href="https://github.com/scjohnson16/top-spotify-web"
+    rel="noopener noreferrer"
+    style={
+      Object {
+        "paddingRight": "30px",
+      }
+    }
+    target="_blank"
+  >
+    <img
+      alt="github"
+      height="30"
+      src="images/GitHub-Mark-Light-64px.png"
+      width="30"
+    />
+  </a>
+  <a
+    href="mailto:topspotdeveloper@gmail.com"
+    style={
+      Object {
+        "paddingRight": "30px",
+      }
+    }
+    target="_top"
+  >
+    <img
+      alt="email"
+      height="40"
+      src="images/baseline_email_white_18dp.png"
+      width="35"
+    />
+  </a>
   <Button
     active={false}
     className="button-login"
     disabled={false}
     onClick={[Function]}
-    style={
-      Object {
-        "marginBottom": "30px",
-        "position": "absolute",
-        "right": "30px",
-        "top": "30px",
-      }
-    }
     type="button"
     variant="primary"
   >

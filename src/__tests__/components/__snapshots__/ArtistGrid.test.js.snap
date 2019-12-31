@@ -255,7 +255,7 @@ exports[`ArtistGrid renders with artists 1`] = `
       key="lmn"
       style={
         Object {
-          "padding": "0 2px 0 2px",
+          "padding": "0 0 0 2px",
         }
       }
     >
