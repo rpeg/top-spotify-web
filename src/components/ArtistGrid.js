@@ -1,14 +1,16 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { chunk, isEmpty } from 'lodash';
+import { chunk, isEmpty, range } from 'lodash';
+
+const NUM_PER_ROW = 5;
 
 const ArtistGrid = ({ artists }) => {
-  const chunkedArtists = chunk(artists, 5);
+  const chunkedArtists = chunk(artists, NUM_PER_ROW);
 
-  const getColPadding = (index, length) => {
+  const getColPadding = (index) => {
     switch (index) {
       case 0: return '0 2px 0 0';
-      case length: return '0 0 0 2px';
+      case (NUM_PER_ROW - 1): return '0 0 0 2px';
       default: return '0 2px 0 2px';
     }
   };
@@ -20,7 +22,7 @@ const ArtistGrid = ({ artists }) => {
           <Col
             key={artist.id}
             style={{
-              padding: `${getColPadding(index, artistRow.length)}`,
+              padding: `${getColPadding(index)}`,
             }}
           >
             <div style={{
@@ -60,6 +62,14 @@ const ArtistGrid = ({ artists }) => {
               </div>
             </div>
           </Col>
+        ))}
+        {artistRow.length < NUM_PER_ROW && range(NUM_PER_ROW - artistRow.length).map((index) => (
+          <Col
+            key={index}
+            style={{
+              padding: `${getColPadding(artistRow.length + index)}`,
+            }}
+          />
         ))}
       </Row>
     </div>
