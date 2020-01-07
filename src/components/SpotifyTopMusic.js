@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner, Container } from 'react-bootstrap';
+import GridLayout from 'react-grid-layout';
 
 import ArtistGrid from './ArtistGrid';
 import TrackGrid from './TrackGrid';
@@ -56,7 +57,7 @@ const SpotifyTopMusic = () => {
         <div>
           <p className="text-xl" style={{ marginBottom: '0uu' }}>{getTimeRangeByName(timeRangeName).title}</p>
         </div>
-        <Container>
+        <GridLayout isResizable={false}>
           {artistCount > 0 && (haveArtists()
             ? (
               <div>
@@ -104,7 +105,7 @@ const SpotifyTopMusic = () => {
               </div>
             )
             : <SpinnerBlock />)}
-        </Container>
+        </GridLayout>
       </div>
     ) : null
   );
