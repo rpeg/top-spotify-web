@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
 
-import OAuth from '../components/OAuth';
+import NavBar from '../components/NavBar';
 import { BASE_API_URL } from '../config';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <OAuth socket={socket} />
+      <NavBar socket={socket} />
       <Controls />
       {hasClickedCreate && (
         <div id="top-spotify">
