@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import { Button } from 'react-bootstrap';
 import { Accordion, AccordionItem } from 'react-light-accordion';
 import 'react-light-accordion/demo/css/index.css';
-import { Button } from 'react-bootstrap';
 
 import { setUser } from '../actions/actions';
 import { SPOTIFY_API_URL } from '../config';
@@ -101,6 +101,8 @@ const NavBar = ({ socket }) => {
           style={
             {
               content: {
+                maxHeight: 'calc(100vh - 100px)',
+                overflowY: 'auto',
                 top: '50%',
                 left: '50%',
                 right: 'auto',
@@ -118,38 +120,49 @@ const NavBar = ({ socket }) => {
           }
         >
           <div style={{ maxWidth: '800px' }}>
-            <Accordion atomic>
+            <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <p style={{ fontSize: '32pt', color: '#191414' }}>FAQ:</p>
+              <button
+                href="#"
+                aria-label="close faq"
+                type="button"
+                className="close"
+                onClick={() => setIsModalOpen(false)}
+              />
+            </span>
+            <Accordion atomic={false}>
               <AccordionItem title="Why can't I login?">
                 <p style={accordionItemStyle}>
-                  After a period of inactivity, the server application which
-                  handles Spotify authentication goes to sleep. If you can't login at first,
-                  simply refresh the page and try again—the server should have woken up in
-                  that time.
+          After a period of inactivity, the server application which
+          handles Spotify authentication goes to sleep. If you can&apos;t login at first,
+          simply refresh the page and try again—the server should have woken up in
+          that time.
                 </p>
               </AccordionItem>
               <AccordionItem title="Why am I limited to only 50 artists and certain time ranges?">
                 <p style={accordionItemStyle}>
-                  Unfortunately, this is all the data that Spotify's public API makes available.
+          Unfortunately, this is all the data that Spotify&apos;s public API makes available.
                 </p>
               </AccordionItem>
-              <AccordionItem title="Could you also display my top albums a la Topsters?">
+              <AccordionItem title="Could you also display my top albums à la Topsters?">
                 <p style={accordionItemStyle}>
-                  Spotify's public API only provides your top 50 artists and tracks for a given time-range, nothing more.
+          Spotify&apos;s public API only provides your top 50 artists and tracks for a given
+          time-range, nothing more.
                 </p>
               </AccordionItem>
               <AccordionItem title="Why is the map slow to load and lists some artists in the wrong location?">
                 <p style={accordionItemStyle}>
-                  Because the public Spotify API doesn't provide artist location, I rely on an
-                  external Postgres service hosting a custom clone of the MusicBrainz database.
-                  Upwards of 50 distinct queries to this service are necessary to retrieve all
-                  the map data. As there is no foolproof way of matching up Spotify data
-                  with MusicBrainz data, some anomalies may persist.
+          Because the public Spotify API doesn&apos;t provide artist location, I rely on an
+          external Postgres service hosting a custom clone of the MusicBrainz database.
+          Upwards of 50 distinct queries to this service are necessary to retrieve all
+          the map data. As there is no foolproof way of matching up Spotify data
+          with MusicBrainz data, some anomalies may persist.
                 </p>
               </AccordionItem>
               <AccordionItem title="What do all the stats like 'valence' mean?">
                 <p style={accordionItemStyle}>
-                  These are features of individual tracks Spotify generates through audio analysis.
-                  Read more
+          These are features of individual tracks Spotify generates through audio analysis.
+          Read more
                   {' '}
                   <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/">here.</a>
                 </p>
