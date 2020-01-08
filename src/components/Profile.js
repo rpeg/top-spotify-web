@@ -12,6 +12,7 @@ const Profile = ({ user }) => {
         display: 'inline-flex',
         alignItems: 'center',
         marginLeft: 'auto',
+        float: 'right',
       }}
     >
       <p className="text-m" style={{ margin: '0 0.5em 0 0' }}>
