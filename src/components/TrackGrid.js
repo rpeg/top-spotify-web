@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
-import { chunk, debounce } from 'lodash';
+import { chunk } from 'lodash';
 import PropTypes from 'prop-types';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import OrdinalCircle from './OrdinalCircle';
 import {
@@ -41,14 +42,6 @@ const makeOptimizedTracks = (tracks, count) => {
   }
 
   return combinedArr.map((t) => t[1]).slice(0, count);
-};
-
-const getWindowDimensions = () => {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height,
-  };
 };
 
 export const Track = ({ track, position }) => (
@@ -170,40 +163,13 @@ TrackRow.propTypes = {
   numPerRow: PropTypes.number.isRequired,
 };
 
-// grid sets # of items per row based on window width
 const TrackGrid = ({ tracks, count }) => {
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-
+  const isMobile = useMediaQuery(`(max-width:${SM_WIDTH_BOUNDARY}px)`);
   const optimizeTracks = useSelector(selectOptimizeTracks);
 
   const tracksToMap = optimizeTracks ? makeOptimizedTracks(tracks, count) : tracks.slice(0, count);
-
-  const getNumPerRow = useCallback(() => (windowDimensions.width <= SM_WIDTH_BOUNDARY
-    ? NUM_PER_ROW_MOBILE
-    : NUM_PER_ROW_DESKTOP), [windowDimensions]);
-
-  const [numPerRow, setNumPerRow] = useState(getNumPerRow());
-
-  const makeTracksByRow = useCallback(() => (
-    chunk(tracksToMap, numPerRow)), [tracksToMap, numPerRow]);
-
-  const [tracksByRow, setTracksByRow] = useState(makeTracksByRow(tracksToMap, windowDimensions));
-
-  // Optimize grid arrangement for responsive screen width
-  useEffect(() => {
-    const handleResize = debounce(() => {
-      const dimens = getWindowDimensions();
-
-      if (dimens !== windowDimensions) {
-        setWindowDimensions(dimens);
-        setNumPerRow(getNumPerRow());
-        setTracksByRow(makeTracksByRow());
-      }
-    }, 100);
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [tracksToMap, windowDimensions, getNumPerRow, makeTracksByRow]);
+  const numPerRow = isMobile ? NUM_PER_ROW_MOBILE : NUM_PER_ROW_DESKTOP;
+  const tracksByRow = chunk(tracksToMap, numPerRow);
 
   return (
     count > 0 ? (
