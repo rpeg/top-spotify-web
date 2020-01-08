@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client';
+import axios from 'axios';
 
 import NavBar from '../components/NavBar';
-import { BASE_API_URL } from '../config';
+import { BASE_API_URL, DB_URL } from '../config';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MainHeader from '../components/MainHeader';
@@ -18,6 +19,9 @@ const socket = io(BASE_API_URL);
 const App = () => {
   const hasClickedCreate = useSelector(selectHasClickedCreate);
   const user = useSelector(selectUser);
+
+  // ping database server to wake
+  axios.get(DB_URL);
 
   return (
     <div className="App">
