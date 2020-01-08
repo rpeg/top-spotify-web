@@ -13,11 +13,12 @@ const MainHeader = () => {
     user && user.id ? (
       <Container style={{ paddingTop: '2em' }}>
         <Row>
-          <Col xs={6} style={{ padding: '0', display: 'inline-flex' }}>
+          <Col xs={6} style={{ padding: '0', display: 'block' }}>
             <span
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
+                float: 'left',
               }}
             >
               <img
@@ -33,7 +34,7 @@ const MainHeader = () => {
               </div>
             </span>
           </Col>
-          <Col xs={6} style={{ padding: '0', display: 'inline-flex' }}>
+          <Col xs={6} style={{ padding: '0', display: 'block' }}>
             <Profile user={user} />
           </Col>
         </Row>
