@@ -20,8 +20,6 @@ React frontend client for Spotify data visualizer. Makes async requests to Expre
 * Allows for DOM->PNG exports via `dom-to-image`
 * ES6 syntax; airbnb code style
 
-## Todo
+## Example
 
-* Retry fetch on error
-* Optimize redux store with `normalizr`
-* Optimize responsive track grid + fix bug when changing count
+![alt text](https://i.imgur.com/O8kYWzu.png)
